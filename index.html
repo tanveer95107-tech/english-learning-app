@@ -2,2504 +2,584 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#09090f">
-<meta name="description" content="English Master Ultra - Learn English through AI, games, speaking and challenges.">
-<title>English Master Ultra</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LingoQuest - Better Than Duolingo 🦜</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦜</text></svg>">
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  -webkit-tap-highlight-color:transparent;
-}
-
-:root{
-  --bg:#080910;
-  --card:rgba(255,255,255,.075);
-  --card2:rgba(255,255,255,.11);
-  --text:#fff;
-  --muted:#a8adbd;
-  --line:rgba(255,255,255,.12);
-  --accent:#8b5cf6;
-  --accent2:#06b6d4;
-  --gold:#f5c451;
-  --danger:#ff5577;
-  --radius:24px;
-  --shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-body{
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 10% 10%,rgba(139,92,246,.25),transparent 30%),
-    radial-gradient(circle at 90% 20%,rgba(6,182,212,.16),transparent 30%),
-    var(--bg);
-  color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  overflow-x:hidden;
-}
-
-button,input,textarea{
-  font:inherit;
-}
-
-button{
-  border:0;
-  cursor:pointer;
-}
-
-button:active{
-  transform:scale(.97);
-}
-
-#splash{
-  position:fixed;
-  inset:0;
-  z-index:99999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#050509;
-  transition:opacity .7s,visibility .7s;
-}
-
-#splash.hide{
-  opacity:0;
-  visibility:hidden;
-}
-
-.book{
-  width:120px;
-  height:150px;
-  position:relative;
-  perspective:800px;
-}
-
-.book:before,
-.book:after{
-  content:"";
-  position:absolute;
-  top:10px;
-  width:55px;
-  height:130px;
-  background:linear-gradient(145deg,#a78bfa,#6d28d9);
-  border-radius:7px 3px 3px 7px;
-  box-shadow:0 10px 35px rgba(139,92,246,.45);
-}
-
-.book:before{
-  left:5px;
-  transform-origin:right center;
-  animation:leftBook 1.7s infinite alternate ease-in-out;
-}
-
-.book:after{
-  right:5px;
-  border-radius:3px 7px 7px 3px;
-  transform-origin:left center;
-  animation:rightBook 1.7s infinite alternate ease-in-out;
-}
-
-@keyframes leftBook{
-  from{transform:rotateY(0)}
-  to{transform:rotateY(45deg)}
-}
-
-@keyframes rightBook{
-  from{transform:rotateY(0)}
-  to{transform:rotateY(-45deg)}
-}
-
-.splashText{
-  position:absolute;
-  margin-top:240px;
-  text-align:center;
-}
-
-.splashText h1{
-  font-size:28px;
-  letter-spacing:3px;
-}
-
-.splashText p{
-  color:var(--muted);
-  margin-top:8px;
-}
-
-.app{
-  max-width:1200px;
-  margin:auto;
-  padding:18px 18px 110px;
-}
-
-.topbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  position:sticky;
-  top:0;
-  z-index:50;
-  padding:12px 0;
-  backdrop-filter:blur(20px);
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.logoIcon{
-  width:44px;
-  height:44px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  box-shadow:0 10px 30px rgba(139,92,246,.3);
-}
-
-.logoText b{
-  display:block;
-}
-
-.logoText span{
-  font-size:11px;
-  color:var(--gold);
-  letter-spacing:1.5px;
-}
-
-.topActions{
-  display:flex;
-  gap:8px;
-}
-
-.iconBtn{
-  width:42px;
-  height:42px;
-  border-radius:14px;
-  color:#fff;
-  background:var(--card);
-  border:1px solid var(--line);
-}
-
-.hero{
-  margin-top:20px;
-  min-height:350px;
-  padding:35px;
-  border:1px solid var(--line);
-  border-radius:34px;
-  position:relative;
-  overflow:hidden;
-  background:
-    linear-gradient(120deg,rgba(139,92,246,.25),rgba(6,182,212,.08)),
-    var(--card);
-  box-shadow:var(--shadow);
-}
-
-.hero:after{
-  content:"";
-  position:absolute;
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  right:-100px;
-  top:-100px;
-  background:rgba(139,92,246,.25);
-  filter:blur(10px);
-}
-
-.badge{
-  display:inline-flex;
-  padding:7px 12px;
-  border-radius:99px;
-  background:rgba(245,196,81,.1);
-  color:var(--gold);
-  border:1px solid rgba(245,196,81,.25);
-  font-size:12px;
-  font-weight:800;
-}
-
-.hero h1{
-  max-width:700px;
-  margin-top:18px;
-  font-size:clamp(38px,7vw,70px);
-  line-height:.98;
-  letter-spacing:-3px;
-}
-
-.gradientText{
-  background:linear-gradient(90deg,#fff,#a78bfa,#67e8f9);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  max-width:650px;
-  margin-top:18px;
-  color:var(--muted);
-  font-size:17px;
-  line-height:1.7;
-}
-
-.heroButtons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-top:25px;
-}
-
-.primary,
-.secondary,
-.goldBtn{
-  padding:13px 18px;
-  border-radius:15px;
-  font-weight:800;
-}
-
-.primary{
-  color:#fff;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-}
-
-.secondary{
-  color:#fff;
-  background:var(--card2);
-  border:1px solid var(--line);
-}
-
-.goldBtn{
-  color:#19130a;
-  background:linear-gradient(135deg,#f9d976,#f5c451);
-}
-
-.section{
-  margin-top:28px;
-}
-
-.sectionTitle{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:14px;
-}
-
-.sectionTitle h2{
-  font-size:21px;
-}
-
-.sectionTitle span{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-
-.stat{
-  padding:20px;
-  border-radius:20px;
-  background:var(--card);
-  border:1px solid var(--line);
-}
-
-.stat strong{
-  font-size:27px;
-  display:block;
-}
-
-.stat span{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-}
-
-.feature{
-  padding:23px;
-  min-height:160px;
-  border-radius:24px;
-  background:var(--card);
-  border:1px solid var(--line);
-  transition:.25s;
-}
-
-.feature:hover{
-  transform:translateY(-4px);
-  background:var(--card2);
-}
-
-.featureIcon{
-  font-size:30px;
-}
-
-.feature h3{
-  margin-top:12px;
-}
-
-.feature p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.6;
-  margin-top:7px;
-}
-
-.page{
-  display:none;
-  animation:pageIn .4s ease;
-}
-
-.page.active{
-  display:block;
-}
-
-@keyframes pageIn{
-  from{opacity:0;transform:translateY(15px)}
-  to{opacity:1;transform:none}
-}
-
-.panel{
-  padding:24px;
-  border-radius:25px;
-  background:var(--card);
-  border:1px solid var(--line);
-  margin-top:15px;
-}
-
-.back{
-  margin:12px 0;
-  color:var(--muted);
-  background:none;
-}
-
-.search{
-  width:100%;
-  padding:15px 18px;
-  border-radius:17px;
-  border:1px solid var(--line);
-  background:var(--card);
-  color:#fff;
-  outline:none;
-}
-
-.search:focus{
-  border-color:var(--accent);
-}
-
-.chips{
-  display:flex;
-  gap:8px;
-  overflow:auto;
-  padding:8px 0;
-}
-
-.chip{
-  white-space:nowrap;
-  padding:9px 13px;
-  border-radius:99px;
-  color:#fff;
-  background:var(--card);
-  border:1px solid var(--line);
-}
-
-.chip.active{
-  background:var(--accent);
-}
-
-.wordCard{
-  padding:20px;
-  border-radius:22px;
-  background:var(--card);
-  border:1px solid var(--line);
-}
-
-.wordTop{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.word{
-  font-size:26px;
-  font-weight:900;
-}
-
-.type{
-  color:#a78bfa;
-  font-size:12px;
-}
-
-.meaning{
-  margin-top:10px;
-  color:var(--muted);
-}
-
-.example{
-  margin-top:10px;
-  padding:12px;
-  border-left:3px solid var(--accent);
-  color:#ddd;
-}
-
-.cardActions{
-  display:flex;
-  gap:8px;
-  margin-top:15px;
-}
-
-.smallBtn{
-  padding:9px 12px;
-  border-radius:12px;
-  background:var(--card2);
-  color:#fff;
-}
-
-.aiTeacher{
-  display:grid;
-  grid-template-columns:130px 1fr;
-  gap:20px;
-  align-items:center;
-}
-
-.aiAvatar{
-  width:120px;
-  height:120px;
-  border-radius:38px;
-  display:grid;
-  place-items:center;
-  font-size:48px;
-  background:linear-gradient(135deg,#8b5cf6,#06b6d4);
-  box-shadow:0 20px 50px rgba(139,92,246,.3);
-}
-
-.chat{
-  min-height:170px;
-}
-
-.chatBubble{
-  display:inline-block;
-  max-width:90%;
-  padding:15px;
-  border-radius:18px;
-  background:var(--card2);
-  line-height:1.6;
-}
-
-.chatInput{
-  display:flex;
-  gap:8px;
-  margin-top:15px;
-}
-
-.chatInput input{
-  flex:1;
-  padding:14px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:rgba(0,0,0,.2);
-  color:#fff;
-  outline:none;
-}
-
-.game{
-  text-align:center;
-}
-
-.xpBar{
-  height:13px;
-  border-radius:99px;
-  background:rgba(255,255,255,.1);
-  overflow:hidden;
-  margin:15px 0;
-}
-
-.xpFill{
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,#8b5cf6,#06b6d4,#f5c451);
-  transition:.5s;
-}
-
-.quizOption{
-  width:100%;
-  text-align:left;
-  padding:16px;
-  margin-top:10px;
-  border-radius:15px;
-  color:#fff;
-  background:var(--card);
-  border:1px solid var(--line);
-}
-
-.quizOption.correct{
-  background:rgba(34,197,94,.2);
-  border-color:#22c55e;
-}
-
-.quizOption.wrong{
-  background:rgba(239,68,68,.2);
-  border-color:#ef4444;
-}
-
-textarea{
-  width:100%;
-  min-height:220px;
-  resize:vertical;
-  padding:18px;
-  border-radius:18px;
-  border:1px solid var(--line);
-  background:var(--card);
-  color:#fff;
-  outline:none;
-}
-
-.progressCircle{
-  width:150px;
-  height:150px;
-  margin:20px auto;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:conic-gradient(var(--accent) 0deg,#222 0deg);
-}
-
-.progressCircle div{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  background:var(--bg);
-  display:grid;
-  place-items:center;
-  text-align:center;
-}
-
-.themeGrid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-.theme{
-  min-height:130px;
-  padding:18px;
-  border-radius:20px;
-  border:1px solid var(--line);
-  position:relative;
-  overflow:hidden;
-  cursor:pointer;
-}
-
-.theme strong{
-  position:relative;
-  z-index:2;
-}
-
-.theme small{
-  display:block;
-  position:relative;
-  z-index:2;
-  margin-top:8px;
-  color:#ddd;
-}
-
-.theme.locked:after{
-  content:"🔒 ULTRA";
-  position:absolute;
-  inset:auto 10px 10px auto;
-  padding:5px 8px;
-  border-radius:9px;
-  background:rgba(0,0,0,.55);
-  font-size:10px;
-}
-
-.cameraBox{
-  position:relative;
-  overflow:hidden;
-  border-radius:25px;
-  background:#000;
-  min-height:280px;
-}
-
-.cameraBox video{
-  width:100%;
-  display:block;
-  min-height:280px;
-  object-fit:cover;
-}
-
-.cameraLabel{
-  position:absolute;
-  left:15px;
-  bottom:15px;
-  padding:12px 15px;
-  border-radius:14px;
-  background:rgba(0,0,0,.65);
-  backdrop-filter:blur(12px);
-}
-
-.short{
-  min-height:300px;
-  border-radius:25px;
-  padding:25px;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  background:linear-gradient(145deg,#241044,#061b2b);
-  border:1px solid var(--line);
-}
-
-.shortTag{
-  color:#67e8f9;
-  font-size:12px;
-  font-weight:900;
-}
-
-.short h2{
-  margin-top:10px;
-}
-
-.challenge{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  padding:17px;
-  border-radius:18px;
-  background:var(--card);
-  border:1px solid var(--line);
-  margin-top:10px;
-}
-
-.avatarSmall{
-  width:48px;
-  height:48px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-}
-
-.planGrid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.plan{
-  padding:25px;
-  border-radius:25px;
-  background:var(--card);
-  border:1px solid var(--line);
-}
-
-.plan.ultra{
-  border-color:rgba(245,196,81,.6);
-  box-shadow:0 15px 50px rgba(245,196,81,.08);
-}
-
-.price{
-  font-size:32px;
-  font-weight:900;
-  margin:15px 0;
-}
-
-.plan ul{
-  list-style:none;
-  color:var(--muted);
-  line-height:2;
-  font-size:13px;
-}
-
-.bottomNav{
-  position:fixed;
-  bottom:12px;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(700px,calc(100% - 24px));
-  padding:8px;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  background:rgba(15,16,25,.82);
-  backdrop-filter:blur(25px);
-  border:1px solid var(--line);
-  border-radius:22px;
-  z-index:100;
-}
-
-.navBtn{
-  color:var(--muted);
-  background:none;
-  padding:9px 4px;
-  font-size:11px;
-}
-
-.navBtn b{
-  display:block;
-  font-size:18px;
-  margin-bottom:2px;
-}
-
-.navBtn.active{
-  color:#fff;
-}
-
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:90px;
-  transform:translateX(-50%) translateY(20px);
-  padding:13px 18px;
-  border-radius:14px;
-  background:#fff;
-  color:#111;
-  font-weight:700;
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-  z-index:9999;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translateX(-50%);
-}
-
-@media(max-width:800px){
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .themeGrid,
-  .planGrid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .hero{
-    padding:25px;
-  }
-
-  .aiTeacher{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
-
-  .aiAvatar{
-    margin:auto;
-  }
-}
-
-@media(max-width:560px){
-  .app{
-    padding:10px 12px 100px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .themeGrid,
-  .planGrid{
-    grid-template-columns:1fr;
-  }
-
-  .hero h1{
-    font-size:42px;
-  }
-
-  .hero{
-    min-height:420px;
-  }
-
-  .logoText{
-    display:none;
-  }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito','Segoe UI',-apple-system,sans-serif;-webkit-tap-highlight-color:transparent}
+:root{--green:#58cc02;--green-dark:#4caf00;--green-light:#d7ffb8;--blue:#1cb0f6;--blue-dark:#1899d6;--blue-light:#ddf4ff;--red:#ff4b4b;--red-dark:#d63a3a;--red-light:#ffdfe0;--yellow:#ffc800;--purple:#ce82ff;--orange:#ff9600;--text:#3c3c3c;--text-light:#777;--text-lighter:#afafaf;--border:#e5e5e5;--bg:#fff;--bg-alt:#f7f7f7}
+body.dark{--text:#f0f0f0;--text-light:#b0b0b0;--text-lighter:#707070;--border:#2a2a2a;--bg:#131f24;--bg-alt:#1c2b33}
+body{background:var(--bg);min-height:100vh;color:var(--text);user-select:none;overflow-x:hidden;transition:background .3s,color .3s}
+.screen{display:none;min-height:100vh;flex-direction:column}
+.screen.active{display:flex}
+.header{background:var(--bg);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:8px;font-weight:900;font-size:22px;color:var(--green)}
+.logo-icon{font-size:28px;animation:wiggle 2s infinite}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
+.header-stats{display:flex;gap:14px;align-items:center}
+.stat{display:flex;align-items:center;gap:4px;font-weight:800;font-size:16px;color:var(--text-light)}
+.stat span:first-child{font-size:18px}
+.theme-btn{background:none;border:none;font-size:20px;cursor:pointer;padding:4px}
+.home-main{flex:1;padding:30px 20px;max-width:1000px;margin:0 auto;width:100%}
+.hero{text-align:center;padding:30px 10px}
+.hero h1{font-size:clamp(24px,5vw,42px);font-weight:900;color:var(--text);margin-bottom:12px;line-height:1.2}
+.hero h1 span{color:var(--green)}
+.hero p{font-size:clamp(15px,2.5vw,18px);color:var(--text-light);font-weight:600}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:30px 0;padding:20px;background:var(--bg-alt);border-radius:16px}
+.big-stat{text-align:center;padding:14px}
+.big-stat-value{font-size:28px;font-weight:900;color:var(--green);display:block}
+.big-stat-label{font-size:12px;font-weight:800;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;margin-top:4px;display:block}
+.courses{margin:40px 0}
+.courses h2{font-size:24px;font-weight:900;margin-bottom:20px;text-align:center;color:var(--text)}
+.course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+.course-card{background:var(--bg);border:2px solid var(--border);border-bottom:5px solid var(--border);border-radius:16px;padding:24px 20px;text-align:center;cursor:pointer;transition:all .15s}
+.course-card:hover{background:var(--bg-alt);transform:translateY(-2px)}
+.course-card:active{transform:translateY(2px);border-bottom-width:2px}
+.course-card .flag{font-size:48px;margin-bottom:10px;display:block}
+.course-card h3{font-size:18px;font-weight:900;color:var(--text);margin-bottom:4px}
+.course-card p{color:var(--text-light);font-weight:600;font-size:13px}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:50px}
+.feature{text-align:center;padding:20px}
+.feature-icon{font-size:48px;margin-bottom:12px}
+.feature h3{font-size:17px;font-weight:900;margin-bottom:8px;color:var(--text)}
+.feature p{color:var(--text-light);font-weight:600;font-size:14px}
+.home-footer{text-align:center;padding:20px;color:var(--text-lighter);font-size:13px;border-top:2px solid var(--border);background:var(--bg-alt)}
+.lesson-main{flex:1;padding:30px 20px;max-width:650px;margin:0 auto;width:100%}
+.lesson-header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:12px}
+.timer{display:flex;align-items:center;gap:6px;font-weight:900;color:var(--orange);font-size:16px;background:var(--bg-alt);padding:6px 12px;border-radius:10px}
+.lesson-main h1{font-size:clamp(20px,4vw,26px);font-weight:900;color:var(--text);margin-bottom:30px;line-height:1.3}
+.progress-container{flex:1;height:16px;background:var(--border);border-radius:10px;overflow:hidden;position:relative}
+.progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#89e219);border-radius:10px;transition:width .4s ease}
+.close-btn{background:none;border:none;font-size:24px;color:var(--text-lighter);cursor:pointer;font-weight:900;padding:4px 8px;transition:color .15s}
+.close-btn:hover{color:var(--text-light)}
+.hint-btn{background:var(--purple);color:#fff;border:none;padding:8px 16px;border-radius:10px;font-weight:900;font-size:13px;cursor:pointer;letter-spacing:.5px;font-family:inherit}
+.hint-btn:disabled{opacity:.4;cursor:not-allowed}
+.hint-btn:active:not(:disabled){transform:scale(.95)}
+.options{display:flex;flex-direction:column;gap:12px}
+.option{padding:18px 20px;background:var(--bg);border:2px solid var(--border);border-bottom:4px solid var(--border);border-radius:14px;font-size:17px;font-weight:700;color:var(--text);cursor:pointer;transition:all .12s;text-align:left;font-family:inherit}
+.option:hover{background:var(--bg-alt)}
+.option.selected{border-color:#84d8ff;background:var(--blue-light);color:var(--blue-dark)}
+body.dark .option.selected{background:rgba(28,176,246,.2)}
+.option.correct{border-color:#a5ed6e;background:var(--green-light);color:#58a700}
+body.dark .option.correct{background:rgba(88,204,2,.2)}
+.option.wrong{border-color:#ffb2b2;background:var(--red-light);color:#ea2b2b}
+body.dark .option.wrong{background:rgba(255,75,75,.2)}
+.option:disabled{cursor:default}
+.lesson-footer{padding:16px 20px;background:var(--bg);border-top:2px solid var(--border);display:flex;justify-content:center;position:sticky;bottom:0}
+.check-btn{width:100%;max-width:650px;padding:16px;background:var(--green);color:#fff;border:none;border-bottom:4px solid var(--green-dark);border-radius:14px;font-size:16px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:1.5px;transition:all .12s;font-family:inherit}
+.check-btn:disabled{background:var(--border);border-bottom-color:#ccc;color:var(--text-lighter);cursor:not-allowed}
+.check-btn:not(:disabled):active{transform:translateY(2px);border-bottom-width:2px}
+.result-popup{position:fixed;bottom:0;left:0;right:0;background:var(--green-light);border-top:3px solid var(--green);padding:20px;display:flex;justify-content:space-between;align-items:center;gap:20px;animation:slideUp .25s ease;z-index:100}
+body.dark .result-popup{background:rgba(88,204,2,.15)}
+.result-popup.wrong-mode{background:var(--red-light);border-top-color:var(--red)}
+body.dark .result-popup.wrong-mode{background:rgba(255,75,75,.15)}
+.result-content{display:flex;align-items:center;gap:14px;flex:1}
+.result-icon{font-size:44px;animation:pop .3s ease}
+@keyframes pop{0%{transform:scale(0)}80%{transform:scale(1.15)}100%{transform:scale(1)}}
+.result-text h2{font-size:22px;font-weight:900;color:#58a700;margin-bottom:2px}
+.result-popup.wrong-mode .result-text h2{color:#ea2b2b}
+.result-text p{color:#58a700;font-weight:700;font-size:14px}
+.result-popup.wrong-mode .result-text p{color:#ea2b2b}
+.continue-btn{padding:14px 32px;background:var(--green);color:#fff;border:none;border-bottom:4px solid var(--green-dark);border-radius:12px;font-size:15px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:1px;font-family:inherit}
+.result-popup.wrong-mode .continue-btn{background:var(--red);border-bottom-color:var(--red-dark)}
+.continue-btn:active{transform:translateY(2px);border-bottom-width:2px}
+#completeScreen{align-items:center;justify-content:center;background:var(--bg);text-align:center;padding:40px 20px}
+.complete-content{max-width:500px;width:100%}
+.trophy{font-size:100px;margin-bottom:20px;animation:bounce 1s infinite alternate}
+@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-15px)}}
+.complete-content h1{font-size:32px;font-weight:900;color:var(--yellow);margin-bottom:30px;text-shadow:2px 2px 0 rgba(0,0,0,.1)}
+.stats-box{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:30px}
+.stat-box{background:var(--bg);border:2px solid var(--yellow);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;gap:4px}
+.stat-label{font-size:12px;font-weight:900;color:var(--yellow);text-transform:uppercase;letter-spacing:1px}
+.stat-value{font-size:20px;font-weight:900;color:var(--text)}
+.primary-btn{padding:16px 60px;background:var(--green);color:#fff;border:none;border-bottom:4px solid var(--green-dark);border-radius:14px;font-size:16px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:1.5px;font-family:inherit}
+.primary-btn:active{transform:translateY(2px);border-bottom-width:2px}
+.profile-main{flex:1;padding:30px 20px;max-width:600px;margin:0 auto;width:100%}
+.profile-card{background:var(--bg-alt);border-radius:20px;padding:30px;text-align:center;margin-bottom:20px}
+.avatar{font-size:80px;margin-bottom:12px}
+.profile-card h2{font-size:24px;font-weight:900;color:var(--text);margin-bottom:6px}
+.profile-card p{color:var(--text-light);font-weight:600}
+.profile-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.profile-stat{background:var(--bg);border-radius:12px;padding:14px 8px}
+.profile-stat-value{font-size:22px;font-weight:900;color:var(--green);display:block}
+.profile-stat-label{font-size:11px;font-weight:800;color:var(--text-light);text-transform:uppercase;letter-spacing:.5px;margin-top:4px;display:block}
+.danger-btn{width:100%;padding:14px;background:var(--red);color:#fff;border:none;border-bottom:4px solid var(--red-dark);border-radius:12px;font-size:14px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:1px;margin-top:20px;font-family:inherit}
+.danger-btn:active{transform:translateY(2px);border-bottom-width:2px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:2px solid var(--border);display:flex;justify-content:space-around;padding:8px 0;z-index:50}
+.nav-item{background:none;border:none;padding:8px 16px;font-size:22px;cursor:pointer;color:var(--text-lighter);transition:all .15s;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:2px}
+.nav-item.active{color:var(--green)}
+.nav-item span.label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
+.hidden{display:none!important}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.shake{animation:shake .3s}
+@media (max-width:600px){
+.logo-text{display:none}
+.result-popup{flex-direction:column;align-items:stretch}
+.continue-btn{width:100%}
+.home-main{padding:20px 15px;padding-bottom:90px}
+.lesson-main{padding-bottom:90px}
+.profile-main{padding-bottom:90px}
 }
 </style>
 </head>
-
 <body>
 
-<div id="splash">
-  <div class="book"></div>
-  <div class="splashText">
-    <h1>ENGLISH MASTER</h1>
-    <p>ULTRA LEARNING EXPERIENCE</p>
-  </div>
-</div>
-
-<div class="app">
-
-<header class="topbar">
-  <div class="logo">
-    <div class="logoIcon">EM</div>
-    <div class="logoText">
-      <b>English Master</b>
-      <span>ULTRA</span>
+<div id="homeScreen" class="screen active">
+  <header class="header">
+    <div class="logo"><span class="logo-icon">🦜</span><span class="logo-text">LingoQuest</span></div>
+    <div class="header-stats">
+      <div class="stat"><span>🔥</span><span id="homeStreak">0</span></div>
+      <div class="stat"><span>💎</span><span id="homeGems">0</span></div>
+      <div class="stat"><span>❤️</span><span id="homeHearts">5</span></div>
+      <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
     </div>
-  </div>
-
-  <div class="topActions">
-    <button class="iconBtn" onclick="toggleDark()">◐</button>
-    <button class="iconBtn" onclick="showPage('themes')">🎨</button>
-    <button class="iconBtn" onclick="showPage('settings')">⚙</button>
-  </div>
-</header>
-
-<main>
-
-<!-- HOME -->
-<section id="home" class="page active">
-
-<div class="hero">
-  <span class="badge">✦ ULTRA ENGLISH EXPERIENCE</span>
-
-  <h1>
-    Master English.
-    <span class="gradientText">Unlock Your World.</span>
-  </h1>
-
-  <p>
-    Learn, speak, play, practice and build real-world English skills
-    through an interactive learning experience.
-  </p>
-
-  <div class="heroButtons">
-    <button class="primary" onclick="showPage('teacher')">🤖 Meet AI Teacher</button>
-    <button class="goldBtn" onclick="showPage('premium')">✦ Explore Ultra</button>
-    <button class="secondary" onclick="continueLearning()">▶ Continue Learning</button>
-  </div>
-</div>
-
-<div class="section">
-  <div class="sectionTitle">
-    <h2>Your Progress</h2>
-    <span id="levelText">Level 1</span>
-  </div>
-
-  <div class="stats">
-    <div class="stat">
-      <strong id="wordsStat">0</strong>
-      <span>Words Learned</span>
+  </header>
+  <main class="home-main">
+    <div class="hero">
+      <h1>Learn a language <span>the fun way</span>!</h1>
+      <p>Free forever. No ads. No limits. Better than the rest.</p>
     </div>
-    <div class="stat">
-      <strong id="xpStat">0</strong>
-      <span>XP Earned</span>
+    <div class="stats-grid">
+      <div class="big-stat"><span class="big-stat-value" id="totalXP">0</span><span class="big-stat-label">Total XP</span></div>
+      <div class="big-stat"><span class="big-stat-value" id="lessonsDone">0</span><span class="big-stat-label">Lessons</span></div>
+      <div class="big-stat"><span class="big-stat-value" id="bestStreak">0</span><span class="big-stat-label">Best Streak</span></div>
+      <div class="big-stat"><span class="big-stat-value" id="accuracyStat">0%</span><span class="big-stat-label">Accuracy</span></div>
     </div>
-    <div class="stat">
-      <strong id="streakStat">0</strong>
-      <span>Day Streak</span>
-    </div>
-    <div class="stat">
-      <strong id="quizStat">0</strong>
-      <span>Quiz Correct</span>
-    </div>
-  </div>
-</div>
-
-<div class="section">
-  <div class="sectionTitle">
-    <h2>Ultra Learning Space</h2>
-    <span>Explore</span>
-  </div>
-
-  <div class="grid">
-
-    <div class="feature" onclick="showPage('teacher')">
-      <div class="featureIcon">🤖</div>
-      <h3>AI Teacher</h3>
-      <p>Practice conversations with your virtual English teacher.</p>
-    </div>
-
-    <div class="feature" onclick="showPage('vocabulary')">
-      <div class="featureIcon">📚</div>
-      <h3>Vocabulary</h3>
-      <p>Build powerful vocabulary with examples and pronunciation.</p>
-    </div>
-
-    <div class="feature" onclick="showPage('dictionary')">
-      <div class="featureIcon">📖</div>
-      <h3>Dictionary</h3>
-      <p>Search meanings, examples and word information.</p>
-    </div>
-
-    <div class="feature" onclick="showPage('game')">
-      <div class="featureIcon">🎮</div>
-      <h3>English Games</h3>
-      <p>Earn XP while testing your English knowledge.</p>
-    </div>
-
-    <div class="feature" onclick="showPage('camera')">
-      <div class="featureIcon">📷</div>
-      <h3>See & Learn</h3>
-      <p>Use your camera for object-based English practice.</p>
-    </div>
-
-    <div class="feature" onclick="showPage('shorts')">
-      <div class="featureIcon">▶️</div>
-      <h3>English Shorts</h3>
-      <p>Learn useful English through short-form lessons.</p>
-    </div>
-
-    <div class="feature" onclick="showPage('speaking')">
-      <div class="featureIcon">🎙️</div>
-      <h3>Speaking Lab</h3>
-      <p>Practice sentences and pronunciation using your voice.</p>
-    </div>
-
-    <div class="feature" onclick="showPage('writing')">
-      <div class="featureIcon">✍️</div>
-      <h3>Writing Lab</h3>
-      <p>Write English and improve your communication skills.</p>
-    </div>
-
-    <div class="feature" onclick="showPage('challenge')">
-      <div class="featureIcon">🏆</div>
-      <h3>Challenges</h3>
-      <p>Compete with friends through learning challenges.</p>
-    </div>
-
-  </div>
-</div>
-
-<div class="section panel">
-  <div class="sectionTitle">
-    <h2>Today's Mission</h2>
-    <span id="missionText">0 / 10 XP</span>
-  </div>
-
-  <div class="xpBar">
-    <div class="xpFill" id="missionFill"></div>
-  </div>
-
-  <button class="primary" onclick="dailyMission()">Start Mission</button>
-</div>
-
-</section>
-
-
-<!-- TEACHER -->
-<section id="teacher" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="sectionTitle">
-  <h2>🤖 AI Teacher</h2>
-  <span>Conversation Lab</span>
-</div>
-
-<div class="panel aiTeacher">
-
-  <div class="aiAvatar">👩🏻‍🏫</div>
-
-  <div>
-    <span class="badge">AI TEACHER</span>
-    <h2 style="margin-top:10px">Ayesha</h2>
-    <p style="color:var(--muted);margin-top:7px">
-      Your conversation practice teacher.
-    </p>
-
-    <div class="chat">
-      <div class="chatBubble" id="teacherMessage">
-        Hello! What would you like to practice today?
+    <div class="courses">
+      <h2>🎯 Choose a Course</h2>
+      <div class="course-grid">
+        <div class="course-card" onclick="startCourse('hindi')"><span class="flag">🇮🇳</span><h3>Hindi</h3><p>हिन्दी सीखें</p></div>
+        <div class="course-card" onclick="startCourse('spanish')"><span class="flag">🇪🇸</span><h3>Spanish</h3><p>Aprende Español</p></div>
+        <div class="course-card" onclick="startCourse('french')"><span class="flag">🇫🇷</span><h3>French</h3><p>Apprends le Français</p></div>
+        <div class="course-card" onclick="startCourse('german')"><span class="flag">🇩🇪</span><h3>German</h3><p>Lerne Deutsch</p></div>
       </div>
     </div>
-
-    <div class="chatInput">
-      <input id="teacherInput" placeholder="Write something in English...">
-      <button class="primary" onclick="askTeacher()">Send</button>
-      <button class="secondary" onclick="speakTeacher()">🔊</button>
+    <div class="features">
+      <div class="feature"><div class="feature-icon">♾️</div><h3>Unlimited Hearts</h3><p>Never wait for hearts to refill.</p></div>
+      <div class="feature"><div class="feature-icon">🎯</div><h3>Free Hints</h3><p>Get free hints when stuck.</p></div>
+      <div class="feature"><div class="feature-icon">⏱️</div><h3>Speed Bonus</h3><p>Answer fast, earn extra XP.</p></div>
+      <div class="feature"><div class="feature-icon">🌙</div><h3>Dark Mode</h3><p>Easy on the eyes, day or night.</p></div>
+      <div class="feature"><div class="feature-icon">💾</div><h3>Auto Save</h3><p>Progress saved locally.</p></div>
+      <div class="feature"><div class="feature-icon">🚫</div><h3>Zero Ads</h3><p>Pure learning. No interruptions.</p></div>
     </div>
-  </div>
-
+  </main>
+  <footer class="home-footer"><p>© 2025 LingoQuest · Made with ❤️ · Not affiliated with Duolingo</p></footer>
 </div>
 
-<div class="panel">
-  <h3>Choose Practice</h3>
-  <div class="chips">
-    <button class="chip" onclick="teacherTopic('Daily conversation')">Daily Talk</button>
-    <button class="chip" onclick="teacherTopic('Job interview')">Job Interview</button>
-    <button class="chip" onclick="teacherTopic('Travel')">Travel</button>
-    <button class="chip" onclick="teacherTopic('Freelancing')">Freelancing</button>
-  </div>
-</div>
-
-<div class="panel">
-  <h3>AI Integration</h3>
-  <p style="color:var(--muted);line-height:1.7;margin-top:8px">
-    This interface is ready for a real AI API connection. Add your
-    server/API endpoint here when you connect an AI provider.
-  </p>
-</div>
-
-</section>
-
-
-<!-- VOCABULARY -->
-<section id="vocabulary" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="sectionTitle">
-  <h2>📚 Vocabulary</h2>
-  <span id="vocabCount"></span>
-</div>
-
-<input class="search" id="vocabSearch"
-       placeholder="Search vocabulary..."
-       oninput="renderVocabulary()">
-
-<div class="chips">
-  <button class="chip active" onclick="setVocabCategory('All',this)">All</button>
-  <button class="chip" onclick="setVocabCategory('Everyday',this)">Everyday</button>
-  <button class="chip" onclick="setVocabCategory('Study',this)">Study</button>
-  <button class="chip" onclick="setVocabCategory('Work',this)">Work</button>
-  <button class="chip" onclick="setVocabCategory('People',this)">People</button>
-</div>
-
-<div id="vocabList" class="grid"></div>
-
-</section>
-
-
-<!-- DICTIONARY -->
-<section id="dictionary" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="sectionTitle">
-  <h2>📖 Ultra Dictionary</h2>
-  <span>Offline word bank</span>
-</div>
-
-<input class="search"
-       id="dictionarySearch"
-       placeholder="Search a word..."
-       oninput="searchDictionary()">
-
-<div id="dictionaryResult" class="panel">
-  <h3>Search a word</h3>
-  <p style="color:var(--muted);margin-top:8px">
-    Try: confidence, opportunity, beautiful, improve...
-  </p>
-</div>
-
-</section>
-
-
-<!-- GAME -->
-<section id="game" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="panel game">
-  <span class="badge">⚡ XP GAME</span>
-  <h1 style="margin-top:12px">Word Rush</h1>
-  <p style="color:var(--muted);margin-top:8px">
-    Choose the correct meaning and earn XP.
-  </p>
-
-  <div class="xpBar">
-    <div class="xpFill" id="gameXP"></div>
-  </div>
-
-  <div id="gameQuestion" style="margin-top:25px"></div>
-</div>
-
-</section>
-
-
-<!-- SPEAKING -->
-<section id="speaking" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="panel">
-  <span class="badge">🎙️ SPEAKING LAB</span>
-  <h2 style="margin-top:12px">Speak Like You Mean It</h2>
-
-  <div id="speakSentence"
-       style="font-size:24px;line-height:1.5;margin-top:25px">
-    I want to improve my English.
-  </div>
-
-  <div class="cardActions">
-    <button class="primary" onclick="speakCurrent()">🔊 Listen</button>
-    <button class="goldBtn" onclick="nextSentence()">Next →</button>
-  </div>
-</div>
-
-<div class="panel">
-  <h3>Pronunciation Practice</h3>
-  <p style="color:var(--muted);line-height:1.7;margin-top:8px">
-    Listen to the sentence and repeat it aloud. Voice recognition can
-    be connected to a speech-analysis API for detailed pronunciation
-    scoring.
-  </p>
-</div>
-
-</section>
-
-
-<!-- WRITING -->
-<section id="writing" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="panel">
-  <span class="badge">✍️ WRITING LAB</span>
-  <h2 style="margin-top:12px">Write Your Story</h2>
-
-  <textarea id="writingBox"
-    placeholder="Write 5-10 sentences about your day..."></textarea>
-
-  <div style="display:flex;justify-content:space-between;margin-top:8px">
-    <span style="color:var(--muted)" id="wordCount">0 words</span>
-    <button class="primary" onclick="saveWriting()">Save Practice</button>
-  </div>
-</div>
-
-</section>
-
-
-<!-- CAMERA -->
-<section id="camera" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="panel">
-  <span class="badge">📷 SEE & LEARN</span>
-  <h2 style="margin-top:12px">English Through Your Camera</h2>
-
-  <div class="cameraBox" style="margin-top:18px">
-    <video id="cameraVideo" autoplay playsinline></video>
-    <div class="cameraLabel" id="cameraLabel">
-      Camera ready — point it at an object.
+<div id="lessonScreen" class="screen">
+  <header class="header">
+    <button class="close-btn" onclick="quitLesson()">✕</button>
+    <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="stat"><span>❤️</span><span id="hearts">5</span></div>
+  </header>
+  <main class="lesson-main">
+    <div class="lesson-header-row">
+      <div class="timer">⏱️ <span id="timer">0:00</span></div>
+      <button class="hint-btn" id="hintBtn" onclick="useHint()">💡 HINT (<span id="hintCount">3</span>)</button>
     </div>
+    <h1 id="questionText">Loading...</h1>
+    <div class="options" id="optionsContainer"></div>
+  </main>
+  <footer class="lesson-footer">
+    <button class="check-btn" id="checkBtn" disabled>CHECK</button>
+  </footer>
+</div>
+
+<div class="result-popup hidden" id="resultPopup">
+  <div class="result-content">
+    <div class="result-icon" id="resultIcon">✅</div>
+    <div class="result-text"><h2 id="resultTitle">Correct!</h2><p id="resultMessage">Great job!</p></div>
   </div>
-
-  <div class="cardActions">
-    <button class="primary" onclick="startCamera()">📷 Start Camera</button>
-    <button class="secondary" onclick="stopCamera()">Stop</button>
-  </div>
-
-  <p style="color:var(--muted);margin-top:15px;line-height:1.7">
-    Camera access works through your browser/PWA permission.
-    Real object identification requires an image-recognition model/API.
-  </p>
+  <button class="continue-btn" id="continueBtn">CONTINUE</button>
 </div>
 
-</section>
-
-
-<!-- SHORTS -->
-<section id="shorts" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="sectionTitle">
-  <h2>▶️ English Shorts</h2>
-  <span>30-second lessons</span>
-</div>
-
-<div id="shortsList"></div>
-
-</section>
-
-
-<!-- CHALLENGE -->
-<section id="challenge" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="panel">
-  <span class="badge">🏆 SOCIAL CHALLENGES</span>
-  <h2 style="margin-top:12px">Challenge Your Friends</h2>
-  <p style="color:var(--muted);margin-top:8px">
-    Create a learning challenge and compare progress.
-  </p>
-
-  <button class="primary" style="margin-top:18px" onclick="createChallenge()">
-    + Create Challenge
-  </button>
-</div>
-
-<div id="challengeList"></div>
-
-</section>
-
-
-<!-- THEMES -->
-<section id="themes" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="sectionTitle">
-  <h2>🎨 50 Live Themes</h2>
-  <span>3 Free • 47 Ultra</span>
-</div>
-
-<div id="themeGrid" class="themeGrid"></div>
-
-</section>
-
-
-<!-- PREMIUM -->
-<section id="premium" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="hero" style="min-height:auto">
-  <span class="badge">✦ ULTRA MEMBERSHIP</span>
-
-  <h1 style="font-size:48px">
-    Learn more.
-    <span class="gradientText">Do more.</span>
-  </h1>
-
-  <p>
-    Choose the learning experience that fits your goals.
-  </p>
-</div>
-
-<div class="section">
-  <div class="planGrid">
-
-    <div class="plan">
-      <h2>FREE</h2>
-      <div class="price">Rs. 0</div>
-      <ul>
-        <li>✓ Vocabulary</li>
-        <li>✓ Dictionary</li>
-        <li>✓ Basic Quiz</li>
-        <li>✓ 3 Themes</li>
-        <li>✓ Basic Progress</li>
-      </ul>
-      <button class="secondary" style="margin-top:20px;width:100%">
-        Current Plan
-      </button>
+<div id="completeScreen" class="screen">
+  <div class="complete-content">
+    <div class="trophy">🏆</div>
+    <h1>Lesson Complete!</h1>
+    <div class="stats-box">
+      <div class="stat-box"><span class="stat-label">XP Earned</span><span class="stat-value" id="finalXP">+50</span></div>
+      <div class="stat-box"><span class="stat-label">Accuracy</span><span class="stat-value" id="finalAccuracy">100%</span></div>
+      <div class="stat-box"><span class="stat-label">Time</span><span class="stat-value" id="finalTime">1:30</span></div>
     </div>
-
-    <div class="plan">
-      <h2>PRO</h2>
-      <div class="price">Rs. 499</div>
-      <ul>
-        <li>✓ Everything in Free</li>
-        <li>✓ Speaking Lab</li>
-        <li>✓ More practice</li>
-        <li>✓ Premium lessons</li>
-        <li>✓ More themes</li>
-      </ul>
-      <button class="primary" style="margin-top:20px;width:100%"
-              onclick="purchaseMessage('PRO')">
-        Upgrade
-      </button>
-    </div>
-
-    <div class="plan ultra">
-      <span class="badge">MOST FEATURES</span>
-      <h2 style="margin-top:10px">ULTRA</h2>
-      <div class="price">Rs. 999</div>
-      <ul>
-        <li>✓ Everything in Pro</li>
-        <li>✓ Ultra themes</li>
-        <li>✓ AI Teacher interface</li>
-        <li>✓ Interview Practice</li>
-        <li>✓ Freelancing English</li>
-        <li>✓ Certificates structure</li>
-        <li>✓ Advanced challenges</li>
-      </ul>
-      <button class="goldBtn" style="margin-top:20px;width:100%"
-              onclick="purchaseMessage('ULTRA')">
-        Upgrade to Ultra
-      </button>
-    </div>
-
+    <button class="primary-btn" onclick="goHome()">CONTINUE</button>
   </div>
 </div>
 
-<div class="panel">
-  <h3>💼 Freelancing English</h3>
-  <p style="color:var(--muted);line-height:1.7;margin-top:8px">
-    Learn professional English for client messages, proposals,
-    meetings, interviews and workplace communication.
-  </p>
-  <button class="goldBtn" style="margin-top:15px"
-          onclick="showToast('Freelancing course opened')">
-    Start Course
-  </button>
-</div>
-
-</section>
-
-
-<!-- PROGRESS -->
-<section id="progress" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="panel">
-  <div class="sectionTitle">
-    <h2>📊 My Progress</h2>
-    <span id="progressLevel">Level 1</span>
-  </div>
-
-  <div class="progressCircle" id="progressCircle">
-    <div>
-      <strong id="progressPercent">0%</strong>
-      <small>Progress</small>
+<div id="profileScreen" class="screen">
+  <header class="header">
+    <div class="logo"><span class="logo-icon">👤</span><span class="logo-text">Profile</span></div>
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+  </header>
+  <main class="profile-main">
+    <div class="profile-card">
+      <div class="avatar">🦜</div>
+      <h2>Language Learner</h2>
+      <p>Level <span id="userLevel">1</span> · Keep going!</p>
+      <div class="profile-stats">
+        <div class="profile-stat"><span class="profile-stat-value" id="pStreak">0</span><span class="profile-stat-label">Streak</span></div>
+        <div class="profile-stat"><span class="profile-stat-value" id="pXP">0</span><span class="profile-stat-label">Total XP</span></div>
+        <div class="profile-stat"><span class="profile-stat-value" id="pGems">0</span><span class="profile-stat-label">Gems</span></div>
+      </div>
     </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat">
-      <strong id="pWords">0</strong>
-      <span>Words</span>
-    </div>
-    <div class="stat">
-      <strong id="pXP">0</strong>
-      <span>XP</span>
-    </div>
-    <div class="stat">
-      <strong id="pStreak">0</strong>
-      <span>Streak</span>
-    </div>
-    <div class="stat">
-      <strong id="pCorrect">0</strong>
-      <span>Correct</span>
-    </div>
-  </div>
+    <button class="danger-btn" onclick="resetProgress()">🗑️ Reset All Progress</button>
+  </main>
 </div>
 
-<div class="panel">
-  <h3>🏅 Achievements</h3>
-  <div id="achievements" class="grid" style="margin-top:15px"></div>
+<div class="bottom-nav" id="bottomNav">
+  <button class="nav-item active" onclick="navTo('home')" data-nav="home">🏠<span class="label">Home</span></button>
+  <button class="nav-item" onclick="navTo('profile')" data-nav="profile">👤<span class="label">Profile</span></button>
 </div>
-
-</section>
-
-
-<!-- SETTINGS -->
-<section id="settings" class="page">
-
-<button class="back" onclick="goHome()">← Home</button>
-
-<div class="sectionTitle">
-  <h2>⚙️ Settings</h2>
-</div>
-
-<div class="panel">
-  <h3>Daily Goal</h3>
-  <p style="color:var(--muted);margin:8px 0 15px">
-    Choose your daily XP target.
-  </p>
-
-  <div class="chips">
-    <button class="chip" onclick="setGoal(10)">10 XP</button>
-    <button class="chip" onclick="setGoal(20)">20 XP</button>
-    <button class="chip" onclick="setGoal(30)">30 XP</button>
-    <button class="chip" onclick="setGoal(50)">50 XP</button>
-  </div>
-</div>
-
-<div class="panel">
-  <h3>App Data</h3>
-  <button class="secondary" style="margin-top:15px"
-          onclick="resetData()">
-    Reset Progress
-  </button>
-</div>
-
-<div class="panel">
-  <h3>PWA</h3>
-  <p style="color:var(--muted);line-height:1.7;margin-top:8px">
-    This page is designed to work inside a PWA Builder project.
-    Add your PWA manifest, icons and service worker through your
-    existing PWA Builder setup.
-  </p>
-</div>
-
-</section>
-
-</main>
-</div>
-
-
-<nav class="bottomNav">
-  <button class="navBtn active" onclick="showPage('home',this)">
-    <b>⌂</b>Home
-  </button>
-  <button class="navBtn" onclick="showPage('vocabulary',this)">
-    <b>📚</b>Learn
-  </button>
-  <button class="navBtn" onclick="showPage('game',this)">
-    <b>🎮</b>Game
-  </button>
-  <button class="navBtn" onclick="showPage('teacher',this)">
-    <b>🤖</b>AI
-  </button>
-  <button class="navBtn" onclick="showPage('progress',this)">
-    <b>🏆</b>Progress
-  </button>
-</nav>
-
-<div id="toast" class="toast"></div>
-
 
 <script>
-/* =========================
-   ENGLISH MASTER ULTRA
-========================= */
-
-const DEFAULT_STATE={
-  words:[],
-  xp:0,
-  streak:0,
-  lastDate:"",
-  correct:0,
-  goal:10,
-  todayXP:0,
-  todayDate:"",
-  theme:"ultra",
-  dark:true,
-  writing:"",
-  challenges:[]
+const courses = {
+  hindi: [
+    { q: "What does 'नमस्ते' mean?", options: ["Hello", "Goodbye", "Sorry", "Please"], answer: "Hello" },
+    { q: "Translate: 'Thank you'", options: ["धन्यवाद", "नमस्ते", "क्षमा करें", "स्वागत"], answer: "धन्यवाद" },
+    { q: "What is 'किताब'?", options: ["Book", "Pen", "Table", "Chair"], answer: "Book" },
+    { q: "What does 'पानी' mean?", options: ["Water", "Milk", "Tea", "Juice"], answer: "Water" },
+    { q: "Translate: 'I am a student'", options: ["मैं छात्र हूँ", "मैं शिक्षक हूँ", "मैं घर हूँ", "मैं खाता हूँ"], answer: "मैं छात्र हूँ" },
+    { q: "What does 'खाना' mean?", options: ["Food", "Water", "Sleep", "Run"], answer: "Food" },
+    { q: "Translate: 'Good morning'", options: ["सुप्रभात", "शुभ रात्रि", "नमस्ते", "अलविदा"], answer: "सुप्रभात" },
+    { q: "What is 'घर'?", options: ["House", "Car", "Tree", "Book"], answer: "House" }
+  ],
+  spanish: [
+    { q: "What does 'Hola' mean?", options: ["Hello", "Goodbye", "Thanks", "Please"], answer: "Hello" },
+    { q: "Translate: 'Thank you'", options: ["Gracias", "Hola", "Adiós", "Por favor"], answer: "Gracias" },
+    { q: "What is 'libro'?", options: ["Book", "Pen", "Table", "Chair"], answer: "Book" },
+    { q: "What does 'agua' mean?", options: ["Water", "Milk", "Tea", "Juice"], answer: "Water" },
+    { q: "Translate: 'I am a student'", options: ["Soy estudiante", "Soy profesor", "Estoy en casa", "Como pan"], answer: "Soy estudiante" },
+    { q: "What is 'casa'?", options: ["House", "Car", "Tree", "Book"], answer: "House" },
+    { q: "Translate: 'Good morning'", options: ["Buenos días", "Buenas noches", "Hola", "Adiós"], answer: "Buenos días" },
+    { q: "What does 'comida' mean?", options: ["Food", "Water", "Sleep", "Run"], answer: "Food" }
+  ],
+  french: [
+    { q: "What does 'Bonjour' mean?", options: ["Hello", "Goodbye", "Thanks", "Please"], answer: "Hello" },
+    { q: "Translate: 'Thank you'", options: ["Merci", "Bonjour", "Au revoir", "S'il vous plaît"], answer: "Merci" },
+    { q: "What is 'livre'?", options: ["Book", "Pen", "Table", "Chair"], answer: "Book" },
+    { q: "What does 'eau' mean?", options: ["Water", "Milk", "Tea", "Juice"], answer: "Water" },
+    { q: "Translate: 'I am a student'", options: ["Je suis étudiant", "Je suis prof", "Je suis à la maison", "Je mange"], answer: "Je suis étudiant" },
+    { q: "What is 'maison'?", options: ["House", "Car", "Tree", "Book"], answer: "House" },
+    { q: "Translate: 'Good morning'", options: ["Bonjour", "Bonsoir", "Salut", "Au revoir"], answer: "Bonjour" },
+    { q: "What does 'nourriture' mean?", options: ["Food", "Water", "Sleep", "Run"], answer: "Food" }
+  ],
+  german: [
+    { q: "What does 'Hallo' mean?", options: ["Hello", "Goodbye", "Thanks", "Please"], answer: "Hello" },
+    { q: "Translate: 'Thank you'", options: ["Danke", "Hallo", "Tschüss", "Bitte"], answer: "Danke" },
+    { q: "What is 'Buch'?", options: ["Book", "Pen", "Table", "Chair"], answer: "Book" },
+    { q: "What does 'Wasser' mean?", options: ["Water", "Milk", "Tea", "Juice"], answer: "Water" },
+    { q: "Translate: 'I am a student'", options: ["Ich bin Student", "Ich bin Lehrer", "Ich bin zu Hause", "Ich esse"], answer: "Ich bin Student" },
+    { q: "What is 'Haus'?", options: ["House", "Car", "Tree", "Book"], answer: "House" },
+    { q: "Translate: 'Good morning'", options: ["Guten Morgen", "Gute Nacht", "Hallo", "Tschüss"], answer: "Guten Morgen" },
+    { q: "What does 'Essen' mean?", options: ["Food", "Water", "Sleep", "Run"], answer: "Food" }
+  ]
 };
 
-let state=loadState();
-let vocabCategory="All";
-let gameIndex=0;
-let sentenceIndex=0;
-let cameraStream=null;
-
-
-/* =========================
-   DATA
-========================= */
-
-const vocabulary=[
-["achieve","verb","Everyday","to successfully reach a goal","I want to achieve my goals."],
-["beautiful","adjective","Everyday","very attractive or pleasing","The city is beautiful."],
-["confidence","noun","People","belief in your own ability","Confidence helps you speak clearly."],
-["challenge","noun","Study","something difficult that tests ability","Learning English is a useful challenge."],
-["improve","verb","Study","to make something better","I want to improve my English."],
-["opportunity","noun","Work","a good chance to do something","This is a great opportunity."],
-["success","noun","Work","the achievement of a desired result","Hard work can lead to success."],
-["knowledge","noun","Study","information and understanding","Knowledge grows with practice."],
-["practice","noun","Study","repeated activity to improve a skill","Practice makes progress."],
-["focus","verb","Study","to give attention to something","Focus on one task."],
-["brave","adjective","People","showing courage","She was brave during the interview."],
-["creative","adjective","People","able to create new ideas","He has a creative mind."],
-["curious","adjective","People","wanting to learn or know more","Curious students ask questions."],
-["important","adjective","Everyday","having great value or meaning","English is important for communication."],
-["comfortable","adjective","Everyday","feeling relaxed and at ease","I feel comfortable speaking English."],
-["brilliant","adjective","People","very clever or impressive","That was a brilliant idea."],
-["reliable","adjective","Work","able to be trusted","A reliable person keeps promises."],
-["professional","adjective","Work","suitable for a job or business","Use professional English with clients."],
-["meeting","noun","Work","an organized discussion","We have a meeting today."],
-["deadline","noun","Work","the latest time something must be completed","The project deadline is Friday."],
-["journey","noun","Everyday","an act of traveling","The journey was long."],
-["healthy","adjective","Everyday","good for health","A healthy routine helps learning."],
-["discover","verb","Study","to find something new","I discovered a new word."],
-["communicate","verb","People","to share information or ideas","English helps people communicate."]
-];
-
-const dictionary={
-hello:{
-type:"interjection",
-meaning:"A greeting used when meeting someone.",
-example:"Hello! How are you today?",
-synonyms:"hi, greetings",
-opposite:"goodbye"
-},
-confidence:{
-type:"noun",
-meaning:"The belief that you can do something successfully.",
-example:"She spoke with confidence.",
-synonyms:"self-belief, assurance",
-opposite:"doubt"
-},
-opportunity:{
-type:"noun",
-meaning:"A suitable chance to do something.",
-example:"This job is a great opportunity.",
-synonyms:"chance, possibility",
-opposite:"obstacle"
-},
-improve:{
-type:"verb",
-meaning:"To become or make something better.",
-example:"I want to improve my English.",
-synonyms:"develop, enhance",
-opposite:"worsen"
-},
-beautiful:{
-type:"adjective",
-meaning:"Very attractive or pleasing.",
-example:"The view is beautiful.",
-synonyms:"lovely, attractive",
-opposite:"ugly"
-},
-success:{
-type:"noun",
-meaning:"The achievement of a goal or desired result.",
-example:"Practice can lead to success.",
-synonyms:"achievement, victory",
-opposite:"failure"
-},
-challenge:{
-type:"noun",
-meaning:"A difficult task that tests your ability.",
-example:"The exam was a challenge.",
-synonyms:"test, difficulty",
-opposite:"ease"
-},
-practice:{
-type:"noun",
-meaning:"Repeated activity used to develop a skill.",
-example:"English practice improves fluency.",
-synonyms:"training, exercise",
-opposite:"neglect"
-},
-knowledge:{
-type:"noun",
-meaning:"Information and understanding gained through learning.",
-example:"Knowledge gives you confidence.",
-synonyms:"understanding, learning",
-opposite:"ignorance"
-},
-focus:{
-type:"verb",
-meaning:"To give your attention to something.",
-example:"Focus on your pronunciation.",
-synonyms:"concentrate, attend",
-opposite:"distract"
-}
+let state = {
+  hearts: 5, gems: 0, streak: 0, bestStreak: 0, totalXP: 0,
+  lessonsDone: 0, totalCorrect: 0, totalAnswered: 0, hints: 3,
+  currentCourse: null, courseName: null, currentIndex: 0,
+  selectedOption: null, correctCount: 0, startTime: null,
+  timerInterval: null, darkMode: false, usedHint: false,
+  hintRemoved: null, fastAnswers: 0
 };
 
-const gameQuestions=[
-["What does “achieve” mean?","To reach a goal","To forget something","To sleep","To lose"],
-["What does “brilliant” mean?","Very clever or impressive","Very slow","Very angry","Very small"],
-["What is an “opportunity”?","A good chance","A mistake","A problem","A lesson"],
-["What does “improve” mean?","Make better","Make worse","Stop","Forget"],
-["What is “confidence”?","Belief in your ability","Fear","Anger","Sleep"],
-["What does “practice” help you do?","Develop a skill","Forget a skill","Avoid learning","Waste time"],
-["What does “professional” describe?","Suitable for work","Very funny","Very young","Very tired"],
-["What does “curious” mean?","Wanting to know more","Never asking","Feeling sleepy","Being careless"],
-["What is a “deadline”?","Latest completion time","Lunch time","Holiday","Morning"],
-["What does “communicate” mean?","Share information","Hide information","Forget information","Stop speaking"]
-];
-
-const sentences=[
-"I want to improve my English.",
-"I am confident when I speak English.",
-"I practice English every day.",
-"I would like to become a better communicator.",
-"I am preparing for my future.",
-"I can learn something new every day."
-];
-
-const shorts=[
-["30 SEC LESSON","How to introduce yourself","Learn a simple professional introduction for school, work and new people."],
-["30 SEC LESSON","Speak with confidence","Use short, clear sentences instead of worrying about perfect English."],
-["30 SEC LESSON","Job interview English","Learn useful phrases for answering common interview questions."],
-["30 SEC LESSON","Freelancing English","Practice polite client communication and professional messages."]
-];
-
-const themes=[
-["ultra","Ultra Black","Free","#080910","#8b5cf6"],
-["ocean","Ocean Dream","Free","#06151c","#06b6d4"],
-["emerald","Emerald Garden","Free","#06150f","#10b981"],
-["sunset","Sunset","Ultra","#28100b","#f97316"],
-["ruby","Ruby Night","Ultra","#21060d","#ef4444"],
-["gold","Royal Gold","Ultra","#181205","#f5c451"],
-["rose","Rose Crystal","Ultra","#230d1b","#f43f5e"],
-["violet","Violet Palace","Ultra","#150b28","#a78bfa"],
-["sky","Skyline","Ultra","#071629","#38bdf8"],
-["indigo","Indigo Dream","Ultra","#0c0b24","#6366f1"],
-["teal","Teal Glass","Ultra","#061a1a","#14b8a6"],
-["crimson","Crimson","Ultra","#220609","#dc2626"],
-["forest","Deep Forest","Ultra","#06150c","#22c55e"],
-["lavender","Lavender","Ultra","#151020","#c084fc"],
-["ice","Ice Blue","Ultra","#071521","#7dd3fc"],
-["sapphire","Sapphire","Ultra","#071229","#2563eb"],
-["platinum","Platinum","Ultra","#111318","#d1d5db"],
-["copper","Copper","Ultra","#1c1009","#fb923c"],
-["midnight","Midnight","Ultra","#05060c","#818cf8"],
-["aurora","Aurora","Ultra","#071311","#34d399"],
-["neon","Neon City","Ultra","#0a0715","#e879f9"],
-["cosmic","Cosmic","Ultra","#09051b","#8b5cf6"],
-["galaxy","Galaxy","Ultra","#050b20","#60a5fa"],
-["moon","Moonlight","Ultra","#0b0d18","#94a3b8"],
-["rain","Rain Glass","Ultra","#061017","#22d3ee"],
-["storm","Storm","Ultra","#0c1017","#64748b"],
-["desert","Desert","Ultra","#211307","#f59e0b"],
-["sand","Golden Sand","Ultra","#171008","#eab308"],
-["lavender2","Royal Lavender","Ultra","#180b25","#d946ef"],
-["royal","Royal Purple","Ultra","#110820","#8b5cf6"],
-["diamond","Diamond","Ultra","#0b1016","#e2e8f0"],
-["mint","Mint","Ultra","#061613","#34d399"],
-["aqua","Aqua","Ultra","#04151b","#22d3ee"],
-["fire","Fire","Ultra","#1c0804","#f97316"],
-["cherry","Cherry","Ultra","#20070e","#fb7185"],
-["coffee","Coffee","Ultra","#160e0a","#a16207"],
-["graphite","Graphite","Ultra","#0d0e11","#94a3b8"],
-["electric","Electric Blue","Ultra","#050d1b","#3b82f6"],
-["magenta","Magenta","Ultra","#1a0718","#ec4899"],
-["lime","Lime","Ultra","#0c1504","#84cc16"],
-["cobalt","Cobalt","Ultra","#071022","#3b82f6"],
-["pearl","Pearl","Ultra","#111217","#f8fafc"],
-["obsidian","Obsidian","Ultra","#030405","#64748b"],
-["rainbow","Rainbow Glass","Ultra","#120a18","#f472b6"],
-["deepsea","Deep Sea","Ultra","#031017","#0ea5e9"],
-["jungle","Jungle","Ultra","#04120a","#16a34a"],
-["volcano","Volcano","Ultra","#180604","#ef4444"],
-["starlight","Starlight","Ultra","#080b18","#c4b5fd"],
-["neptune","Neptune","Ultra","#050d1a","#38bdf8"]
-];
-
-
-/* =========================
-   STATE
-========================= */
-
-function loadState(){
-  try{
-    const saved=JSON.parse(localStorage.getItem("englishMasterUltra"));
-    return {...DEFAULT_STATE,...(saved||{})};
-  }catch(e){
-    return {...DEFAULT_STATE};
-  }
-}
-
-function saveState(){
-  localStorage.setItem(
-    "englishMasterUltra",
-    JSON.stringify(state)
-  );
-}
-
-function today(){
-  return new Date().toISOString().slice(0,10);
-}
-
-function addXP(amount){
-  const d=today();
-
-  if(state.todayDate!==d){
-    state.todayDate=d;
-    state.todayXP=0;
-  }
-
-  state.xp+=amount;
-  state.todayXP+=amount;
-
-  if(state.lastDate!==d){
-    state.streak=Math.max(1,state.streak);
-    state.lastDate=d;
-  }
-
-  saveState();
-  updateStats();
-  showToast("+"+amount+" XP earned ⚡");
-}
-
-
-/* =========================
-   NAVIGATION
-========================= */
-
-function showPage(id,nav){
-  document.querySelectorAll(".page").forEach(p=>{
-    p.classList.remove("active");
-  });
-
-  const page=document.getElementById(id);
-
-  if(page){
-    page.classList.add("active");
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
-
-  document.querySelectorAll(".navBtn").forEach(b=>{
-    b.classList.remove("active");
-  });
-
-  if(nav) nav.classList.add("active");
-
-  if(id==="vocabulary") renderVocabulary();
-  if(id==="dictionary") searchDictionary();
-  if(id==="game") renderGame();
-  if(id==="shorts") renderShorts();
-  if(id==="challenge") renderChallenges();
-  if(id==="themes") renderThemes();
-  if(id==="progress") renderProgress();
-}
-
-function goHome(){
-  showPage("home");
-}
-
-function continueLearning(){
-  showPage("vocabulary");
-}
-
-
-/* =========================
-   STATS
-========================= */
-
-function updateStats(){
-
-  document.getElementById("wordsStat").textContent=state.words.length;
-  document.getElementById("xpStat").textContent=state.xp;
-  document.getElementById("streakStat").textContent=state.streak;
-  document.getElementById("quizStat").textContent=state.correct;
-
-  const level=Math.floor(state.xp/100)+1;
-
-  document.getElementById("levelText").textContent="Level "+level;
-
-  const percentage=Math.min(100,(state.todayXP/state.goal)*100);
-
-  document.getElementById("missionFill").style.width=percentage+"%";
-  document.getElementById("missionText").textContent=
-    state.todayXP+" / "+state.goal+" XP";
-}
-
-
-/* =========================
-   VOCABULARY
-========================= */
-
-function setVocabCategory(category,button){
-
-  vocabCategory=category;
-
-  document.querySelectorAll(".chips .chip").forEach(c=>{
-    if(
-      c.textContent==="All" ||
-      c.textContent==="Everyday" ||
-      c.textContent==="Study" ||
-      c.textContent==="Work" ||
-      c.textContent==="People"
-    ){
-      c.classList.remove("active");
-    }
-  });
-
-  if(button) button.classList.add("active");
-
-  renderVocabulary();
-}
-
-function renderVocabulary(){
-
-  const query=(document.getElementById("vocabSearch")?.value||"")
-    .toLowerCase();
-
-  let data=vocabulary.filter(v=>{
-    const matchesCategory=
-      vocabCategory==="All" || v[2]===vocabCategory;
-
-    const matchesSearch=
-      !query ||
-      v[0].toLowerCase().includes(query) ||
-      v[3].toLowerCase().includes(query);
-
-    return matchesCategory && matchesSearch;
-  });
-
-  document.getElementById("vocabCount").textContent=data.length+" words";
-
-  document.getElementById("vocabList").innerHTML=data.map(v=>{
-
-    const learned=state.words.includes(v[0]);
-
-    return `
-      <article class="wordCard">
-        <div class="wordTop">
-          <div>
-            <div class="word">${escapeHTML(v[0])}</div>
-            <div class="type">${v[1]} • ${v[2]}</div>
-          </div>
-
-          <button class="smallBtn"
-                  onclick="speak('${escapeAttribute(v[0])}')">
-            🔊
-          </button>
-        </div>
-
-        <div class="meaning">${escapeHTML(v[3])}</div>
-
-        <div class="example">
-          ${escapeHTML(v[4])}
-        </div>
-
-        <div class="cardActions">
-          <button class="smallBtn"
-            onclick="learnWord('${escapeAttribute(v[0])}')">
-            ${learned?"✓ Learned":"+ Learn"}
-          </button>
-
-          <button class="smallBtn"
-            onclick="favoriteWord('${escapeAttribute(v[0])}')">
-            ♡ Favorite
-          </button>
-        </div>
-      </article>
-    `;
-  }).join("");
-}
-
-function learnWord(word){
-
-  if(!state.words.includes(word)){
-    state.words.push(word);
-    addXP(5);
-    saveState();
-    renderVocabulary();
-  }else{
-    showToast("Already learned ✓");
-  }
-}
-
-function favoriteWord(word){
-  const key="fav_"+word;
-
-  if(localStorage.getItem(key)){
-    localStorage.removeItem(key);
-    showToast("Removed from favorites");
-  }else{
-    localStorage.setItem(key,"1");
-    showToast("Added to favorites ❤️");
-  }
-}
-
-function speak(text){
-
-  if(!("speechSynthesis" in window)){
-    showToast("Speech is not supported on this device");
-    return;
-  }
-
-  speechSynthesis.cancel();
-
-  const utterance=new SpeechSynthesisUtterance(text);
-  utterance.lang="en-US";
-  utterance.rate=.9;
-
-  speechSynthesis.speak(utterance);
-}
-
-
-/* =========================
-   DICTIONARY
-========================= */
-
-function searchDictionary(){
-
-  const input=(document.getElementById("dictionarySearch")?.value||"")
-    .trim()
-    .toLowerCase();
-
-  const box=document.getElementById("dictionaryResult");
-
-  if(!input){
-    box.innerHTML=`
-      <h3>Search a word</h3>
-      <p style="color:var(--muted);margin-top:8px">
-        Try: confidence, opportunity, beautiful, improve...
-      </p>
-    `;
-    return;
-  }
-
-  const item=dictionary[input];
-
-  if(!item){
-    const match=Object.keys(dictionary).find(k=>k.includes(input));
-
-    if(match){
-      showDictionary(match);
-    }else{
-      box.innerHTML=`
-        <h3>No result found</h3>
-        <p style="color:var(--muted);margin-top:8px">
-          Try another English word.
-        </p>
-      `;
-    }
-
-    return;
-  }
-
-  showDictionary(input);
-}
-
-function showDictionary(word){
-
-  const item=dictionary[word];
-
-  document.getElementById("dictionaryResult").innerHTML=`
-    <div class="wordTop">
-      <div>
-        <div class="word">${escapeHTML(word)}</div>
-        <div class="type">${item.type}</div>
-      </div>
-
-      <button class="smallBtn"
-              onclick="speak('${escapeAttribute(word)}')">
-        🔊
-      </button>
-    </div>
-
-    <h3 style="margin-top:20px">Meaning</h3>
-    <p class="meaning">${escapeHTML(item.meaning)}</p>
-
-    <h3 style="margin-top:20px">Example</h3>
-    <div class="example">${escapeHTML(item.example)}</div>
-
-    <h3 style="margin-top:20px">Synonyms</h3>
-    <p class="meaning">${escapeHTML(item.synonyms)}</p>
-
-    <h3 style="margin-top:20px">Opposite</h3>
-    <p class="meaning">${escapeHTML(item.opposite)}</p>
-  `;
-}
-
-
-/* =========================
-   AI TEACHER
-========================= */
-
-function askTeacher(){
-
-  const input=document.getElementById("teacherInput");
-  const text=input.value.trim();
-
-  if(!text){
-    showToast("Write something first");
-    return;
-  }
-
-  const box=document.getElementById("teacherMessage");
-
-  let reply=
-    "Good job! Try to make your sentence clear and natural. Keep practicing.";
-
-  if(/hello|hi/i.test(text)){
-    reply="Hello! Nice to meet you. Tell me something about yourself.";
-  }
-  else if(/job|interview/i.test(text)){
-    reply="Let's practice an interview. Tell me why you would be a good candidate.";
-  }
-  else if(/freelance/i.test(text)){
-    reply="Great! Imagine you are talking to a client. Write a polite professional message.";
-  }
-  else if(text.split(" ").length<4){
-    reply="Nice start! Try writing a longer sentence with more details.";
-  }
-
-  box.textContent=reply;
-
-  speak(reply);
-  input.value="";
-  addXP(3);
-}
-
-function teacherTopic(topic){
-  document.getElementById("teacherMessage").textContent=
-    "Great choice! Let's practice "+topic+". Write your answer in English.";
-  showToast(topic+" practice started");
-}
-
-function speakTeacher(){
-  const text=document.getElementById("teacherMessage").textContent;
-  speak(text);
-}
-
-
-/* =========================
-   GAME
-========================= */
-
-function renderGame(){
-
-  const q=gameQuestions[gameIndex%gameQuestions.length];
-
-  document.getElementById("gameQuestion").innerHTML=`
-    <h2>${escapeHTML(q[0])}</h2>
-
-    <div style="margin-top:18px">
-      ${q.slice(1).map((answer,index)=>`
-        <button class="quizOption"
-          onclick="answerGame(${index},this)">
-          ${escapeHTML(answer)}
-        </button>
-      `).join("")}
-    </div>
-  `;
-
-  document.getElementById("gameXP").style.width=
-    Math.min(100,(state.xp%100))+"%";
-}
-
-function answerGame(index,button){
-
-  const q=gameQuestions[gameIndex%gameQuestions.length];
-
-  if(index===0){
-    button.classList.add("correct");
-    state.correct++;
-    addXP(10);
-    showToast("Correct! +10 XP 🏆");
-  }else{
-    button.classList.add("wrong");
-    showToast("Keep practicing 💪");
-  }
-
-  gameIndex++;
-
-  setTimeout(renderGame,700);
-}
-
-
-/* =========================
-   SPEAKING
-========================= */
-
-function speakCurrent(){
-  speak(sentences[sentenceIndex]);
-  addXP(2);
-}
-
-function nextSentence(){
-
-  sentenceIndex=
-    (sentenceIndex+1)%sentences.length;
-
-  document.getElementById("speakSentence").textContent=
-    sentences[sentenceIndex];
-}
-
-
-/* =========================
-   WRITING
-========================= */
-
-document.addEventListener("input",e=>{
-  if(e.target.id==="writingBox"){
-    const text=e.target.value.trim();
-
-    const words=text?
-      text.split(/\s+/).length:0;
-
-    document.getElementById("wordCount").textContent=
-      words+" words";
-  }
-});
-
-function saveWriting(){
-
-  const text=document.getElementById("writingBox").value.trim();
-
-  if(!text){
-    showToast("Write something first");
-    return;
-  }
-
-  state.writing=text;
-  saveState();
-  addXP(10);
-  showToast("Writing saved! +10 XP ✍️");
-}
-
-
-/* =========================
-   CAMERA
-========================= */
-
-async function startCamera(){
-
-  if(!navigator.mediaDevices ||
-     !navigator.mediaDevices.getUserMedia){
-
-    showToast("Camera is not supported here");
-    return;
-  }
-
-  try{
-
-    cameraStream=
-      await navigator.mediaDevices.getUserMedia({
-        video:{facingMode:"environment"},
-        audio:false
-      });
-
-    document.getElementById("cameraVideo").srcObject=
-      cameraStream;
-
-    document.getElementById("cameraLabel").textContent=
-      "Camera active — object recognition needs an AI vision model.";
-
-  }catch(error){
-
-    showToast("Camera permission was not granted");
-
-  }
-}
-
-function stopCamera(){
-
-  if(cameraStream){
-
-    cameraStream.getTracks().forEach(track=>track.stop());
-
-    cameraStream=null;
-  }
-
-  document.getElementById("cameraVideo").srcObject=null;
-
-  document.getElementById("cameraLabel").textContent=
-    "Camera stopped.";
-}
-
-
-/* =========================
-   SHORTS
-========================= */
-
-function renderShorts(){
-
-  document.getElementById("shortsList").innerHTML=
-    shorts.map((s,i)=>`
-      <article class="short" style="margin-top:15px">
-        <span class="shortTag">${s[0]}</span>
-        <h2>${escapeHTML(s[1])}</h2>
-        <p style="color:#c7cad5;line-height:1.7;margin-top:8px">
-          ${escapeHTML(s[2])}
-        </p>
-
-        <button class="primary"
-                style="margin-top:18px;width:max-content"
-                onclick="playShort(${i})">
-          ▶ Start Lesson
-        </button>
-      </article>
-    `).join("");
-}
-
-function playShort(index){
-  addXP(5);
-  showToast("Short lesson started ▶ +5 XP");
-}
-
-
-/* =========================
-   CHALLENGES
-========================= */
-
-function createChallenge(){
-
-  const challenge={
-    name:"30 Day English Challenge",
-    progress:Math.floor(Math.random()*70)+10
+function save() {
+  const data = {
+    gems: state.gems, streak: state.streak, bestStreak: state.bestStreak,
+    totalXP: state.totalXP, lessonsDone: state.lessonsDone,
+    totalCorrect: state.totalCorrect, totalAnswered: state.totalAnswered,
+    darkMode: state.darkMode, lastDate: new Date().toDateString()
   };
-
-  state.challenges.push(challenge);
-  saveState();
-
-  renderChallenges();
-
-  showToast("Challenge created 🏆");
+  try { localStorage.setItem('lingoquest', JSON.stringify(data)); } catch(e) {}
 }
 
-function renderChallenges(){
+function load() {
+  const raw = localStorage.getItem('lingoquest');
+  if (!raw) return;
+  try {
+    const d = JSON.parse(raw);
+    state.gems = d.gems || 0;
+    state.streak = d.streak || 0;
+    state.bestStreak = d.bestStreak || 0;
+    state.totalXP = d.totalXP || 0;
+    state.lessonsDone = d.lessonsDone || 0;
+    state.totalCorrect = d.totalCorrect || 0;
+    state.totalAnswered = d.totalAnswered || 0;
+    state.darkMode = d.darkMode || false;
+    if (d.lastDate) {
+      const last = new Date(d.lastDate);
+      const today = new Date();
+      const diff = Math.floor((today - last) / (1000 * 60 * 60 * 24));
+      if (diff > 1) state.streak = 0;
+    }
+  } catch(e) {}
+}
 
-  const list=document.getElementById("challengeList");
+function playSound(type) {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+    if (type === 'correct') {
+      osc.frequency.setValueAtTime(523, ctx.currentTime);
+      osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1);
+      osc.frequency.setValueAtTime(784, ctx.currentTime + 0.2);
+    } else {
+      osc.frequency.setValueAtTime(300, ctx.currentTime);
+      osc.frequency.setValueAtTime(200, ctx.currentTime + 0.15);
+    }
+    osc.start();
+    osc.stop(ctx.currentTime + 0.3);
+  } catch(e) {}
+}
 
-  if(!state.challenges.length){
+const el = id => document.getElementById(id);
+const homeScreen = el('homeScreen');
+const lessonScreen = el('lessonScreen');
+const completeScreen = el('completeScreen');
+const profileScreen = el('profileScreen');
+const resultPopup = el('resultPopup');
+const questionText = el('questionText');
+const optionsContainer = el('optionsContainer');
+const checkBtn = el('checkBtn');
+const progressBar = el('progressBar');
+const heartsEl = el('hearts');
+const hintBtn = el('hintBtn');
+const hintCount = el('hintCount');
+const timerEl = el('timer');
 
-    list.innerHTML=`
-      <div class="panel">
-        <p style="color:var(--muted)">
-          No challenges yet. Create your first challenge.
-        </p>
-      </div>
-    `;
+function showScreen(screen) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  screen.classList.add('active');
+  window.scrollTo(0, 0);
+}
 
-    return;
+function navTo(name) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const btn = document.querySelector(`[data-nav="${name}"]`);
+  if (btn) btn.classList.add('active');
+  if (name === 'home') { showScreen(homeScreen); updateHomeStats(); }
+  else if (name === 'profile') { showScreen(profileScreen); updateProfile(); }
+}
+
+function updateHomeStats() {
+  el('homeStreak').textContent = state.streak;
+  el('homeGems').textContent = state.gems;
+  el('homeHearts').textContent = state.hearts;
+  el('totalXP').textContent = state.totalXP;
+  el('lessonsDone').textContent = state.lessonsDone;
+  el('bestStreak').textContent = state.bestStreak;
+  const acc = state.totalAnswered > 0 ? Math.round((state.totalCorrect / state.totalAnswered) * 100) : 0;
+  el('accuracyStat').textContent = acc + '%';
+}
+
+function updateProfile() {
+  el('pStreak').textContent = state.streak;
+  el('pXP').textContent = state.totalXP;
+  el('pGems').textContent = state.gems;
+  el('userLevel').textContent = Math.floor(state.totalXP / 100) + 1;
+}
+
+function startCourse(courseName) {
+  state.courseName = courseName;
+  state.currentCourse = [...courses[courseName]].sort(() => Math.random() - 0.5);
+  state.currentIndex = 0;
+  state.correctCount = 0;
+  state.fastAnswers = 0;
+  state.hearts = 5;
+  state.hints = 3;
+  state.usedHint = false;
+  state.startTime = Date.now();
+  updateHomeStats();
+  showScreen(lessonScreen);
+  startTimer();
+  loadQuestion();
+}
+
+function startTimer() {
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  state.timerInterval = setInterval(() => {
+    const sec = Math.floor((Date.now() - state.startTime) / 1000);
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    timerEl.textContent = m + ':' + String(s).padStart(2, '0');
+  }, 1000);
+}
+
+function loadQuestion() {
+  if (state.currentIndex >= state.currentCourse.length) { finishLesson(); return; }
+  if (state.hearts <= 0) { gameOver(); return; }
+
+  const q = state.currentCourse[state.currentIndex];
+  questionText.textContent = q.q;
+  optionsContainer.innerHTML = '';
+  state.selectedOption = null;
+  state.usedHint = false;
+  state.hintRemoved = null;
+  checkBtn.disabled = true;
+  resultPopup.classList.add('hidden');
+  checkBtn.style.display = 'block';
+  hintBtn.disabled = false;
+  hintCount.textContent = state.hints;
+  if (state.hints <= 0) hintBtn.disabled = true;
+
+  const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+  shuffled.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = opt;
+    btn.onclick = () => selectOption(btn, opt);
+    optionsContainer.appendChild(btn);
+  });
+
+  progressBar.style.width = ((state.currentIndex / state.currentCourse.length) * 100) + '%';
+}
+
+function selectOption(btn, value) {
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  btn.classList.add('selected');
+  state.selectedOption = value;
+  checkBtn.disabled = false;
+}
+
+function useHint() {
+  if (state.hints <= 0 || state.usedHint) return;
+  const q = state.currentCourse[state.currentIndex];
+  const wrongOpts = [...document.querySelectorAll('.option')].filter(o => o.textContent !== q.answer && !o.classList.contains('wrong'));
+  if (wrongOpts.length <= 1) return;
+  const toRemove = wrongOpts[Math.floor(Math.random() * wrongOpts.length)];
+  toRemove.classList.add('wrong');
+  toRemove.disabled = true;
+  toRemove.style.pointerEvents = 'none';
+  state.hints--;
+  state.usedHint = true;
+  hintCount.textContent = state.hints;
+  if (state.hints <= 0) hintBtn.disabled = true;
+}
+
+checkBtn.onclick = () => {
+  const q = state.currentCourse[state.currentIndex];
+  const isCorrect = state.selectedOption === q.answer;
+
+  document.querySelectorAll('.option').forEach(opt => {
+    opt.disabled = true;
+    opt.style.pointerEvents = 'none';
+    if (opt.textContent === q.answer) opt.classList.add('correct');
+    if (opt.textContent === state.selectedOption && !isCorrect) opt.classList.add('wrong');
+  });
+
+  checkBtn.style.display = 'none';
+  resultPopup.classList.remove('hidden');
+
+  let xpEarned = 0;
+  if (isCorrect) {
+    playSound('correct');
+    resultPopup.classList.remove('wrong-mode');
+    el('resultIcon').textContent = '✅';
+    el('resultTitle').textContent = 'Correct!';
+    state.gems += 10;
+    state.correctCount++;
+    state.totalCorrect++;
+    const elapsed = (Date.now() - state.startTime) / 1000;
+    const avgTime = elapsed / (state.currentIndex + 1);
+    const speedBonus = avgTime < 5 ? 5 : 0;
+    if (speedBonus) state.fastAnswers++;
+    xpEarned = 10 + speedBonus;
+    state.totalXP += xpEarned;
+    el('resultMessage').textContent = speedBonus ? `Fast! +${xpEarned} XP ⚡` : `Great job! +${xpEarned} XP`;
+  } else {
+    playSound('wrong');
+    resultPopup.classList.add('wrong-mode');
+    el('resultIcon').textContent = '❌';
+    el('resultTitle').textContent = 'Oops!';
+    el('resultMessage').textContent = `Correct answer: ${q.answer}`;
+    state.hearts--;
+    heartsEl.textContent = state.hearts;
   }
+  state.totalAnswered++;
 
-  list.innerHTML=state.challenges.map(c=>`
-    <div class="challenge">
-      <div class="avatarSmall">🏆</div>
-      <div style="flex:1">
-        <strong>${escapeHTML(c.name)}</strong>
-        <div class="xpBar">
-          <div class="xpFill" style="width:${c.progress}%"></div>
-        </div>
-        <small style="color:var(--muted)">
-          ${c.progress}% complete
-        </small>
-      </div>
-    </div>
-  `).join("");
+  updateHomeStats();
+  save();
+  progressBar.style.width = (((state.currentIndex + 1) / state.currentCourse.length) * 100) + '%';
+};
+
+el('continueBtn').onclick = () => {
+  state.currentIndex++;
+  loadQuestion();
+};
+
+function finishLesson() {
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  const total = state.currentCourse.length;
+  const accuracy = Math.round((state.correctCount / total) * 100);
+  const elapsed = Math.round((Date.now() - state.startTime) / 1000);
+  const minutes = Math.floor(elapsed / 60);
+  const seconds = elapsed % 60;
+
+  el('finalXP').textContent = '+' + (state.correctCount * 10);
+  el('finalAccuracy').textContent = accuracy + '%';
+  el('finalTime').textContent = minutes + ':' + String(seconds).padStart(2, '0');
+
+  state.streak++;
+  if (state.streak > state.bestStreak) state.bestStreak = state.streak;
+  state.lessonsDone++;
+  updateHomeStats();
+  updateProfile();
+  save();
+  showScreen(completeScreen);
 }
 
-
-/* =========================
-   THEMES
-========================= */
-
-function renderThemes(){
-
-  document.getElementById("themeGrid").innerHTML=
-    themes.map(t=>`
-      <div class="theme ${t[2]==="Ultra"?"locked":""}"
-           style="background:
-             radial-gradient(circle at top right,${t[4]}66,transparent 55%),
-             ${t[3]}"
-           onclick="selectTheme('${t[0]}','${t[3]}','${t[4]}','${t[2]}')">
-
-        <strong>${escapeHTML(t[1])}</strong>
-        <small>${t[2]}</small>
-      </div>
-    `).join("");
-}
-
-function selectTheme(id,bg,accent,type){
-
-  if(type==="Ultra"){
-
-    showPage("premium");
-
-    showToast("This theme is part of Ultra");
-    return;
-  }
-
-  state.theme=id;
-
-  document.documentElement.style.setProperty("--bg",bg);
-  document.documentElement.style.setProperty("--accent",accent);
-
-  saveState();
-
-  showToast("Theme changed ✨");
-}
-
-
-/* =========================
-   DAILY MISSION
-========================= */
-
-function dailyMission(){
-
-  addXP(5);
-
-  if(state.todayXP>=state.goal){
-    showToast("Daily mission completed! 🏆");
-  }
-}
-
-
-/* =========================
-   PROGRESS
-========================= */
-
-function renderProgress(){
-
-  const level=Math.floor(state.xp/100)+1;
-
-  const percentage=Math.min(
-    100,
-    Math.round((state.xp%100))
-  );
-
-  document.getElementById("progressLevel").textContent=
-    "Level "+level;
-
-  document.getElementById("pWords").textContent=
-    state.words.length;
-
-  document.getElementById("pXP").textContent=
-    state.xp;
-
-  document.getElementById("pStreak").textContent=
-    state.streak;
-
-  document.getElementById("pCorrect").textContent=
-    state.correct;
-
-  document.getElementById("progressPercent").textContent=
-    percentage+"%";
-
-  document.getElementById("progressCircle").style.background=
-    `conic-gradient(var(--accent) ${percentage*3.6}deg,#222 ${percentage*3.6}deg)`;
-
-  const achievements=[
-    ["🌱","First Step",state.xp>=5],
-    ["📚","Word Builder",state.words.length>=5],
-    ["⚡","XP Hunter",state.xp>=50],
-    ["🔥","Streak Starter",state.streak>=3],
-    ["🏆","Quiz Master",state.correct>=5],
-    ["✍️","Writer",state.writing.length>0]
-  ];
-
-  document.getElementById("achievements").innerHTML=
-    achievements.map(a=>`
-      <div class="feature"
-           style="min-height:120px;opacity:${a[2]?1:.45}">
-        <div class="featureIcon">${a[0]}</div>
-        <h3>${a[1]}</h3>
-        <p>${a[2]?"Unlocked ✓":"Locked"}</p>
-      </div>
-    `).join("");
-}
-
-
-/* =========================
-   SETTINGS
-========================= */
-
-function setGoal(goal){
-
-  state.goal=goal;
-  saveState();
-  updateStats();
-
-  showToast("Daily goal: "+goal+" XP");
-}
-
-function toggleDark(){
-
-  state.dark=!state.dark;
-
-  document.body.style.filter=
-    state.dark?"none":"brightness(1.08)";
-
-  saveState();
-}
-
-function resetData(){
-
-  if(confirm("Reset all English Master progress?")){
-
-    state={...DEFAULT_STATE};
-
-    saveState();
-    updateStats();
-
-    showToast("Progress reset");
-  }
-}
-
-function purchaseMessage(plan){
-
-  showToast(
-    plan+" selected — connect your payment provider to activate checkout."
-  );
-}
-
-
-/* =========================
-   HELPERS
-========================= */
-
-function escapeHTML(value){
-
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-function escapeAttribute(value){
-
-  return String(value)
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'");
-}
-
-let toastTimer;
-
-function showToast(message){
-
-  const toast=document.getElementById("toast");
-
-  toast.textContent=message;
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer=setTimeout(()=>{
-    toast.classList.remove("show");
-  },2200);
-}
-
-
-/* =========================
-   STARTUP
-========================= */
-
-window.addEventListener("load",()=>{
-
-  setTimeout(()=>{
-    document.getElementById("splash")
-      .classList.add("hide");
-  },2200);
-
-  updateStats();
-  renderVocabulary();
-  renderGame();
-  renderShorts();
-  renderChallenges();
-  renderThemes();
-  renderProgress();
-
-  if(state.writing){
-    document.getElementById("writingBox").value=
-      state.writing;
-
-    document.getElementById("wordCount").textContent=
-      state.writing.split(/\s+/).length+" words";
-  }
-
-});
-
-
-/* =========================
-   ANDROID / BROWSER BACK
-========================= */
-
-window.addEventListener("popstate",()=>{
+function gameOver() {
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  alert('💔 You ran out of hearts! Try again.');
   goHome();
-});
+}
 
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"){
+function quitLesson() {
+  if (confirm('Are you sure you want to quit? Progress will be lost.')) {
+    if (state.timerInterval) clearInterval(state.timerInterval);
     goHome();
   }
-});
+}
 
+function goHome() {
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  state.hearts = 5;
+  updateHomeStats();
+  showScreen(homeScreen);
+  navTo('home');
+}
+
+function toggleTheme() {
+  state.darkMode = !state.darkMode;
+  document.body.classList.toggle('dark', state.darkMode);
+  document.querySelectorAll('.theme-btn').forEach(b => b.textContent = state.darkMode ? '☀️' : '🌙');
+  save();
+}
+
+function resetProgress() {
+  if (!confirm('⚠️ This will delete ALL your progress. Are you sure?')) return;
+  localStorage.removeItem('lingoquest');
+  state.gems = 0; state.streak = 0; state.bestStreak = 0; state.totalXP = 0;
+  state.lessonsDone = 0; state.totalCorrect = 0; state.totalAnswered = 0;
+  updateHomeStats();
+  updateProfile();
+  alert('✅ Progress reset successfully!');
+}
+
+load();
+if (state.darkMode) {
+  document.body.classList.add('dark');
+  document.querySelectorAll('.theme-btn').forEach(b => b.textContent = '☀️');
+}
+updateHomeStats();
+updateProfile();
 </script>
-
 </body>
 </html>
