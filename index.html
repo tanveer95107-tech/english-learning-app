@@ -4,21 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#070b16">
-<meta name="description" content="English Master Ultra — Complete Premium English Learning App">
+<meta name="description" content="English Master Ultra — Premium English Learning App">
 <title>English Master Ultra</title>
 <style>
-:root{
-  --bg:#05070f;--panel:#0f1524;--panel2:#151d30;--text:#f5f7ff;
-  --muted:#8b98b5;--accent:#7c5cff;--accent2:#19d3ae;--accent3:#ff5f9e;
-  --danger:#ff5f7a;--line:#1e2a42;--shadow:0 20px 60px #0008;
-}
+:root{--bg:#05070f;--panel:#0f1524;--panel2:#151d30;--text:#f5f7ff;--muted:#8b98b5;--accent:#7c5cff;--accent2:#19d3ae;--accent3:#ff5f9e;--danger:#ff5f7a;--line:#1e2a42;--shadow:0 20px 60px #0008}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;min-height:100vh;overflow-x:hidden}
 body{min-height:100vh;padding-bottom:90px}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer;border:0;background:none;color:inherit}
 .hidden{display:none!important}
-
 #splash{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 50% 40%,#1a1050 0%,#0a0520 40%,#03030a 100%);display:grid;place-items:center;overflow:hidden;perspective:1200px;transition:opacity .8s ease,transform .8s ease}
 #splash.exit{opacity:0;transform:scale(1.15);pointer-events:none}
 .splashParticles{position:absolute;inset:0;overflow:hidden}
@@ -39,7 +34,6 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 .splashLoader{width:220px;height:4px;border-radius:99px;background:#ffffff12;overflow:hidden;margin-top:30px;animation:fadeIn 1s ease 1s backwards}
 .splashLoader i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;box-shadow:0 0 15px var(--accent);animation:loadBar 2.5s ease forwards}
 @keyframes loadBar{0%{width:0%}30%{width:40%}60%{width:70%}100%{width:100%}}
-
 #stars{pointer-events:none;position:fixed;inset:0;z-index:0;overflow:hidden}
 .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 2s infinite alternate}
 @keyframes twinkle{to{opacity:.1;transform:scale(.4)}}
@@ -49,7 +43,6 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 .orb.o2{width:250px;height:250px;background:var(--accent2);bottom:-80px;right:-80px;animation-delay:-7s}
 .orb.o3{width:200px;height:200px;background:var(--accent3);top:40%;right:10%;animation-delay:-14s}
 @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.1)}66%{transform:translate(-30px,40px) scale(.95)}}
-
 .app{max-width:1180px;margin:auto;padding:18px 18px 90px;position:relative;z-index:1}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:20;padding:12px 0 16px;background:linear-gradient(var(--bg) 70%,transparent);backdrop-filter:blur(10px)}
 .brand{display:flex;align-items:center;gap:10px}
@@ -60,7 +53,6 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 .actions{display:flex;gap:8px}
 .iconBtn{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:13px;padding:10px 12px;transition:.2s;font-size:16px}
 .iconBtn:hover{background:var(--panel2);border-color:var(--accent);box-shadow:0 0 20px #7c5cff44;transform:translateY(-2px)}
-
 .hero{background:linear-gradient(135deg,#171b3d,#0f1524 50%,#0d2a2e);border:1px solid var(--line);border-radius:28px;padding:32px 28px;box-shadow:var(--shadow);overflow:hidden;position:relative}
 .hero::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;right:-100px;top:-100px;background:radial-gradient(circle,#7c5cff55,transparent 70%);filter:blur(20px);pointer-events:none;animation:heroGlow 6s ease-in-out infinite}
 @keyframes heroGlow{50%{transform:scale(1.2);opacity:.7}}
@@ -69,7 +61,6 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;position:relative;z-index:1}
 .chip{padding:9px 14px;background:#ffffff0c;border:1px solid #ffffff18;border-radius:99px;color:#dce4f7;font-size:13px;backdrop-filter:blur(10px);transition:.2s}
 .chip:hover{background:#ffffff18;border-color:var(--accent)}
-
 .primary{background:linear-gradient(135deg,var(--accent),#5d78ff);color:#fff;border-radius:14px;padding:13px 20px;font-weight:800;transition:.25s;box-shadow:0 6px 20px #7c5cff66;position:relative;overflow:hidden}
 .primary::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,#ffffff44,transparent);transition:.5s}
 .primary:hover::before{left:100%}
@@ -78,7 +69,6 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 .ghost:hover{background:var(--panel2);border-color:var(--accent);transform:translateY(-2px)}
 .danger{background:#ff5f7a18;color:#ff91a4;border:1px solid #ff5f7a44;border-radius:12px;padding:11px 16px;transition:.2s}
 .danger:hover{background:#ff5f7a28}
-
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:16px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 12px 35px #0003;transition:.3s;position:relative;overflow:hidden}
 .card:hover{transform:translateY(-4px);border-color:#7c5cff66;box-shadow:0 20px 50px #0005,0 0 30px #7c5cff22}
@@ -94,11 +84,9 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 .section{margin-top:26px}
 .sectionHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
 .sectionHead h2{margin:0;font-size:22px}
-
 .page{display:none;animation:pageIn .4s ease}
 .page.active{display:block}
 @keyframes pageIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-
 .searchBox{display:flex;gap:8px;flex-wrap:wrap}
 .searchBox input,.field input,.field textarea,.field select{width:100%;padding:14px 16px;border-radius:13px;border:1px solid var(--line);background:var(--panel);color:var(--text);outline:0;transition:.2s}
 .searchBox input:focus,.field input:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px #7c5cff22}
@@ -110,12 +98,10 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 .itemMain b{font-size:16px}
 .itemMain p{margin:4px 0 0;color:var(--muted);font-size:14px}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-
 .nav{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);width:min(680px,calc(100% - 22px));background:#0d1424f0;backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:22px;padding:8px;display:flex;justify-content:space-around;z-index:30;box-shadow:0 20px 60px #0008,0 0 30px #7c5cff22}
 .nav button{background:transparent;color:var(--muted);padding:8px 10px;border-radius:14px;font-size:11px;transition:.2s;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:56px}
 .nav button span:first-child{font-size:18px}
 .nav button.active{background:linear-gradient(135deg,#7c5cff33,#19d3ae33);color:#fff;box-shadow:0 0 20px #7c5cff44}
-
 .themeGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .theme{padding:14px;border-radius:18px;border:1px solid var(--line);background:var(--panel);text-align:left;transition:.25s;position:relative;overflow:hidden}
 .theme:hover{transform:translateY(-3px) scale(1.02);border-color:var(--accent);box-shadow:0 12px 30px #0005,0 0 25px #7c5cff44}
@@ -126,31 +112,24 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 .theme small{color:var(--muted);font-size:12px}
 .theme.locked::after{content:'🔒 PRO';position:absolute;top:8px;right:8px;background:linear-gradient(135deg,#ffc857,#ff9f1c);color:#000;font-size:10px;font-weight:900;padding:3px 8px;border-radius:99px;box-shadow:0 4px 12px #ffc85788}
 .theme.active{border-color:var(--accent2);box-shadow:0 0 25px #19d3ae88}
-
 .badges{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .badge{text-align:center;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:17px;transition:.2s}
 .badge:hover{transform:translateY(-3px);border-color:var(--accent)}
 .badge .bicon{font-size:28px;display:block;margin-bottom:6px}
 .badge.locked{opacity:.35;filter:grayscale(1)}
-
 .progress{width:100%;height:10px;background:#ffffff12;border-radius:99px;overflow:hidden;margin:10px 0}
 .progress i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:width .4s ease}
-
 .quizOption{width:100%;text-align:left;background:var(--panel);color:var(--text);border:1px solid var(--line);padding:14px;border-radius:13px;margin-top:9px;transition:.15s}
 .quizOption:hover{border-color:#7c5cff;background:var(--panel2)}
 .quizOption.correct{border-color:#20d6a2;background:#20d6a21a}
 .quizOption.wrong{border-color:#ff5f7a;background:#ff5f7a1a}
-
 .notice{padding:12px 14px;border-radius:13px;background:#ffffff08;border:1px solid var(--line);color:var(--muted);margin-top:10px}
-
 .modal{position:fixed;inset:0;background:#0009;z-index:80;display:grid;place-items:center;padding:18px}
 .modalBox{width:min(680px,100%);max-height:90vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:25px;padding:22px;box-shadow:var(--shadow)}
 .camera{width:100%;aspect-ratio:16/10;background:#05070d;border-radius:18px;object-fit:cover}
-
 .certificate{background:#fff;color:#111;padding:34px;border-radius:8px;text-align:center;border:10px solid #ddd}
 .certificate h1{font-family:Georgia,serif;font-size:35px}
 .certificate .certName{font-size:25px;font-weight:800;border-bottom:1px solid #aaa;display:inline-block;padding:5px 30px}
-
 .planCard{background:linear-gradient(135deg,var(--panel),var(--panel2));border:2px solid var(--line);border-radius:22px;padding:24px;transition:.3s;position:relative;overflow:hidden}
 .planCard.featured{border-color:var(--accent);box-shadow:0 0 40px #7c5cff44;transform:scale(1.02)}
 .planCard.featured::before{content:'⭐ MOST POPULAR';position:absolute;top:0;right:0;background:linear-gradient(135deg,#ffc857,#ff9f1c);color:#000;font-size:11px;font-weight:900;padding:6px 14px;border-bottom-left-radius:14px}
@@ -159,24 +138,8 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 .planCard ul li{padding:8px 0;color:var(--muted);font-size:14px;border-bottom:1px solid var(--line)}
 .planCard ul li:last-child{border-bottom:0}
 .planCard ul li::before{content:'✅ ';margin-right:6px}
-
-@media(max-width:900px){
-  .grid{grid-template-columns:repeat(2,1fr)}
-  .tiles{grid-template-columns:repeat(2,1fr)}
-  .themeGrid{grid-template-columns:repeat(3,1fr)}
-  .badges{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:520px){
-  .app{padding:12px 12px 88px}
-  .hero{padding:22px 18px}
-  .grid,.tiles{grid-template-columns:1fr}
-  .themeGrid{grid-template-columns:repeat(2,1fr)}
-  .nav button{min-width:48px;font-size:10px}
-  .nav button span:first-child{font-size:16px}
-  .splashText h1{font-size:32px}
-  .logo3D{width:110px;height:110px}
-  .logoFace{font-size:56px}
-}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.tiles{grid-template-columns:repeat(2,1fr)}.themeGrid{grid-template-columns:repeat(3,1fr)}.badges{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.app{padding:12px 12px 88px}.hero{padding:22px 18px}.grid,.tiles{grid-template-columns:1fr}.themeGrid{grid-template-columns:repeat(2,1fr)}.nav button{min-width:48px;font-size:10px}.nav button span:first-child{font-size:16px}.splashText h1{font-size:32px}.logo3D{width:110px;height:110px}.logoFace{font-size:56px}}
 </style>
 </head>
 <body>
@@ -186,35 +149,21 @@ button{cursor:pointer;border:0;background:none;color:inherit}
   <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
     <div style="position:relative;">
       <div class="logoRing"></div>
-      <div class="logo3D">
-        <div class="logoFace">E</div>
-        <div class="logoFace back">M</div>
-      </div>
+      <div class="logo3D"><div class="logoFace">E</div><div class="logoFace back">M</div></div>
     </div>
-    <div class="splashText">
-      <h1>English Master</h1>
-      <p>Ultra Premium Learning</p>
-    </div>
+    <div class="splashText"><h1>English Master</h1><p>Ultra Premium Learning</p></div>
     <div class="splashLoader"><i></i></div>
   </div>
 </div>
 
 <div id="stars"></div>
-<div id="glowOrbs">
-  <div class="orb o1"></div>
-  <div class="orb o2"></div>
-  <div class="orb o3"></div>
-</div>
+<div id="glowOrbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
 
 <main class="app">
-
 <header class="top">
   <div class="brand">
     <div class="brandMark">E</div>
-    <div>
-      <b>English Master</b>
-      <small>Learn • Speak • Grow</small>
-    </div>
+    <div><b>English Master</b><small>Learn • Speak • Grow</small></div>
   </div>
   <div class="actions">
     <button class="iconBtn" onclick="openSearch()">🔍</button>
@@ -225,7 +174,7 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 <section id="home" class="page active">
   <div class="hero">
     <h2>Build your English, one smart step at a time.</h2>
-    <p>60+ vocabulary words, 60 grammar lessons, 100 quiz questions — all in one premium learning space. Premium themes unlock a whole new experience.</p>
+    <p>60 vocabulary words, 60 grammar lessons, 100 quiz questions, 5 free + 45 premium themes — all in one premium learning space.</p>
     <div class="chips">
       <span class="chip">🔥 <span id="streakChip">0</span> day streak</span>
       <span class="chip">🎯 <span id="goalChip">0/20</span> daily goal</span>
@@ -237,21 +186,16 @@ button{cursor:pointer;border:0;background:none;color:inherit}
       <button class="ghost" onclick="go('premium')">Go Premium 👑</button>
     </div>
   </div>
-
   <div class="grid">
     <div class="card stat"><small>Words learned</small><div><b id="wordsStat">0</b></div></div>
     <div class="card stat"><small>Quiz score</small><div><b id="scoreStat">0%</b></div></div>
     <div class="card stat"><small>Writing</small><div><b id="writeStat">0</b></div></div>
     <div class="card stat"><small>Achievements</small><div><b id="badgeStat">0</b></div></div>
   </div>
-
   <div class="section">
-    <div class="sectionHead">
-      <h2>Quick Practice</h2>
-      <button class="ghost" onclick="go('learn')">View all →</button>
-    </div>
+    <div class="sectionHead"><h2>Quick Practice</h2><button class="ghost" onclick="go('learn')">View all →</button></div>
     <div class="tiles">
-      <div class="card tile"><div class="emoji">📚</div><h3>Vocabulary</h3><p>Learn words by category.</p><button class="ghost" onclick="go('learn')">Open</button></div>
+      <div class="card tile"><div class="emoji">📚</div><h3>Vocabulary</h3><p>60 words by category.</p><button class="ghost" onclick="go('learn')">Open</button></div>
       <div class="card tile"><div class="emoji">🧠</div><h3>Grammar</h3><p>60 detailed lessons.</p><button class="ghost" onclick="go('grammar')">Open</button></div>
       <div class="card tile"><div class="emoji">🎙️</div><h3>Speaking</h3><p>Voice pronunciation.</p><button class="ghost" onclick="go('speaking')">Open</button></div>
       <div class="card tile"><div class="emoji">✍️</div><h3>Writing Lab</h3><p>Smart feedback.</p><button class="ghost" onclick="go('writing')">Open</button></div>
@@ -262,10 +206,7 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 </section>
 
 <section id="learn" class="page">
-  <div class="sectionHead">
-    <h2>Learning Hub</h2>
-    <button class="ghost" onclick="go('home')">Home</button>
-  </div>
+  <div class="sectionHead"><h2>Learning Hub</h2><button class="ghost" onclick="go('home')">Home</button></div>
   <div class="grid">
     <div class="card"><h3>Everyday</h3><p class="muted">Daily words.</p><button class="primary" onclick="showCategory('Everyday')">Practice</button></div>
     <div class="card"><h3>School</h3><p class="muted">Academic English.</p><button class="primary" onclick="showCategory('School')">Practice</button></div>
@@ -326,10 +267,7 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 </section>
 
 <section id="quiz" class="page">
-  <div class="sectionHead">
-    <h2>Quiz Arena</h2>
-    <span class="muted" id="quizProgress"></span>
-  </div>
+  <div class="sectionHead"><h2>Quiz Arena</h2><span class="muted" id="quizProgress"></span></div>
   <div id="quizBox" class="card"></div>
 </section>
 
@@ -365,11 +303,27 @@ button{cursor:pointer;border:0;background:none;color:inherit}
   </div>
 </section>
 
-<section id="themes" class="page">
-  <div class="sectionHead">
-    <h2>Theme Gallery</h2>
-    <span class="muted" id="themeCount">5 free • 45 locked</span>
+<section id="shorts" class="page">
+  <div class="sectionHead"><h2>English Shorts</h2></div>
+  <div class="tiles">
+    <div class="card tile"><div class="emoji">🎬</div><h3>Phrase of the day</h3><p>"How are you doing?" — friendly greeting.</p><button class="ghost" onclick="speakText('How are you doing?')">Listen</button></div>
+    <div class="card tile"><div class="emoji">🎧</div><h3>Pronunciation tip</h3><p>Practice slowly, then at natural speed.</p><button class="ghost" onclick="speakText('Practice slowly, then at natural speed.')">Listen</button></div>
+    <div class="card tile"><div class="emoji">💡</div><h3>Word of the day</h3><p>Confident — feeling sure about yourself.</p><button class="ghost" onclick="speakText('Confident. Feeling sure about yourself.')">Listen</button></div>
   </div>
+</section>
+
+<section id="challenge" class="page">
+  <div class="sectionHead"><h2>Friend Challenge</h2></div>
+  <div class="card">
+    <h3>Invite a friend</h3>
+    <p class="muted">Share a challenge message.</p>
+    <div class="notice">Challenge: Learn 20 English words today.</div>
+    <button class="primary" style="margin-top:12px" onclick="shareChallenge()">Share challenge</button>
+  </div>
+</section>
+
+<section id="themes" class="page">
+  <div class="sectionHead"><h2>Theme Gallery</h2><span class="muted" id="themeCount">5 free • 45 locked</span></div>
   <div id="themeGrid" class="themeGrid"></div>
 </section>
 
@@ -400,52 +354,27 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 <section id="premium" class="page">
   <div class="hero">
     <h2>Go Premium 👑</h2>
-    <p>Unlock 45+ premium themes, exclusive content, and future features. Cancel anytime.</p>
+    <p>Unlock 45+ premium themes, exclusive content, and future features.</p>
   </div>
-
   <div class="tiles" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:20px">
     <div class="planCard">
-      <h3>Free</h3>
-      <div class="planPrice">Rs. 0</div>
-      <ul>
-        <li>5 free themes</li>
-        <li>Basic vocabulary</li>
-        <li>Grammar lessons</li>
-        <li>Quiz Arena</li>
-        <li>Writing Lab</li>
-      </ul>
+      <h3>Free</h3><div class="planPrice">Rs. 0</div>
+      <ul><li>5 free themes</li><li>Basic vocabulary</li><li>Grammar lessons</li><li>Quiz Arena</li><li>Writing Lab</li></ul>
       <button class="ghost" style="width:100%" disabled>Current Plan</button>
     </div>
-
     <div class="planCard featured">
-      <h3>Pro</h3>
-      <div class="planPrice">Rs. 499<span style="font-size:14px;color:var(--muted)">/mo</span></div>
-      <ul>
-        <li>Everything in Free</li>
-        <li>+25 premium themes</li>
-        <li>Advanced vocabulary packs</li>
-        <li>Priority support</li>
-        <li>Ad-free forever</li>
-      </ul>
+      <h3>Pro</h3><div class="planPrice">Rs. 499<span style="font-size:14px;color:var(--muted)">/mo</span></div>
+      <ul><li>Everything in Free</li><li>+25 premium themes</li><li>Advanced vocabulary</li><li>Priority support</li><li>Ad-free forever</li></ul>
       <button class="primary" style="width:100%" onclick="buyPlan('Pro',499)">Upgrade to Pro</button>
     </div>
-
     <div class="planCard">
-      <h3>Ultra</h3>
-      <div class="planPrice">Rs. 999<span style="font-size:14px;color:var(--muted)">/mo</span></div>
-      <ul>
-        <li>Everything in Pro</li>
-        <li>All 50 themes unlocked</li>
-        <li>AI Teacher unlimited</li>
-        <li>Certificate with seal</li>
-        <li>Early access to new features</li>
-      </ul>
+      <h3>Ultra</h3><div class="planPrice">Rs. 999<span style="font-size:14px;color:var(--muted)">/mo</span></div>
+      <ul><li>Everything in Pro</li><li>All 50 themes</li><li>AI Teacher unlimited</li><li>Certificate with seal</li><li>Early access</li></ul>
       <button class="primary" style="width:100%" onclick="buyPlan('Ultra',999)">Upgrade to Ultra</button>
     </div>
   </div>
-
   <div class="notice" style="margin-top:20px">
-    💳 <b>Payment Integration:</b> To enable real payments, connect a payment gateway (Stripe / JazzCash / EasyPaisa) via a secure backend. This UI is production-ready; the payment button calls <code>buyPlan()</code> which you can hook to your backend.
+    💳 <b>Payment Integration:</b> Connect a payment gateway (Stripe / JazzCash / EasyPaisa) via a secure backend. The button calls <code>buyPlan()</code>.
   </div>
 </section>
 
@@ -453,19 +382,13 @@ button{cursor:pointer;border:0;background:none;color:inherit}
   <div class="sectionHead"><h2>Settings</h2></div>
   <div class="card">
     <div class="row" style="justify-content:space-between">
-      <div>
-        <b>Daily reminder</b>
-        <p class="muted">Enable browser notifications.</p>
-      </div>
+      <div><b>Daily reminder</b><p class="muted">Enable browser notifications.</p></div>
       <button class="ghost" onclick="enableReminder()">Enable</button>
     </div>
   </div>
   <div class="card" style="margin-top:12px">
     <div class="row" style="justify-content:space-between">
-      <div>
-        <b>Animations</b>
-        <p class="muted">Toggle background effects.</p>
-      </div>
+      <div><b>Animations</b><p class="muted">Toggle background effects.</p></div>
       <button class="ghost" onclick="toggleAnimations()">Toggle</button>
     </div>
   </div>
@@ -488,12 +411,7 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 
 <script>
 const STORAGE_KEY='englishMasterUltra_v4';
-const defaultState={
-  xp:0,streak:0,wordsLearned:0,quizScore:0,writingCount:0,
-  dailyGoal:20,todayProgress:0,
-  lastActiveDate:new Date().toDateString(),
-  badges:[],theme:'Midnight',plan:'Free',animations:true,learnedWords:[]
-};
+const defaultState={xp:0,streak:0,wordsLearned:0,quizScore:0,writingCount:0,dailyGoal:20,todayProgress:0,lastActiveDate:new Date().toDateString(),badges:[],theme:'Midnight',plan:'Free',animations:true,learnedWords:[]};
 let state=JSON.parse(localStorage.getItem(STORAGE_KEY))||{...defaultState};
 if(!state.learnedWords)state.learnedWords=[];
 function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
@@ -502,53 +420,33 @@ document.addEventListener('DOMContentLoaded',()=>{
   const particles=document.getElementById('splashParticles');
   const colors=['#7c5cff','#19d3ae','#ff5f9e','#5d78ff'];
   for(let i=0;i<40;i++){
-    const p=document.createElement('div');
-    p.className='sParticle';
+    const p=document.createElement('div');p.className='sParticle';
     p.style.left=Math.random()*100+'%';
     p.style.animationDuration=(4+Math.random()*4)+'s';
     p.style.animationDelay=Math.random()*4+'s';
     const c=colors[Math.floor(Math.random()*colors.length)];
-    p.style.background=c;
-    p.style.boxShadow='0 0 12px '+c;
+    p.style.background=c;p.style.boxShadow='0 0 12px '+c;
     particles.appendChild(p);
   }
   const stars=document.getElementById('stars');
   for(let i=0;i<80;i++){
-    const s=document.createElement('div');
-    s.className='star';
-    s.style.left=Math.random()*100+'%';
-    s.style.top=Math.random()*100+'%';
+    const s=document.createElement('div');s.className='star';
+    s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
     s.style.animationDelay=Math.random()*3+'s';
     s.style.opacity=0.3+Math.random()*0.6;
     stars.appendChild(s);
   }
-  setTimeout(()=>{
-    const splash=document.getElementById('splash');
-    if(splash){splash.classList.add('exit');setTimeout(()=>splash.remove(),800);}
-  },2800);
-  refreshAllUI();
-  renderWords();
-  renderThemes();
-  renderGrammar();
-  renderBadges();
-  applyTheme(state.theme);
+  setTimeout(()=>{const splash=document.getElementById('splash');if(splash){splash.classList.add('exit');setTimeout(()=>splash.remove(),800);}},2800);
+  refreshAllUI();renderWords();renderThemes();renderGrammar();renderBadges();applyTheme(state.theme);
   const wt=document.getElementById('writingText');
-  if(wt){
-    wt.addEventListener('input',()=>{
-      const w=wt.value.trim().split(/\s+/).filter(Boolean).length;
-      document.getElementById('wordCounter').textContent=w+' word'+(w!==1?'s':'');
-    });
-  }
+  if(wt)wt.addEventListener('input',()=>{const w=wt.value.trim().split(/\s+/).filter(Boolean).length;document.getElementById('wordCounter').textContent=w+' word'+(w!==1?'s':'');});
 });
 
 function go(pageId){
   document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
   const target=document.getElementById(pageId);
-  if(target)target.classList.add('active');
-  else document.getElementById('home').classList.add('active');
-  document.querySelectorAll('.nav button').forEach(btn=>{
-    btn.classList.toggle('active',btn.dataset.nav===pageId);
-  });
+  if(target)target.classList.add('active');else document.getElementById('home').classList.add('active');
+  document.querySelectorAll('.nav button').forEach(btn=>{btn.classList.toggle('active',btn.dataset.nav===pageId);});
   window.scrollTo({top:0,behavior:'smooth'});
   if(pageId==='quiz')initQuiz();
   if(pageId==='progress')renderBadges();
@@ -557,42 +455,29 @@ function go(pageId){
   if(pageId==='learn')renderWords();
 }
 
-function openSearch(){
-  const q=prompt('🔍 Search words:');
-  if(q){go('learn');document.getElementById('wordSearch').value=q;activeCategory=null;renderWords();}
-}
+function openSearch(){const q=prompt('🔍 Search words:');if(q){go('learn');document.getElementById('wordSearch').value=q;activeCategory=null;renderWords();}}
 
 function addXP(amount){
   if(amount>0){state.xp+=amount;state.todayProgress=Math.min(state.dailyGoal,state.todayProgress+1);}
   const today=new Date().toDateString();
   if(state.lastActiveDate!==today){
     const yesterday=new Date(Date.now()-86400000).toDateString();
-    if(state.lastActiveDate===yesterday)state.streak+=1;
-    else state.streak=1;
-    state.lastActiveDate=today;
-    state.todayProgress=0;
+    if(state.lastActiveDate===yesterday)state.streak+=1;else state.streak=1;
+    state.lastActiveDate=today;state.todayProgress=0;
   }
-  saveState();
-  refreshAllUI();
+  saveState();refreshAllUI();
 }
 
 function refreshAllUI(){
   const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
-  set('streakChip',state.streak);
-  set('goalChip',state.todayProgress+'/'+state.dailyGoal);
-  set('xpChip',state.xp);
-  set('planChip',state.plan);
-  set('wordsStat',state.wordsLearned);
-  set('scoreStat',state.quizScore+'%');
-  set('writeStat',state.writingCount);
-  set('badgeStat',state.badges.length);
-  set('pXP',state.xp);
-  set('pStreak',state.streak);
-  set('pWords',state.wordsLearned);
+  set('streakChip',state.streak);set('goalChip',state.todayProgress+'/'+state.dailyGoal);
+  set('xpChip',state.xp);set('planChip',state.plan);
+  set('wordsStat',state.wordsLearned);set('scoreStat',state.quizScore+'%');
+  set('writeStat',state.writingCount);set('badgeStat',state.badges.length);
+  set('pXP',state.xp);set('pStreak',state.streak);set('pWords',state.wordsLearned);
   const pct=Math.min(100,Math.round((state.todayProgress/state.dailyGoal)*100));
   set('pGoal',pct+'%');
-  const bar=document.getElementById('goalBar');
-  if(bar)bar.style.width=pct+'%';
+  const bar=document.getElementById('goalBar');if(bar)bar.style.width=pct+'%';
   const gt=document.getElementById('goalText');
   if(gt)gt.textContent=state.todayProgress+' / '+state.dailyGoal+' words today';
 }
@@ -613,6 +498,7 @@ const wordBank=[
   {word:'environment',meaning:'surroundings or conditions',category:'Everyday'},
   {word:'challenge',meaning:'difficult task',category:'Everyday'},
   {word:'success',meaning:'achievement of a goal',category:'Everyday'},
+  {word:'failure',meaning:'lack of success',category:'Everyday'},
   {word:'library',meaning:'place where books are kept',category:'School'},
   {word:'notebook',meaning:'book for writing notes',category:'School'},
   {word:'schedule',meaning:'plan of activities and times',category:'School'},
@@ -628,6 +514,12 @@ const wordBank=[
   {word:'vocabulary',meaning:'words known by a person',category:'School'},
   {word:'pronunciation',meaning:'way of saying words',category:'School'},
   {word:'sentence',meaning:'group of words expressing a thought',category:'School'},
+  {word:'paragraph',meaning:'section of writing',category:'School'},
+  {word:'essay',meaning:'short piece of writing',category:'School'},
+  {word:'poem',meaning:'piece of writing in verse',category:'School'},
+  {word:'story',meaning:'account of events',category:'School'},
+  {word:'novel',meaning:'long fictional book',category:'School'},
+  {word:'language',meaning:'system of communication',category:'School'},
   {word:'passport',meaning:'official travel document',category:'Travel'},
   {word:'luggage',meaning:'bags for a journey',category:'Travel'},
   {word:'itinerary',meaning:'detailed plan for a trip',category:'Travel'},
@@ -650,57 +542,26 @@ const wordBank=[
   {word:'client',meaning:'person who buys services',category:'Work'},
   {word:'opportunity',meaning:'chance to do something',category:'Work'},
   {word:'experience',meaning:'practical knowledge from doing',category:'Work'},
-  {word:'communication',meaning:'exchange of information',category:'Work'},
-  {word:'paragraph',meaning:'section of writing',category:'School'},
-  {word:'essay',meaning:'short piece of writing',category:'School'},
-  {word:'poem',meaning:'piece of writing in verse',category:'School'},
-  {word:'story',meaning:'account of events',category:'School'},
-  {word:'novel',meaning:'long fictional book',category:'School'},
-  {word:'language',meaning:'system of communication',category:'School'},
-  {word:'failure',meaning:'lack of success',category:'Everyday'}
+  {word:'communication',meaning:'exchange of information',category:'Work'}
 ];
 
 let activeCategory=null;
 
-function showCategory(cat){
-  activeCategory=cat;
-  go('learn');
-  const ws=document.getElementById('wordSearch');
-  if(ws)ws.value='';
-  renderWords();
-}
+function showCategory(cat){activeCategory=cat;go('learn');const ws=document.getElementById('wordSearch');if(ws)ws.value='';renderWords();}
 
 function renderWords(){
-  const list=document.getElementById('wordList');
-  if(!list)return;
+  const list=document.getElementById('wordList');if(!list)return;
   const q=(document.getElementById('wordSearch')?.value||'').toLowerCase().trim();
   let words=wordBank;
   if(activeCategory)words=words.filter(w=>w.category===activeCategory);
   if(q)words=words.filter(w=>w.word.toLowerCase().includes(q)||w.meaning.toLowerCase().includes(q));
-  if(words.length===0){
-    list.innerHTML='<div class="item"><div class="itemMain"><b>No words found</b><p class="muted">Try another search.</p></div></div>';
-    return;
-  }
-  list.innerHTML=words.map(w=>
-    '<div class="item">'+
-      '<div class="itemMain"><b>'+w.word+'</b><p>'+w.meaning+' · <span class="muted">'+w.category+'</span></p></div>'+
-      '<div class="row">'+
-        '<button class="ghost" onclick="speakText(\''+w.word.replace(/'/g,"\\'")+'\')">🔊</button>'+
-        '<button class="primary" onclick="learnWord(\''+w.word.replace(/'/g,"\\'")+'\')">+1 XP</button>'+
-      '</div>'+
-    '</div>'
-  ).join('');
+  if(words.length===0){list.innerHTML='<div class="item"><div class="itemMain"><b>No words found</b><p class="muted">Try another search.</p></div></div>';return;}
+  list.innerHTML=words.map(w=>'<div class="item"><div class="itemMain"><b>'+w.word+'</b><p>'+w.meaning+' · <span class="muted">'+w.category+'</span></p></div><div class="row"><button class="ghost" onclick="speakText(\''+w.word.replace(/'/g,"\\'")+'\')">🔊</button><button class="primary" onclick="learnWord(\''+w.word.replace(/'/g,"\\'")+'\')">+1 XP</button></div></div>').join('');
 }
 
 function learnWord(word){
-  if(!state.learnedWords.includes(word)){
-    state.learnedWords.push(word);
-    state.wordsLearned=state.learnedWords.length;
-    addXP(5);
-    alert('✅ "'+word+'" learned! +5 XP');
-  }else{
-    alert('📖 You already learned "'+word+'". Review it again!');
-  }
+  if(!state.learnedWords.includes(word)){state.learnedWords.push(word);state.wordsLearned=state.learnedWords.length;addXP(5);alert('✅ "'+word+'" learned! +5 XP');}
+  else alert('📖 You already learned "'+word+'". Review it again!');
 }
 
 async function dictionarySearch(){
@@ -717,16 +578,13 @@ async function dictionarySearch(){
     const phonetic=entry.phonetic||'';
     let html='<h3>'+entry.word+' <span class="muted" style="font-size:14px">'+phonetic+'</span></h3>';
     entry.meanings.slice(0,3).forEach(m=>{
-      html+='<p style="margin-top:8px"><b>'+m.partOfSpeech+'</b></p>';
-      html+='<ul style="padding-left:20px;margin-top:4px">';
+      html+='<p style="margin-top:8px"><b>'+m.partOfSpeech+'</b></p><ul style="padding-left:20px;margin-top:4px">';
       m.definitions.slice(0,2).forEach(d=>{html+='<li style="color:var(--muted);margin-bottom:4px">'+d.definition+'</li>';});
       html+='</ul>';
     });
     html+='<button class="ghost" style="margin-top:12px" onclick="speakText(\''+entry.word.replace(/'/g,"\\'")+'\')">🔊 Pronounce</button>';
     box.innerHTML=html;
-  }catch(e){
-    box.innerHTML='<h3>'+query+'</h3><p class="muted">Word not found. Check spelling or try another word.</p>';
-  }
+  }catch(e){box.innerHTML='<h3>'+query+'</h3><p class="muted">Word not found. Check spelling.</p>';}
 }
 
 const grammarLessons=[
@@ -795,17 +653,10 @@ const grammarLessons=[
 ];
 
 function renderGrammar(){
-  const c=document.getElementById('grammarList');
-  if(!c)return;
+  const c=document.getElementById('grammarList');if(!c)return;
   const countEl=document.getElementById('grammarCount');
   if(countEl)countEl.textContent=grammarLessons.length+' lessons';
-  c.innerHTML=grammarLessons.map(g=>
-    '<div class="item">'+
-      '<div class="itemMain"><b>'+g.title+'</b><p>'+g.desc+'</p>'+
-      '<p class="muted" style="font-size:13px;margin-top:4px">📝 '+g.example+'</p></div>'+
-      '<button class="ghost" onclick="speakText(\''+g.example.replace(/'/g,"\\'")+'\')">🔊</button>'+
-    '</div>'
-  ).join('');
+  c.innerHTML=grammarLessons.map(g=>'<div class="item"><div class="itemMain"><b>'+g.title+'</b><p>'+g.desc+'</p><p class="muted" style="font-size:13px;margin-top:4px">📝 '+g.example+'</p></div><button class="ghost" onclick="speakText(\''+g.example.replace(/'/g,"\\'")+'\')">🔊</button></div>').join('');
 }
 
 function speakText(text){
@@ -816,10 +667,7 @@ function speakText(text){
   speechSynthesis.speak(u);
 }
 
-function speakCurrent(){
-  const p=document.getElementById('speakPhrase');
-  if(p)speakText(p.textContent);
-}
+function speakCurrent(){const p=document.getElementById('speakPhrase');if(p)speakText(p.textContent);}
 
 function startSpeech(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
@@ -828,11 +676,7 @@ function startSpeech(){
   r.lang='en-US';r.interimResults=false;r.maxAlternatives=1;
   document.getElementById('speechOutput').textContent='🎤 Listening...';
   r.start();
-  r.onresult=(e)=>{
-    const t=e.results[0][0].transcript;
-    document.getElementById('speechOutput').textContent='📝 You said: "'+t+'"';
-    addXP(3);
-  };
+  r.onresult=(e)=>{const t=e.results[0][0].transcript;document.getElementById('speechOutput').textContent='📝 You said: "'+t+'"';addXP(3);};
   r.onerror=(e)=>{document.getElementById('speechOutput').textContent='❌ Error: '+e.error;};
 }
 
@@ -849,8 +693,7 @@ function checkWriting(){
   if(sentences<2)tips.push('Aim for 2–5 sentences.');
   if(tips.length===0)tips.push('Great job! Keep writing! 🌟');
   fb.innerHTML='<b>📊 Stats:</b> '+words+' words · '+sentences+' sentences · '+unique+' unique.<br><b>💡 Feedback:</b> '+tips.join(' ');
-  state.writingCount+=1;
-  addXP(8);
+  state.writingCount+=1;addXP(8);
 }
 
 const quizData=[
@@ -907,4 +750,282 @@ const quizData=[
   {q:'Which is an interjection?',options:['Wow','run','beautiful','quickly'],answer:0},
   {q:'Correct: "I ___ my homework."',options:['do','does','doing','did'],answer:0},
   {q:'Past of "drink"?',options:['drinked','drank','drunk','drinking'],answer:1},
-  {q:'Which is a countable noun?',options:['
+  {q:'Which is a countable noun?',options:['water','rice','apple','milk'],answer:2},
+  {q:'Correct: "She has ___ money."',options:['many','much','a','few'],answer:1},
+  {q:'Which sentence is correct?',options:['I am agree.','I agree.','I agreeing.','I agrees.'],answer:1},
+  {q:'Antonym of "always"?',options:['often','sometimes','never','usually'],answer:2},
+  {q:'Correct: "He is good ___ math."',options:['in','on','at','for'],answer:2},
+  {q:'Past of "fly"?',options:['flied','flew','flown','flying'],answer:1},
+  {q:'Which is a proper noun?',options:['city','Pakistan','country','place'],answer:1},
+  {q:'Correct: "___ you like tea?"',options:['Does','Do','Is','Are'],answer:1},
+  {q:'Synonym of "difficult"?',options:['easy','simple','hard','quick'],answer:2},
+  {q:'Correct: "They ___ watching TV."',options:['is','am','are','be'],answer:2},
+  {q:'Past participle of "eat"?',options:['ate','eaten','eating','eats'],answer:1},
+  {q:'Which is a collective noun?',options:['team','player','ball','game'],answer:0},
+  {q:'Correct: "I have lived here ___ 2010."',options:['for','since','from','at'],answer:1},
+  {q:'Antonym of "expensive"?',options:['costly','cheap','rich','pricey'],answer:1},
+  {q:'Correct: "She is ___ than me."',options:['tall','taller','tallest','more tall'],answer:1},
+  {q:'Which is a modal verb?',options:['run','should','happy','quickly'],answer:1},
+  {q:'Correct: "If it rains, I ___ stay home."',options:['will','would','am','was'],answer:0},
+  {q:'Past of "sing"?',options:['singed','sang','sung','singing'],answer:1},
+  {q:'Which word is an article?',options:['the','and','but','or'],answer:0},
+  {q:'Correct: "He ___ TV when I called."',options:['watches','watched','was watching','is watching'],answer:2},
+  {q:'Antonym of "wet"?',options:['damp','dry','humid','moist'],answer:1},
+  {q:'Correct: "I wish I ___ taller."',options:['am','was','were','be'],answer:2},
+  {q:'Which is a phrasal verb?',options:['run fast','give up','very quick','beautiful'],answer:1},
+  {q:'Correct: "She has ___ finished."',options:['yet','already','still','ever'],answer:1},
+  {q:'Antonym of "buy"?',options:['purchase','sell','get','acquire'],answer:1},
+  {q:'Past of "think"?',options:['thinked','thought','thanked','thinking'],answer:1},
+  {q:'Which is a possessive pronoun?',options:['me','mine','my','I'],answer:1},
+  {q:'Correct: "They ___ to the party yesterday."',options:['go','goes','went','going'],answer:2},
+  {q:'Synonym of "angry"?',options:['happy','furious','calm','sad'],answer:1},
+  {q:'Correct: "She is interested ___ music."',options:['on','at','in','for'],answer:2},
+  {q:'Past of "give"?',options:['gived','gave','given','giving'],answer:1},
+  {q:'Which is an uncountable noun?',options:['book','chair','information','pen'],answer:2},
+  {q:'Correct: "I ___ him since 2020."',options:['know','knew','have known','knowing'],answer:2},
+  {q:'Antonym of "early"?',options:['soon','late','quick','fast'],answer:1},
+  {q:'Correct: "She said she ___ tired."',options:['is','was','be','am'],answer:1},
+  {q:'Which is a helping verb?',options:['run','have','book','happy'],answer:1},
+  {q:'Past of "come"?',options:['comed','came','come','coming'],answer:1},
+  {q:'Correct: "Neither John ___ Mary came."',options:['or','and','nor','but'],answer:2},
+  {q:'Antonym of "strong"?',options:['powerful','weak','tough','hard'],answer:1},
+  {q:'Correct: "This is the man ___ helped me."',options:['which','who','whom','whose'],answer:1},
+  {q:'Past of "wear"?',options:['weared','wore','worn','wearing'],answer:1},
+  {q:'Which is a preposition of place?',options:['quickly','under','happy','run'],answer:1},
+  {q:'Correct: "I would rather ___ home."',options:['stay','staying','stayed','to stay'],answer:0},
+  {q:'Synonym of "beautiful"?',options:['ugly','gorgeous','plain','simple'],answer:1},
+  {q:'Correct: "She enjoys ___ books."',options:['read','reading','to read','reads'],answer:1},
+  {q:'Past of "break"?',options:['breaked','broke','broken','breaking'],answer:1},
+  {q:'Which sentence uses "too"?',options:['It is too hot.','It is to hot.','It is two hot.','It is hot too.'],answer:0},
+  {q:'Correct: "He is ___ honest man."',options:['a','an','the','none'],answer:1},
+  {q:'Past participle of "write"?',options:['wrote','written','writing','writes'],answer:1},
+  {q:'Which is a definite article?',options:['a','an','the','some'],answer:2}
+];
+
+let quizIndex=0,quizCorrect=0,quizAnswered=false;
+
+function initQuiz(){quizIndex=0;quizCorrect=0;quizAnswered=false;renderQuiz();}
+
+function renderQuiz(){
+  const box=document.getElementById('quizBox');const prog=document.getElementById('quizProgress');
+  if(!box)return;
+  if(quizIndex>=quizData.length){
+    const pct=Math.round((quizCorrect/quizData.length)*100);
+    state.quizScore=pct;state.xp+=quizCorrect*5;saveState();refreshAllUI();
+    box.innerHTML='<h3>🏁 Quiz complete!</h3><p style="font-size:1.2rem;margin:12px 0">Score: <b>'+quizCorrect+'/'+quizData.length+'</b> ('+pct+'%)</p><p class="muted">'+(pct>=80?'Excellent! 🌟':pct>=50?'Good effort! 💪':'Keep learning! 📚')+'</p><button class="primary" style="margin-top:14px" onclick="initQuiz()">Play again</button>';
+    prog.textContent='';return;
+  }
+  const q=quizData[quizIndex];
+  prog.textContent=(quizIndex+1)+' / '+quizData.length;
+  let opts='';
+  q.options.forEach((opt,i)=>{opts+='<button class="quizOption" onclick="answerQuiz('+i+')" id="opt-'+i+'">'+opt+'</button>';});
+  box.innerHTML='<h3>'+q.q+'</h3><div style="margin-top:10px">'+opts+'</div><div id="quizFeedback" class="notice" style="display:none"></div>';
+  quizAnswered=false;
+}
+
+function answerQuiz(i){
+  if(quizAnswered)return;
+  quizAnswered=true;
+  const q=quizData[quizIndex];
+  const fb=document.getElementById('quizFeedback');
+  const chosen=document.getElementById('opt-'+i);
+  const correct=document.getElementById('opt-'+q.answer);
+  if(i===q.answer){quizCorrect++;chosen.classList.add('correct');fb.innerHTML='✅ Correct! +5 XP';}
+  else{chosen.classList.add('wrong');correct.classList.add('correct');fb.innerHTML='❌ Correct answer: <b>'+q.options[q.answer]+'</b>';}
+  fb.style.display='block';
+  setTimeout(()=>{quizIndex++;renderQuiz();},1400);
+}
+
+function teacherReply(){
+  const inp=document.getElementById('teacherInput');
+  const msg=inp.value.trim();
+  if(!msg)return;
+  addChat('You',msg);inp.value='';
+  const lower=msg.toLowerCase();
+  let reply="That's interesting! Tell me more. 😊";
+  if(lower.includes('hello')||lower.includes('hi'))reply='Hello! How are you today? 🌟';
+  else if(lower.includes('how are you'))reply="I'm great! How about you?";
+  else if(lower.includes('name'))reply='My name is Ayesha, your English partner.';
+  else if(lower.includes('learn')||lower.includes('english'))reply='English is best learned a little every day. Keep going! 💪';
+  else if(lower.includes('thank'))reply="You're welcome! 😊";
+  else if(lower.includes('bye'))reply='Goodbye! Come back soon. 👋';
+  else if(lower.includes('?'))reply='Good question! Try writing a full sentence and I will help.';
+  else if(msg.split(' ').length<3)reply='Try a longer sentence!';
+  if(lower.startsWith('i is'))reply='💡 Say "I am", not "I is".';
+  if(lower.startsWith('she go'))reply='💡 Say "She goes", not "She go".';
+  if(lower.includes('i has'))reply='💡 Say "I have", not "I has".';
+  addChat('Ayesha',reply);addXP(2);
+}
+
+function addChat(sender,text){
+  const chat=document.getElementById('chat');if(!chat)return;
+  const d=document.createElement('div');d.className='item';
+  d.innerHTML='<div class="itemMain"><b>'+sender+'</b><p>'+text+'</p></div>';
+  chat.appendChild(d);chat.scrollTop=chat.scrollHeight;
+}
+
+function startTeacherSpeech(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR)return alert('Speech recognition not supported.');
+  const r=new SR();r.lang='en-US';r.interimResults=false;r.start();
+  r.onresult=(e)=>{document.getElementById('teacherInput').value=e.results[0][0].transcript;teacherReply();};
+}
+
+let cameraStream=null;
+
+function startCamera(){
+  const v=document.getElementById('camera');
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return alert('Camera not supported.');
+  navigator.mediaDevices.getUserMedia({video:true}).then(s=>{cameraStream=s;v.srcObject=s;v.play();}).catch(e=>alert('Camera error: '+e.message));
+}
+
+function stopCamera(){
+  if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;const v=document.getElementById('camera');if(v)v.srcObject=null;}
+}
+
+function sayObject(name){speakText('This is a '+name+'.');addXP(2);}
+
+const themes=[
+  {name:'Midnight',c:['#05070f','#0f1524','#7c5cff'],free:true},
+  {name:'Ocean',c:['#0a1a2a','#0f2a3a','#19d3ae'],free:true},
+  {name:'Sunset',c:['#1a0e1a','#2a152a','#ff5f9e'],free:true},
+  {name:'Forest',c:['#0a1a0a','#152a15','#4caf50'],free:true},
+  {name:'Royal',c:['#1a0a2a','#2a1545','#9c27b0'],free:true},
+  {name:'Amber',c:['#1a150a','#2a2215','#ffb300'],free:false},
+  {name:'Rose',c:['#1a0a15','#2a1520','#ff6b9d'],free:false},
+  {name:'Cyber',c:['#0a0a0a','#151520','#00e5ff'],free:false},
+  {name:'Lava',c:['#1a0a0a','#2a1515','#ff3d00'],free:false},
+  {name:'Emerald',c:['#0a1a15','#152a20','#00e676'],free:false},
+  {name:'Sapphire',c:['#0a0f1a','#152040','#2196f3'],free:false},
+  {name:'Ruby',c:['#1a0a0f','#2a1520','#e91e63'],free:false},
+  {name:'Gold',c:['#1a150a','#2a2015','#ffc107'],free:false},
+  {name:'Platinum',c:['#1a1a1a','#252525','#e0e0e0'],free:false},
+  {name:'Neon',c:['#050510','#101025','#39ff14'],free:false},
+  {name:'Aurora',c:['#0a1a1a','#152a2a','#00e5ff'],free:false},
+  {name:'Cosmic',c:['#0a0515','#1a0a2a','#e91e9c'],free:false},
+  {name:'Steel',c:['#0f1215','#1a2025','#607d8b'],free:false},
+  {name:'Peach',c:['#1a0f0a','#2a1a15','#ff8a65'],free:false},
+  {name:'Mint',c:['#0a1a15','#152a25','#4db6ac'],free:false},
+  {name:'Lavender',c:['#150a1a','#25152a','#b388ff'],free:false},
+  {name:'Crimson',c:['#1a0505','#2a1015','#dc143c'],free:false},
+  {name:'Teal',c:['#0a1a1a','#152a2a','#009688'],free:false},
+  {name:'Indigo',c:['#0a0a1a','#15152a','#3f51b5'],free:false},
+  {name:'Coral',c:['#1a0f0a','#2a1a15','#ff7043'],free:false},
+  {name:'Olive',c:['#151a0a','#252a15','#827717'],free:false},
+  {name:'Maroon',c:['#1a0a0a','#2a1515','#800000'],free:false},
+  {name:'Navy',c:['#0a0f1a','#151f2a','#001f3f'],free:false},
+  {name:'Fuchsia',c:['#1a0a1a','#2a152a','#ff00ff'],free:false},
+  {name:'Silver',c:['#1a1a1a','#252525','#c0c0c0'],free:false},
+  {name:'Bronze',c:['#1a120a','#2a2015','#cd7f32'],free:false},
+  {name:'Ice',c:['#0a1520','#15202a','#b3e5fc'],free:false},
+  {name:'Flame',c:['#1a0a05','#2a150a','#ff5722'],free:false},
+  {name:'Sky',c:['#0a1520','#15253a','#87ceeb'],free:false},
+  {name:'Sand',c:['#1a150f','#2a251a','#d4a373'],free:false},
+  {name:'Moss',c:['#0f1a0a','#1a2a15','#8bc34a'],free:false},
+  {name:'Berry',c:['#1a0a15','#2a1525','#c2185b'],free:false},
+  {name:'Storm',c:['#0f1215','#1a2025','#546e7a'],free:false},
+  {name:'Cloud',c:['#151a20','#20252a','#90a4ae'],free:false},
+  {name:'Wine',c:['#1a050f','#2a101a','#722f37'],free:false},
+  {name:'Sage',c:['#151a15','#202a20','#9caf88'],free:false},
+  {name:'Denim',c:['#0f1520','#1a2530','#1565c0'],free:false},
+  {name:'Rust',c:['#1a0f0a','#2a1a15','#b7410e'],free:false},
+  {name:'Pearl',c:['#1a1a1a','#252525','#f5f5dc'],free:false},
+  {name:'Onyx',c:['#050505','#101010','#353839'],free:false},
+  {name:'Jade',c:['#0a1a10','#152a20','#00a86b'],free:false},
+  {name:'Topaz',c:['#1a150a','#2a2015','#ffc87c'],free:false},
+  {name:'Amethyst',c:['#150a1a','#25152a','#9966cc'],free:false},
+  {name:'Turquoise',c:['#0a1a1a','#152a2a','#40e0d0'],free:false},
+  {name:'Magenta',c:['#1a0a1a','#2a152a','#ff00aa'],free:false},
+  {name:'Copper',c:['#1a0f0a','#2a1a15','#b87333'],free:false}
+];
+
+function renderThemes(){
+  const grid=document.getElementById('themeGrid');if(!grid)return;
+  grid.innerHTML=themes.map((t,i)=>{
+    const locked=!t.free&&state.plan==='Free';
+    const active=state.theme===t.name?' active':'';
+    return '<button class="theme'+(locked?' locked':'')+active+'" onclick="selectTheme('+i+')"><div class="swatch" style="background:linear-gradient(135deg,'+t.c[0]+','+t.c[1]+','+t.c[2]+')"></div><b>'+t.name+'</b><br><small>'+(t.free?'Free':'Premium')+'</small></button>';
+  }).join('');
+}
+
+function selectTheme(i){
+  const t=themes[i];
+  if(!t.free&&state.plan==='Free'){alert('🔒 "'+t.name+'" is a Premium theme. Upgrade to unlock all 45 premium themes!');go('premium');return;}
+  state.theme=t.name;saveState();applyTheme(t.name);renderThemes();
+}
+
+function applyTheme(name){
+  const t=themes.find(x=>x.name===name)||themes[0];
+  document.documentElement.style.setProperty('--bg',t.c[0]);
+  document.documentElement.style.setProperty('--panel',t.c[1]);
+  document.documentElement.style.setProperty('--panel2',t.c[1]);
+  document.documentElement.style.setProperty('--accent',t.c[2]);
+  document.documentElement.style.setProperty('--accent2',t.c[2]);
+}
+
+const allBadges=[
+  {id:'first',icon:'🌱',label:'First Step',check:()=>state.xp>=10},
+  {id:'words10',icon:'📚',label:'10 Words',check:()=>state.wordsLearned>=10},
+  {id:'streak3',icon:'🔥',label:'3-Day Streak',check:()=>state.streak>=3},
+  {id:'quiz80',icon:'🏆',label:'Quiz 80%',check:()=>state.quizScore>=80},
+  {id:'writer',icon:'✍️',label:'Writer',check:()=>state.writingCount>=3},
+  {id:'xp100',icon:'⭐',label:'100 XP',check:()=>state.xp>=100},
+  {id:'words25',icon:'📖',label:'25 Words',check:()=>state.wordsLearned>=25},
+  {id:'streak7',icon:'💎',label:'7-Day Streak',check:()=>state.streak>=7}
+];
+
+function renderBadges(){
+  const c=document.getElementById('badges');if(!c)return;
+  state.badges=allBadges.filter(b=>b.check()).map(b=>b.id);saveState();
+  c.innerHTML=allBadges.map(b=>{
+    const unlocked=b.check();
+    return '<div class="badge'+(unlocked?'':' locked')+'"><div class="bicon">'+b.icon+'</div><small>'+b.label+'</small></div>';
+  }).join('');
+  const bs=document.getElementById('badgeStat');if(bs)bs.textContent=state.badges.length;
+}
+
+function showCertificate(){
+  const name=prompt('Enter your name for the certificate:','Student');
+  if(!name)return;
+  const m=document.createElement('div');m.className='modal';
+  m.innerHTML='<div class="modalBox"><div class="certificate"><h1>Certificate of Achievement</h1><p style="margin:16px 0 6px;font-size:14px;color:#555">This certifies that</p><div class="certName">'+name+'</div><p style="margin:18px 0;font-size:14px;color:#555">has successfully completed English Master practice with '+state.xp+' XP, '+state.wordsLearned+' words learned, and a quiz score of '+state.quizScore+'%.</p><p style="font-size:12px;color:#888;margin-top:20px">⚠️ In-app achievement certificate, not accredited.</p><p style="font-size:12px;color:#888">'+new Date().toLocaleDateString()+'</p></div><div class="row" style="margin-top:14px"><button class="primary" onclick="window.print()">🖨️ Print</button><button class="ghost" onclick="this.closest(\'.modal\').remove()">Close</button></div></div>';
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m)m.remove();});
+}
+
+function shareChallenge(){
+  const text='🔥 English Master Challenge: Learn 20 new English words today! Can you beat me?';
+  if(navigator.share)navigator.share({title:'English Master Challenge',text}).catch(()=>{});
+  else if(navigator.clipboard)navigator.clipboard.writeText(text).then(()=>alert('Challenge copied!')).catch(()=>alert(text));
+  else alert(text);
+}
+
+function buyPlan(plan,price){
+  const confirm_msg='👑 Upgrade to '+plan+' — Rs. '+price+'/month\n\nThis is a demo. In production, this button should:\n1. Send user to payment gateway\n2. Verify payment on backend\n3. Unlock premium features\n\nFor now, click OK to unlock '+plan+' locally (demo only).';
+  if(confirm(confirm_msg)){state.plan=plan;saveState();refreshAllUI();renderThemes();alert('🎉 Welcome to '+plan+'! (demo unlock)');}
+}
+
+function enableReminder(){
+  if(!('Notification' in window))return alert('Notifications not supported.');
+  Notification.requestPermission().then(p=>{
+    if(p==='granted')new Notification('English Master',{body:'Time to practice! 🚀'});
+    else alert('Permission denied.');
+  });
+}
+
+function toggleAnimations(){
+  state.animations=!state.animations;saveState();
+  const s=document.getElementById('stars');const g=document.getElementById('glowOrbs');
+  if(s)s.style.display=state.animations?'block':'none';
+  if(g)g.style.display=state.animations?'block':'none';
+}
+
+function resetProgress(){
+  if(!confirm('Reset all local progress?'))return;
+  state={...defaultState};state.lastActiveDate=new Date().toDateString();saveState();
+  refreshAllUI();renderBadges();renderThemes();alert('Progress reset.');
+}
+</script>
+
+</body>
+</html>
