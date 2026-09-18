@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#070b16">
-<meta name="description" content="English Master Ultra — Premium English Learning App">
 <title>English Master Ultra</title>
 <style>
 :root{--bg:#05070f;--panel:#0f1524;--panel2:#151d30;--text:#f5f7ff;--muted:#8b98b5;--accent:#7c5cff;--accent2:#19d3ae;--accent3:#ff5f9e;--danger:#ff5f7a;--line:#1e2a42;--shadow:0 20px 60px #0008}
@@ -410,42 +409,26 @@ button{cursor:pointer;border:0;background:none;color:inherit}
 </nav>
 
 <script>
-const STORAGE_KEY='englishMasterUltra_v4';
-const defaultState={xp:0,streak:0,wordsLearned:0,quizScore:0,writingCount:0,dailyGoal:20,todayProgress:0,lastActiveDate:new Date().toDateString(),badges:[],theme:'Midnight',plan:'Free',animations:true,learnedWords:[]};
-let state=JSON.parse(localStorage.getItem(STORAGE_KEY))||{...defaultState};
+const SK='englishMasterUltra_v4';
+const DS={xp:0,streak:0,wordsLearned:0,quizScore:0,writingCount:0,dailyGoal:20,todayProgress:0,lastActiveDate:new Date().toDateString(),badges:[],theme:'Midnight',plan:'Free',animations:true,learnedWords:[]};
+let state=JSON.parse(localStorage.getItem(SK))||{...DS};
 if(!state.learnedWords)state.learnedWords=[];
-function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
-
+function saveState(){localStorage.setItem(SK,JSON.stringify(state));}
 document.addEventListener('DOMContentLoaded',()=>{
-  const particles=document.getElementById('splashParticles');
+  const sp=document.getElementById('splashParticles');
   const colors=['#7c5cff','#19d3ae','#ff5f9e','#5d78ff'];
-  for(let i=0;i<40;i++){
-    const p=document.createElement('div');p.className='sParticle';
-    p.style.left=Math.random()*100+'%';
-    p.style.animationDuration=(4+Math.random()*4)+'s';
-    p.style.animationDelay=Math.random()*4+'s';
-    const c=colors[Math.floor(Math.random()*colors.length)];
-    p.style.background=c;p.style.boxShadow='0 0 12px '+c;
-    particles.appendChild(p);
-  }
+  for(let i=0;i<40;i++){const p=document.createElement('div');p.className='sParticle';p.style.left=Math.random()*100+'%';p.style.animationDuration=(4+Math.random()*4)+'s';p.style.animationDelay=Math.random()*4+'s';const c=colors[Math.floor(Math.random()*colors.length)];p.style.background=c;p.style.boxShadow='0 0 12px '+c;sp.appendChild(p);}
   const stars=document.getElementById('stars');
-  for(let i=0;i<80;i++){
-    const s=document.createElement('div');s.className='star';
-    s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
-    s.style.animationDelay=Math.random()*3+'s';
-    s.style.opacity=0.3+Math.random()*0.6;
-    stars.appendChild(s);
-  }
+  for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*3+'s';s.style.opacity=0.3+Math.random()*0.6;stars.appendChild(s);}
   setTimeout(()=>{const splash=document.getElementById('splash');if(splash){splash.classList.add('exit');setTimeout(()=>splash.remove(),800);}},2800);
   refreshAllUI();renderWords();renderThemes();renderGrammar();renderBadges();applyTheme(state.theme);
   const wt=document.getElementById('writingText');
   if(wt)wt.addEventListener('input',()=>{const w=wt.value.trim().split(/\s+/).filter(Boolean).length;document.getElementById('wordCounter').textContent=w+' word'+(w!==1?'s':'');});
 });
-
 function go(pageId){
   document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
-  const target=document.getElementById(pageId);
-  if(target)target.classList.add('active');else document.getElementById('home').classList.add('active');
+  const t=document.getElementById(pageId);
+  if(t)t.classList.add('active');else document.getElementById('home').classList.add('active');
   document.querySelectorAll('.nav button').forEach(btn=>{btn.classList.toggle('active',btn.dataset.nav===pageId);});
   window.scrollTo({top:0,behavior:'smooth'});
   if(pageId==='quiz')initQuiz();
@@ -454,34 +437,17 @@ function go(pageId){
   if(pageId==='grammar')renderGrammar();
   if(pageId==='learn')renderWords();
 }
-
-function openSearch(){const q=prompt('🔍 Search words:');if(q){go('learn');document.getElementById('wordSearch').value=q;activeCategory=null;renderWords();}}
-
-function addXP(amount){
-  if(amount>0){state.xp+=amount;state.todayProgress=Math.min(state.dailyGoal,state.todayProgress+1);}
-  const today=new Date().toDateString();
-  if(state.lastActiveDate!==today){
-    const yesterday=new Date(Date.now()-86400000).toDateString();
-    if(state.lastActiveDate===yesterday)state.streak+=1;else state.streak=1;
-    state.lastActiveDate=today;state.todayProgress=0;
-  }
-  saveState();refreshAllUI();
-}
-
+function openSearch(){const q=prompt('Search words:');if(q){go('learn');document.getElementById('wordSearch').value=q;activeCategory=null;renderWords();}}
+function addXP(a){if(a>0){state.xp+=a;state.todayProgress=Math.min(state.dailyGoal,state.todayProgress+1);}const today=new Date().toDateString();if(state.lastActiveDate!==today){const y=new Date(Date.now()-86400000).toDateString();if(state.lastActiveDate===y)state.streak+=1;else state.streak=1;state.lastActiveDate=today;state.todayProgress=0;}saveState();refreshAllUI();}
 function refreshAllUI(){
-  const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
-  set('streakChip',state.streak);set('goalChip',state.todayProgress+'/'+state.dailyGoal);
-  set('xpChip',state.xp);set('planChip',state.plan);
-  set('wordsStat',state.wordsLearned);set('scoreStat',state.quizScore+'%');
-  set('writeStat',state.writingCount);set('badgeStat',state.badges.length);
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  set('streakChip',state.streak);set('goalChip',state.todayProgress+'/'+state.dailyGoal);set('xpChip',state.xp);set('planChip',state.plan);
+  set('wordsStat',state.wordsLearned);set('scoreStat',state.quizScore+'%');set('writeStat',state.writingCount);set('badgeStat',state.badges.length);
   set('pXP',state.xp);set('pStreak',state.streak);set('pWords',state.wordsLearned);
-  const pct=Math.min(100,Math.round((state.todayProgress/state.dailyGoal)*100));
-  set('pGoal',pct+'%');
+  const pct=Math.min(100,Math.round((state.todayProgress/state.dailyGoal)*100));set('pGoal',pct+'%');
   const bar=document.getElementById('goalBar');if(bar)bar.style.width=pct+'%';
-  const gt=document.getElementById('goalText');
-  if(gt)gt.textContent=state.todayProgress+' / '+state.dailyGoal+' words today';
+  const gt=document.getElementById('goalText');if(gt)gt.textContent=state.todayProgress+' / '+state.dailyGoal+' words today';
 }
-
 const wordBank=[
   {word:'confident',meaning:'feeling sure about yourself',category:'Everyday'},
   {word:'generous',meaning:'willing to give more than expected',category:'Everyday'},
@@ -498,7 +464,6 @@ const wordBank=[
   {word:'environment',meaning:'surroundings or conditions',category:'Everyday'},
   {word:'challenge',meaning:'difficult task',category:'Everyday'},
   {word:'success',meaning:'achievement of a goal',category:'Everyday'},
-  {word:'failure',meaning:'lack of success',category:'Everyday'},
   {word:'library',meaning:'place where books are kept',category:'School'},
   {word:'notebook',meaning:'book for writing notes',category:'School'},
   {word:'schedule',meaning:'plan of activities and times',category:'School'},
@@ -544,11 +509,8 @@ const wordBank=[
   {word:'experience',meaning:'practical knowledge from doing',category:'Work'},
   {word:'communication',meaning:'exchange of information',category:'Work'}
 ];
-
 let activeCategory=null;
-
 function showCategory(cat){activeCategory=cat;go('learn');const ws=document.getElementById('wordSearch');if(ws)ws.value='';renderWords();}
-
 function renderWords(){
   const list=document.getElementById('wordList');if(!list)return;
   const q=(document.getElementById('wordSearch')?.value||'').toLowerCase().trim();
@@ -558,61 +520,52 @@ function renderWords(){
   if(words.length===0){list.innerHTML='<div class="item"><div class="itemMain"><b>No words found</b><p class="muted">Try another search.</p></div></div>';return;}
   list.innerHTML=words.map(w=>'<div class="item"><div class="itemMain"><b>'+w.word+'</b><p>'+w.meaning+' · <span class="muted">'+w.category+'</span></p></div><div class="row"><button class="ghost" onclick="speakText(\''+w.word.replace(/'/g,"\\'")+'\')">🔊</button><button class="primary" onclick="learnWord(\''+w.word.replace(/'/g,"\\'")+'\')">+1 XP</button></div></div>').join('');
 }
-
 function learnWord(word){
-  if(!state.learnedWords.includes(word)){state.learnedWords.push(word);state.wordsLearned=state.learnedWords.length;addXP(5);alert('✅ "'+word+'" learned! +5 XP');}
-  else alert('📖 You already learned "'+word+'". Review it again!');
+  if(!state.learnedWords.includes(word)){state.learnedWords.push(word);state.wordsLearned=state.learnedWords.length;addXP(5);alert('Learned: '+word+' +5 XP');}
+  else alert('Already learned: '+word);
 }
-
 async function dictionarySearch(){
-  const input=document.getElementById('dictSearch');
-  const query=input.value.trim().toLowerCase();
   const box=document.getElementById('dictResult');
-  if(!query){box.innerHTML='<h3>Enter a word</h3><p class="muted">Try: confident, library, journey.</p>';return;}
-  box.innerHTML='<h3>'+query+'</h3><p class="muted">🔍 Searching...</p>';
+  const q=document.getElementById('dictSearch').value.trim().toLowerCase();
+  if(!q){box.innerHTML='<h3>Enter a word</h3><p class="muted">Try: confident, library.</p>';return;}
+  box.innerHTML='<h3>'+q+'</h3><p class="muted">Searching...</p>';
   try{
-    const res=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(query));
-    if(!res.ok)throw new Error('not found');
-    const data=await res.json();
-    const entry=data[0];
-    const phonetic=entry.phonetic||'';
-    let html='<h3>'+entry.word+' <span class="muted" style="font-size:14px">'+phonetic+'</span></h3>';
-    entry.meanings.slice(0,3).forEach(m=>{
-      html+='<p style="margin-top:8px"><b>'+m.partOfSpeech+'</b></p><ul style="padding-left:20px;margin-top:4px">';
-      m.definitions.slice(0,2).forEach(d=>{html+='<li style="color:var(--muted);margin-bottom:4px">'+d.definition+'</li>';});
-      html+='</ul>';
-    });
-    html+='<button class="ghost" style="margin-top:12px" onclick="speakText(\''+entry.word.replace(/'/g,"\\'")+'\')">🔊 Pronounce</button>';
-    box.innerHTML=html;
-  }catch(e){box.innerHTML='<h3>'+query+'</h3><p class="muted">Word not found. Check spelling.</p>';}
+    const res=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(q));
+    if(!res.ok)throw 0;
+    const d=await res.json();
+    const e=d[0];
+    let h='<h3>'+e.word+' <span class="muted" style="font-size:14px">'+(e.phonetic||'')+'</span></h3>';
+    e.meanings.slice(0,3).forEach(m=>{h+='<p style="margin-top:8px"><b>'+m.partOfSpeech+'</b></p><ul style="padding-left:20px;margin-top:4px">';m.definitions.slice(0,2).forEach(x=>{h+='<li style="color:var(--muted);margin-bottom:4px">'+x.definition+'</li>';});h+='</ul>';});
+    h+='<button class="ghost" style="margin-top:12px" onclick="speakText(\''+e.word.replace(/'/g,"\\'")+'\')">🔊 Pronounce</button>';
+    box.innerHTML=h;
+  }catch(e){box.innerHTML='<h3>'+q+'</h3><p class="muted">Word not found.</p>';}
 }
-
 const grammarLessons=[
-  {title:'Present Simple',desc:'I work. She works. They work.',example:'She reads a book every evening.'},
-  {title:'Past Simple',desc:'I worked. She worked. They worked.',example:'He visited his grandmother yesterday.'},
-  {title:'Future Simple',desc:'I will work. She will work.',example:'We will travel next month.'},
-  {title:'Present Continuous',desc:'I am working. She is working.',example:'They are studying for the exam right now.'},
-  {title:'Past Continuous',desc:'I was working. They were playing.',example:'She was reading when I called.'},
-  {title:'Future Continuous',desc:'I will be working tomorrow.',example:'They will be traveling next week.'},
-  {title:'Present Perfect',desc:'I have worked. She has worked.',example:'They have lived here for 5 years.'},
-  {title:'Past Perfect',desc:'I had worked. She had finished.',example:'He had left before I arrived.'},
-  {title:'Future Perfect',desc:'I will have finished by 5pm.',example:'She will have left by then.'},
-  {title:'Present Perfect Continuous',desc:'I have been working all day.',example:'She has been studying for 2 hours.'},
+  {title:'Present Simple',desc:'I work. She works.',example:'She reads a book every evening.'},
+  {title:'Past Simple',desc:'I worked. She worked.',example:'He visited his grandmother yesterday.'},
+  {title:'Future Simple',desc:'I will work.',example:'We will travel next month.'},
+  {title:'Present Continuous',desc:'I am working.',example:'They are studying right now.'},
+  {title:'Past Continuous',desc:'I was working.',example:'She was reading when I called.'},
+  {title:'Future Continuous',desc:'I will be working.',example:'They will be traveling next week.'},
+  {title:'Present Perfect',desc:'I have worked.',example:'They have lived here for 5 years.'},
+  {title:'Past Perfect',desc:'I had worked.',example:'He had left before I arrived.'},
+  {title:'Future Perfect',desc:'I will have finished.',example:'She will have left by then.'},
+  {title:'Present Perfect Continuous',desc:'I have been working.',example:'She has been studying for 2 hours.'},
   {title:'Past Perfect Continuous',desc:'I had been working.',example:'He had been waiting for an hour.'},
-  {title:'Articles: a / an / the',desc:'a cat, an apple, the sun',example:'I saw a cat. The cat was black.'},
-  {title:'Zero Article',desc:'I like music. Cats are cute.',example:'Water is essential for life.'},
+  {title:'Articles: a/an/the',desc:'a cat, an apple, the sun',example:'I saw a cat. The cat was black.'},
+  {title:'Zero Article',desc:'I like music.',example:'Water is essential for life.'},
   {title:'Countable Nouns',desc:'one apple, two apples',example:'I bought three books.'},
   {title:'Uncountable Nouns',desc:'water, rice, information',example:'She gave me some advice.'},
-  {title:'Plural Forms',desc:'cat → cats, child → children',example:'The mice ran away quickly.'},
-  {title:'Possessive Forms',desc:'my, your, his, her, our, their',example:'That is her notebook.'},
+  {title:'Plural Forms',desc:'cat to cats, child to children',example:'The mice ran away quickly.'},
+  {title:'Possessive Forms',desc:'my, your, his, her',example:'That is her notebook.'},
   {title:'Demonstratives',desc:'this, that, these, those',example:'These books are mine.'},
   {title:'Personal Pronouns',desc:'I, you, he, she, it, we, they',example:'They are my friends.'},
   {title:'Object Pronouns',desc:'me, you, him, her, it, us, them',example:'She called me yesterday.'},
   {title:'Reflexive Pronouns',desc:'myself, yourself, himself',example:'She taught herself English.'},
   {title:'Adjectives',desc:'big, small, beautiful, tall',example:'She has a beautiful smile.'},
   {title:'Adjective Order',desc:'opinion, size, age, color',example:'A lovely small old wooden table.'},
-  {title:'Comparatives',desc:'big → bigger, happy → happier',example:'This book is more interesting than that one.'},
-  {title:'Superlatives',desc:'big → biggest, good → best',example:'She is the tallest in the class.'},
+  {title:'Comparatives',desc:'big to bigger, happy to happier',example:'This book is more interesting than that one.'},
+  {title:'Superlatives',desc:'big to biggest, good to best',example:'She is the tallest in the class.'},
   {title:'Adverbs',desc:'quickly, slowly, carefully',example:'He speaks English fluently.'},
   {title:'Adverbs of Frequency',desc:'always, often, sometimes, never',example:'She always arrives on time.'},
   {title:'Adverbs of Manner',desc:'well, badly, carefully, softly',example:'He drives very carefully.'},
@@ -621,12 +574,12 @@ const grammarLessons=[
   {title:'Prepositions of Movement',desc:'to, into, through, across',example:'She walked through the park.'},
   {title:'Conjunctions',desc:'and, but, or, so, because',example:'I was tired, so I went to bed.'},
   {title:'Correlative Conjunctions',desc:'either...or, neither...nor',example:'Both John and Mary came.'},
-  {title:'Modal Verbs: can / could',desc:'ability and permission',example:'I can swim. Could you help me?'},
-  {title:'Modal Verbs: should / must',desc:'advice and obligation',example:'You should study. I must go now.'},
-  {title:'Modal Verbs: may / might',desc:'possibility',example:'It may rain tomorrow.'},
+  {title:'Modal Verbs: can/could',desc:'ability and permission',example:'I can swim. Could you help me?'},
+  {title:'Modal Verbs: should/must',desc:'advice and obligation',example:'You should study. I must go now.'},
+  {title:'Modal Verbs: may/might',desc:'possibility',example:'It may rain tomorrow.'},
   {title:'Passive Voice',desc:'The book was written by him.',example:'The letter was sent yesterday.'},
   {title:'Active vs Passive',desc:'He wrote it. / It was written.',example:'The chef cooked the meal.'},
-  {title:'Question Forms',desc:'Do you...? Are you...? Have you...?',example:'Do you speak English?'},
+  {title:'Question Forms',desc:'Do you...? Are you...?',example:'Do you speak English?'},
   {title:'WH-Questions',desc:'what, where, when, why, who, how',example:'Where do you live?'},
   {title:'Tag Questions',desc:"You're from Pakistan, aren't you?",example:"She can swim, can't she?"},
   {title:'Conditionals Type 0',desc:'If you heat water, it boils.',example:'If I am tired, I go to bed early.'},
@@ -637,7 +590,7 @@ const grammarLessons=[
   {title:'Direct to Indirect',desc:'He said, "I am happy."',example:'She said she loved English.'},
   {title:'Gerunds',desc:'Swimming is fun. I enjoy reading.',example:'She likes dancing.'},
   {title:'Infinitives',desc:'I want to learn. She hopes to win.',example:'He decided to stay home.'},
-  {title:'Gerund vs Infinitive',desc:'I like swimming. / I like to swim.',example:'She stopped smoking.'},
+  {title:'Gerund vs Infinitive',desc:'I like swimming / I like to swim.',example:'She stopped smoking.'},
   {title:'Phrasal Verbs',desc:'give up, look after, put on',example:'Please turn off the light.'},
   {title:'Separable Phrasal Verbs',desc:'turn on / turn it on',example:'Turn the TV on.'},
   {title:'Relative Clauses',desc:'The man who called is my uncle.',example:'This is the book that I bought.'},
@@ -646,56 +599,46 @@ const grammarLessons=[
   {title:'Used to',desc:'I used to play football.',example:'She used to live in Paris.'},
   {title:'Be used to / Get used to',desc:"I'm used to waking up early.",example:'He got used to the new job.'},
   {title:'Causative Verbs',desc:'I had my hair cut.',example:'She got her car repaired.'},
-  {title:'Wish / If only',desc:'I wish I knew. If only I had time.',example:'I wish I were taller.'},
+  {title:'Wish / If only',desc:'I wish I knew.',example:'I wish I were taller.'},
   {title:'So / Such',desc:'so beautiful, such a beautiful day',example:'It was such a lovely evening.'},
   {title:'Too / Enough',desc:'too hot, hot enough',example:'The coffee is too hot to drink.'},
   {title:'Inversion',desc:'Never have I seen such beauty.',example:'Rarely does she complain.'}
 ];
-
 function renderGrammar(){
   const c=document.getElementById('grammarList');if(!c)return;
-  const countEl=document.getElementById('grammarCount');
-  if(countEl)countEl.textContent=grammarLessons.length+' lessons';
-  c.innerHTML=grammarLessons.map(g=>'<div class="item"><div class="itemMain"><b>'+g.title+'</b><p>'+g.desc+'</p><p class="muted" style="font-size:13px;margin-top:4px">📝 '+g.example+'</p></div><button class="ghost" onclick="speakText(\''+g.example.replace(/'/g,"\\'")+'\')">🔊</button></div>').join('');
+  const ce=document.getElementById('grammarCount');if(ce)ce.textContent=grammarLessons.length+' lessons';
+  c.innerHTML=grammarLessons.map(g=>'<div class="item"><div class="itemMain"><b>'+g.title+'</b><p>'+g.desc+'</p><p class="muted" style="font-size:13px;margin-top:4px">'+g.example+'</p></div><button class="ghost" onclick="speakText(\''+g.example.replace(/'/g,"\\'")+'\')">🔊</button></div>').join('');
 }
-
-function speakText(text){
+function speakText(t){
   if(!window.speechSynthesis)return alert('Speech not supported.');
   speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang='en-US';u.rate=0.95;u.pitch=1;
-  speechSynthesis.speak(u);
+  const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=0.95;u.pitch=1;speechSynthesis.speak(u);
 }
-
 function speakCurrent(){const p=document.getElementById('speakPhrase');if(p)speakText(p.textContent);}
-
 function startSpeech(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){document.getElementById('speechOutput').textContent='⚠️ Speech recognition not supported.';return;}
-  const r=new SR();
-  r.lang='en-US';r.interimResults=false;r.maxAlternatives=1;
-  document.getElementById('speechOutput').textContent='🎤 Listening...';
+  if(!SR){document.getElementById('speechOutput').textContent='Speech recognition not supported.';return;}
+  const r=new SR();r.lang='en-US';r.interimResults=false;r.maxAlternatives=1;
+  document.getElementById('speechOutput').textContent='Listening...';
   r.start();
-  r.onresult=(e)=>{const t=e.results[0][0].transcript;document.getElementById('speechOutput').textContent='📝 You said: "'+t+'"';addXP(3);};
-  r.onerror=(e)=>{document.getElementById('speechOutput').textContent='❌ Error: '+e.error;};
+  r.onresult=(e)=>{const t=e.results[0][0].transcript;document.getElementById('speechOutput').textContent='You said: "'+t+'"';addXP(3);};
+  r.onerror=(e)=>{document.getElementById('speechOutput').textContent='Error: '+e.error;};
 }
-
 function checkWriting(){
   const t=document.getElementById('writingText').value.trim();
   const fb=document.getElementById('writingFeedback');
-  if(!t){fb.innerHTML='✏️ Write something first.';return;}
+  if(!t){fb.innerHTML='Write something first.';return;}
   const words=t.split(/\s+/).filter(Boolean).length;
   const sentences=t.split(/[.!?]+/).filter(s=>s.trim().length>0).length;
   const unique=new Set(t.toLowerCase().match(/[a-z']+/g)||[]).size;
   const tips=[];
   if(words<15)tips.push('Try at least 15 words.');
   if(unique<words*0.6)tips.push('Use more varied vocabulary.');
-  if(sentences<2)tips.push('Aim for 2–5 sentences.');
-  if(tips.length===0)tips.push('Great job! Keep writing! 🌟');
-  fb.innerHTML='<b>📊 Stats:</b> '+words+' words · '+sentences+' sentences · '+unique+' unique.<br><b>💡 Feedback:</b> '+tips.join(' ');
+  if(sentences<2)tips.push('Aim for 2-5 sentences.');
+  if(tips.length===0)tips.push('Great job! Keep writing!');
+  fb.innerHTML='<b>Stats:</b> '+words+' words, '+sentences+' sentences, '+unique+' unique.<br><b>Feedback:</b> '+tips.join(' ');
   state.writingCount+=1;addXP(8);
 }
-
 const quizData=[
   {q:'What does "confident" mean?',options:['Feeling tired','Feeling sure','Feeling angry','Feeling shy'],answer:1},
   {q:'Correct sentence?',options:['She go to school.','She going school.','She goes to school.','She gone school.'],answer:2},
@@ -801,90 +744,71 @@ const quizData=[
   {q:'Past participle of "write"?',options:['wrote','written','writing','writes'],answer:1},
   {q:'Which is a definite article?',options:['a','an','the','some'],answer:2}
 ];
-
 let quizIndex=0,quizCorrect=0,quizAnswered=false;
-
 function initQuiz(){quizIndex=0;quizCorrect=0;quizAnswered=false;renderQuiz();}
-
 function renderQuiz(){
   const box=document.getElementById('quizBox');const prog=document.getElementById('quizProgress');
   if(!box)return;
   if(quizIndex>=quizData.length){
     const pct=Math.round((quizCorrect/quizData.length)*100);
     state.quizScore=pct;state.xp+=quizCorrect*5;saveState();refreshAllUI();
-    box.innerHTML='<h3>🏁 Quiz complete!</h3><p style="font-size:1.2rem;margin:12px 0">Score: <b>'+quizCorrect+'/'+quizData.length+'</b> ('+pct+'%)</p><p class="muted">'+(pct>=80?'Excellent! 🌟':pct>=50?'Good effort! 💪':'Keep learning! 📚')+'</p><button class="primary" style="margin-top:14px" onclick="initQuiz()">Play again</button>';
+    box.innerHTML='<h3>Quiz complete!</h3><p style="font-size:1.2rem;margin:12px 0">Score: <b>'+quizCorrect+'/'+quizData.length+'</b> ('+pct+'%)</p><p class="muted">'+(pct>=80?'Excellent!':pct>=50?'Good effort!':'Keep learning!')+'</p><button class="primary" style="margin-top:14px" onclick="initQuiz()">Play again</button>';
     prog.textContent='';return;
   }
-  const q=quizData[quizIndex];
-  prog.textContent=(quizIndex+1)+' / '+quizData.length;
+  const q=quizData[quizIndex];prog.textContent=(quizIndex+1)+' / '+quizData.length;
   let opts='';
-  q.options.forEach((opt,i)=>{opts+='<button class="quizOption" onclick="answerQuiz('+i+')" id="opt-'+i+'">'+opt+'</button>';});
+  q.options.forEach((o,i)=>{opts+='<button class="quizOption" onclick="answerQuiz('+i+')" id="opt-'+i+'">'+o+'</button>';});
   box.innerHTML='<h3>'+q.q+'</h3><div style="margin-top:10px">'+opts+'</div><div id="quizFeedback" class="notice" style="display:none"></div>';
   quizAnswered=false;
 }
-
 function answerQuiz(i){
-  if(quizAnswered)return;
-  quizAnswered=true;
-  const q=quizData[quizIndex];
-  const fb=document.getElementById('quizFeedback');
-  const chosen=document.getElementById('opt-'+i);
-  const correct=document.getElementById('opt-'+q.answer);
-  if(i===q.answer){quizCorrect++;chosen.classList.add('correct');fb.innerHTML='✅ Correct! +5 XP';}
-  else{chosen.classList.add('wrong');correct.classList.add('correct');fb.innerHTML='❌ Correct answer: <b>'+q.options[q.answer]+'</b>';}
+  if(quizAnswered)return;quizAnswered=true;
+  const q=quizData[quizIndex];const fb=document.getElementById('quizFeedback');
+  const ch=document.getElementById('opt-'+i);const co=document.getElementById('opt-'+q.answer);
+  if(i===q.answer){quizCorrect++;ch.classList.add('correct');fb.innerHTML='Correct! +5 XP';}
+  else{ch.classList.add('wrong');co.classList.add('correct');fb.innerHTML='Correct answer: <b>'+q.options[q.answer]+'</b>';}
   fb.style.display='block';
   setTimeout(()=>{quizIndex++;renderQuiz();},1400);
 }
-
 function teacherReply(){
-  const inp=document.getElementById('teacherInput');
-  const msg=inp.value.trim();
-  if(!msg)return;
-  addChat('You',msg);inp.value='';
-  const lower=msg.toLowerCase();
-  let reply="That's interesting! Tell me more. 😊";
-  if(lower.includes('hello')||lower.includes('hi'))reply='Hello! How are you today? 🌟';
-  else if(lower.includes('how are you'))reply="I'm great! How about you?";
-  else if(lower.includes('name'))reply='My name is Ayesha, your English partner.';
-  else if(lower.includes('learn')||lower.includes('english'))reply='English is best learned a little every day. Keep going! 💪';
-  else if(lower.includes('thank'))reply="You're welcome! 😊";
-  else if(lower.includes('bye'))reply='Goodbye! Come back soon. 👋';
-  else if(lower.includes('?'))reply='Good question! Try writing a full sentence and I will help.';
-  else if(msg.split(' ').length<3)reply='Try a longer sentence!';
-  if(lower.startsWith('i is'))reply='💡 Say "I am", not "I is".';
-  if(lower.startsWith('she go'))reply='💡 Say "She goes", not "She go".';
-  if(lower.includes('i has'))reply='💡 Say "I have", not "I has".';
-  addChat('Ayesha',reply);addXP(2);
+  const inp=document.getElementById('teacherInput');const msg=inp.value.trim();
+  if(!msg)return;addChat('You',msg);inp.value='';
+  const l=msg.toLowerCase();let r="That's interesting! Tell me more.";
+  if(l.includes('hello')||l.includes('hi'))r='Hello! How are you today?';
+  else if(l.includes('how are you'))r="I'm great! How about you?";
+  else if(l.includes('name'))r='My name is Ayesha, your English partner.';
+  else if(l.includes('learn')||l.includes('english'))r='English is best learned a little every day. Keep going!';
+  else if(l.includes('thank'))r="You're welcome!";
+  else if(l.includes('bye'))r='Goodbye! Come back soon.';
+  else if(l.includes('?'))r='Good question! Try writing a full sentence.';
+  else if(msg.split(' ').length<3)r='Try a longer sentence!';
+  if(l.startsWith('i is'))r='Say "I am", not "I is".';
+  if(l.startsWith('she go'))r='Say "She goes", not "She go".';
+  if(l.includes('i has'))r='Say "I have", not "I has".';
+  addChat('Ayesha',r);addXP(2);
 }
-
-function addChat(sender,text){
-  const chat=document.getElementById('chat');if(!chat)return;
+function addChat(s,t){
+  const c=document.getElementById('chat');if(!c)return;
   const d=document.createElement('div');d.className='item';
-  d.innerHTML='<div class="itemMain"><b>'+sender+'</b><p>'+text+'</p></div>';
-  chat.appendChild(d);chat.scrollTop=chat.scrollHeight;
+  d.innerHTML='<div class="itemMain"><b>'+s+'</b><p>'+t+'</p></div>';
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
 }
-
 function startTeacherSpeech(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!SR)return alert('Speech recognition not supported.');
   const r=new SR();r.lang='en-US';r.interimResults=false;r.start();
   r.onresult=(e)=>{document.getElementById('teacherInput').value=e.results[0][0].transcript;teacherReply();};
 }
-
 let cameraStream=null;
-
 function startCamera(){
   const v=document.getElementById('camera');
   if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return alert('Camera not supported.');
   navigator.mediaDevices.getUserMedia({video:true}).then(s=>{cameraStream=s;v.srcObject=s;v.play();}).catch(e=>alert('Camera error: '+e.message));
 }
-
 function stopCamera(){
   if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;const v=document.getElementById('camera');if(v)v.srcObject=null;}
 }
-
-function sayObject(name){speakText('This is a '+name+'.');addXP(2);}
-
+function sayObject(n){speakText('This is a '+n+'.');addXP(2);}
 const themes=[
   {name:'Midnight',c:['#05070f','#0f1524','#7c5cff'],free:true},
   {name:'Ocean',c:['#0a1a2a','#0f2a3a','#19d3ae'],free:true},
@@ -938,31 +862,27 @@ const themes=[
   {name:'Magenta',c:['#1a0a1a','#2a152a','#ff00aa'],free:false},
   {name:'Copper',c:['#1a0f0a','#2a1a15','#b87333'],free:false}
 ];
-
 function renderThemes(){
-  const grid=document.getElementById('themeGrid');if(!grid)return;
-  grid.innerHTML=themes.map((t,i)=>{
-    const locked=!t.free&&state.plan==='Free';
-    const active=state.theme===t.name?' active':'';
-    return '<button class="theme'+(locked?' locked':'')+active+'" onclick="selectTheme('+i+')"><div class="swatch" style="background:linear-gradient(135deg,'+t.c[0]+','+t.c[1]+','+t.c[2]+')"></div><b>'+t.name+'</b><br><small>'+(t.free?'Free':'Premium')+'</small></button>';
+  const g=document.getElementById('themeGrid');if(!g)return;
+  g.innerHTML=themes.map((t,i)=>{
+    const l=!t.free&&state.plan==='Free';
+    const a=state.theme===t.name?' active':'';
+    return '<button class="theme'+(l?' locked':'')+a+'" onclick="selectTheme('+i+')"><div class="swatch" style="background:linear-gradient(135deg,'+t.c[0]+','+t.c[1]+','+t.c[2]+')"></div><b>'+t.name+'</b><br><small>'+(t.free?'Free':'Premium')+'</small></button>';
   }).join('');
 }
-
 function selectTheme(i){
   const t=themes[i];
-  if(!t.free&&state.plan==='Free'){alert('🔒 "'+t.name+'" is a Premium theme. Upgrade to unlock all 45 premium themes!');go('premium');return;}
+  if(!t.free&&state.plan==='Free'){alert('"'+t.name+'" is Premium. Upgrade to unlock!');go('premium');return;}
   state.theme=t.name;saveState();applyTheme(t.name);renderThemes();
 }
-
-function applyTheme(name){
-  const t=themes.find(x=>x.name===name)||themes[0];
+function applyTheme(n){
+  const t=themes.find(x=>x.name===n)||themes[0];
   document.documentElement.style.setProperty('--bg',t.c[0]);
   document.documentElement.style.setProperty('--panel',t.c[1]);
   document.documentElement.style.setProperty('--panel2',t.c[1]);
   document.documentElement.style.setProperty('--accent',t.c[2]);
   document.documentElement.style.setProperty('--accent2',t.c[2]);
 }
-
 const allBadges=[
   {id:'first',icon:'🌱',label:'First Step',check:()=>state.xp>=10},
   {id:'words10',icon:'📚',label:'10 Words',check:()=>state.wordsLearned>=10},
@@ -973,56 +893,49 @@ const allBadges=[
   {id:'words25',icon:'📖',label:'25 Words',check:()=>state.wordsLearned>=25},
   {id:'streak7',icon:'💎',label:'7-Day Streak',check:()=>state.streak>=7}
 ];
-
 function renderBadges(){
   const c=document.getElementById('badges');if(!c)return;
   state.badges=allBadges.filter(b=>b.check()).map(b=>b.id);saveState();
   c.innerHTML=allBadges.map(b=>{
-    const unlocked=b.check();
-    return '<div class="badge'+(unlocked?'':' locked')+'"><div class="bicon">'+b.icon+'</div><small>'+b.label+'</small></div>';
+    const u=b.check();
+    return '<div class="badge'+(u?'':' locked')+'"><div class="bicon">'+b.icon+'</div><small>'+b.label+'</small></div>';
   }).join('');
   const bs=document.getElementById('badgeStat');if(bs)bs.textContent=state.badges.length;
 }
-
 function showCertificate(){
-  const name=prompt('Enter your name for the certificate:','Student');
-  if(!name)return;
+  const n=prompt('Enter your name:','Student');
+  if(!n)return;
   const m=document.createElement('div');m.className='modal';
-  m.innerHTML='<div class="modalBox"><div class="certificate"><h1>Certificate of Achievement</h1><p style="margin:16px 0 6px;font-size:14px;color:#555">This certifies that</p><div class="certName">'+name+'</div><p style="margin:18px 0;font-size:14px;color:#555">has successfully completed English Master practice with '+state.xp+' XP, '+state.wordsLearned+' words learned, and a quiz score of '+state.quizScore+'%.</p><p style="font-size:12px;color:#888;margin-top:20px">⚠️ In-app achievement certificate, not accredited.</p><p style="font-size:12px;color:#888">'+new Date().toLocaleDateString()+'</p></div><div class="row" style="margin-top:14px"><button class="primary" onclick="window.print()">🖨️ Print</button><button class="ghost" onclick="this.closest(\'.modal\').remove()">Close</button></div></div>';
+  m.innerHTML='<div class="modalBox"><div class="certificate"><h1>Certificate of Achievement</h1><p style="margin:16px 0 6px;font-size:14px;color:#555">This certifies that</p><div class="certName">'+n+'</div><p style="margin:18px 0;font-size:14px;color:#555">has successfully completed English Master practice with '+state.xp+' XP, '+state.wordsLearned+' words learned, and a quiz score of '+state.quizScore+'%.</p><p style="font-size:12px;color:#888;margin-top:20px">In-app achievement certificate, not accredited.</p><p style="font-size:12px;color:#888">'+new Date().toLocaleDateString()+'</p></div><div class="row" style="margin-top:14px"><button class="primary" onclick="window.print()">Print</button><button class="ghost" onclick="this.closest(\'.modal\').remove()">Close</button></div></div>';
   document.body.appendChild(m);
   m.addEventListener('click',e=>{if(e.target===m)m.remove();});
 }
-
 function shareChallenge(){
-  const text='🔥 English Master Challenge: Learn 20 new English words today! Can you beat me?';
-  if(navigator.share)navigator.share({title:'English Master Challenge',text}).catch(()=>{});
-  else if(navigator.clipboard)navigator.clipboard.writeText(text).then(()=>alert('Challenge copied!')).catch(()=>alert(text));
-  else alert(text);
+  const t='English Master Challenge: Learn 20 new English words today!';
+  if(navigator.share)navigator.share({title:'English Master Challenge',text:t}).catch(()=>{});
+  else if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>alert('Copied!')).catch(()=>alert(t));
+  else alert(t);
 }
-
 function buyPlan(plan,price){
-  const confirm_msg='👑 Upgrade to '+plan+' — Rs. '+price+'/month\n\nThis is a demo. In production, this button should:\n1. Send user to payment gateway\n2. Verify payment on backend\n3. Unlock premium features\n\nFor now, click OK to unlock '+plan+' locally (demo only).';
-  if(confirm(confirm_msg)){state.plan=plan;saveState();refreshAllUI();renderThemes();alert('🎉 Welcome to '+plan+'! (demo unlock)');}
+  const m='Upgrade to '+plan+' - Rs. '+price+'/month\n\nThis is a demo. In production, connect a payment gateway.';
+  if(confirm(m)){state.plan=plan;saveState();refreshAllUI();renderThemes();alert('Welcome to '+plan+'!');}
 }
-
 function enableReminder(){
   if(!('Notification' in window))return alert('Notifications not supported.');
   Notification.requestPermission().then(p=>{
-    if(p==='granted')new Notification('English Master',{body:'Time to practice! 🚀'});
+    if(p==='granted')new Notification('English Master',{body:'Time to practice!'});
     else alert('Permission denied.');
   });
 }
-
 function toggleAnimations(){
   state.animations=!state.animations;saveState();
   const s=document.getElementById('stars');const g=document.getElementById('glowOrbs');
   if(s)s.style.display=state.animations?'block':'none';
   if(g)g.style.display=state.animations?'block':'none';
 }
-
 function resetProgress(){
-  if(!confirm('Reset all local progress?'))return;
-  state={...defaultState};state.lastActiveDate=new Date().toDateString();saveState();
+  if(!confirm('Reset all progress?'))return;
+  state={...DS};state.lastActiveDate=new Date().toDateString();saveState();
   refreshAllUI();renderBadges();renderThemes();alert('Progress reset.');
 }
 </script>
