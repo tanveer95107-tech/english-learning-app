@@ -1,0 +1,16 @@
+{
+  "name": "English Master",
+  "short_name": "English Master",
+  "description": "Learn vocabulary, grammar, speaking and quizzes",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#2563eb",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3898/3898082.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
