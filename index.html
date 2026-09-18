@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="English Master - vocabulary, grammar, speaking, writing and quizzes">
+<title>English Master</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --primary:#2563eb;
+  --secondary:#0f172a;
+  --background:#f5f7fb;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --success:#15803d;
+  --danger:#dc2626;
+}
+
+body.dark{
+  --background:#0f172a;
+  --card:#1e293b;
+  --text:#f8fafc;
+  --muted:#cbd5e1;
+  --border:#334155;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--background);
+  color:var(--text);
+  line-height:1.6;
+  transition:.2s;
+}
+
+header{
+  background:linear-gradient(135deg,#1d4ed8,#2563eb);
+  color:white;
+  padding:28px 18px;
+  text-align:center;
+}
+
+header h1{
+  font-size:32px;
+}
+
+header p{
+  margin-top:5px;
+}
+
+.topbar{
+  max-width:1050px;
+  margin:15px auto 0;
+  padding:0 15px;
+  display:flex;
+  gap:10px;
+}
+
+.search{
+  flex:1;
+  padding:13px 16px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  font-size:16px;
+  background:var(--card);
+  color:var(--text);
+  outline:none;
+}
+
+.top-btn{
+  border:0;
+  border-radius:10px;
+  padding:0 15px;
+  background:var(--secondary);
+  color:white;
+  cursor:pointer;
+}
+
+.container{
+  max-width:1050px;
+  margin:auto;
+  padding:20px 15px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.stat{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:15px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:24px;
+  color:var(--primary);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:14px;
+}
+
+.card{
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:14px;
+  padding:20px;
+  text-align:left;
+  cursor:pointer;
+  box-shadow:0 3px 12px rgba(0,0,0,.05);
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+}
+
+.icon{
+  display:block;
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.panel{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:22px;
+  margin-top:18px;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.back{
+  border:0;
+  background:var(--secondary);
+  color:white;
+  padding:10px 15px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-bottom:18px;
+}
+
+.lesson h2{
+  margin-bottom:8px;
+}
+
+.lesson h3{
+  margin-top:22px;
+  margin-bottom:8px;
+}
+
+.info{
+  background:#eff6ff;
+  color:#172033;
+  border-left:5px solid var(--primary);
+  padding:14px;
+  border-radius:8px;
+  margin:14px 0;
+}
+
+body.dark .info{
+  background:#172554;
+  color:#f8fafc;
+}
+
+.word{
+  background:var(--background);
+  border:1px solid var(--border);
+  padding:15px;
+  border-radius:10px;
+  margin:10px 0;
+}
+
+.word-title{
+  font-size:19px;
+  font-weight:bold;
+}
+
+.word-meaning{
+  margin-top:4px;
+}
+
+.example{
+  margin-top:6px;
+  color:var(--muted);
+}
+
+.small-btn{
+  border:0;
+  padding:8px 11px;
+  border-radius:7px;
+  cursor:pointer;
+  margin-top:10px;
+  margin-right:5px;
+}
+
+.speak{
+  background:var(--primary);
+  color:white;
+}
+
+.favorite{
+  background:#f1f5f9;
+  color:#172033;
+}
+
+.quiz-question{
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.quiz-option{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--card);
+  color:var(--text);
+  text-align:left;
+  cursor:pointer;
+}
+
+.quiz-option:hover{
+  border-color:var(--primary);
+}
+
+.quiz-option.correct{
+  border-color:var(--success);
+  background:#dcfce7;
+  color:#166534;
+}
+
+.quiz-option.wrong{
+  border-color:var(--danger);
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.progress{
+  width:100%;
+  height:10px;
+  background:var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  margin:12px 0 20px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:var(--primary);
+  transition:.3s;
+}
+
+.action{
+  border:0;
+  background:var(--primary);
+  color:white;
+  padding:11px 16px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:12px;
+}
+
+.secondary{
+  background:#475569;
+}
+
+.success{
+  color:var(--success);
+  font-weight:bold;
+}
+
+footer{
+  margin-top:35px;
+  background:var(--secondary);
+  color:white;
+  text-align:center;
+  padding:25px;
+}
+
+footer p{
+  margin:4px;
+}
+
+@media(max-width:600px){
+
+  header h1{
+    font-size:25px;
+  }
+
+  .topbar{
+    flex-direction:column;
+  }
+
+  .top-btn{
+    padding:11px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🇬🇧 English Master</h1>
+  <p>Learn • Practice • Improve</p>
+</header>
+
+<div class="topbar">
+
+<input
+  id="search"
+  class="search"
+  type="search"
+  placeholder="Search English lessons..."
+  oninput="searchApp()"
+>
+
+<button class="top-btn" onclick="toggleDarkMode()">
+  🌙
+</button>
+
+</div>
+
+
+<div class="container">
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+  <strong id="wordsStat">0</strong>
+  Words Learned
+</div>
+
+<div class="stat">
+  <strong id="quizStat">0</strong>
+  Quiz Correct
+</div>
+
+<div class="stat">
+  <strong id="favStat">0</strong>
+  Favorites
+</div>
+
+</div>
+
+
+<!-- HOME -->
+
+<section id="home">
+
+<h2>Start Learning</h2>
+
+<div class="grid">
+
+<button class="card searchable"
+onclick="openVocabulary()">
+<span class="icon">📖</span>
+Vocabulary
+</button>
+
+<button class="card searchable"
+onclick="openGrammar()">
+<span class="icon">🔤</span>
+Grammar
+</button>
+
+<button class="card searchable"
+onclick="openSpeaking()">
+<span class="icon">🗣️</span>
+Speaking Practice
+</button>
+
+<button class="card searchable"
+onclick="openWriting()">
+<span class="icon">✍️</span>
+Writing Practice
+</button>
+
+<button class="card searchable"
+onclick="startQuiz()">
+<span class="icon">📝</span>
+English Quiz
+</button>
+
+<button class="card searchable"
+onclick="openProgress()">
+<span class="icon">📊</span>
+My Progress
+</button>
+
+</div>
+
+</section>
+
+
+<!-- CONTENT -->
+
+<section id="contentPanel" class="panel hidden">
+
+<button class="back" onclick="goHome()">
+← Home
+</button>
+
+<div id="content"></div>
+
+</section>
+
+</div>
+
+
+<footer>
+
+<p>🇬🇧 English Master</p>
+
+<p>Original educational learning material</p>
+
+<p>Learn English step by step.</p>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   DATA
+========================= */
+
+const vocabulary = [
+
+{
+ word:"achieve",
+ meaning:"to successfully reach a goal",
+ example:"She worked hard to achieve her goal."
+},
+
+{
+ word:"brave",
+ meaning:"showing courage in a difficult situation",
+ example:"The brave student helped his classmate."
+},
+
+{
+ word:"careful",
+ meaning:"giving attention to avoid mistakes or danger",
+ example:"Be careful when crossing the road."
+},
+
+{
+ word:"curious",
+ meaning:"wanting to know or learn something",
+ example:"The curious student asked many questions."
+},
+
+{
+ word:"improve",
+ meaning:"to become better or make something better",
+ example:"I practice every day to improve my English."
+},
+
+{
+ word:"important",
+ meaning:"having great value or significance",
+ example:"Education is important for personal development."
+},
+
+{
+ word:"knowledge",
+ meaning:"information and understanding gained through learning",
+ example:"Reading can increase your knowledge."
+},
+
+{
+ word:"practice",
+ meaning:"repeated activity used to improve a skill",
+ example:"Regular practice can improve your speaking."
+},
+
+{
+ word:"respect",
+ meaning:"to treat someone or something with consideration",
+ example:"We should respect other people."
+},
+
+{
+ word:"understand",
+ meaning:"to know the meaning of something",
+ example:"I understand the lesson."
+},
+
+{
+ word:"useful",
+ meaning:"helpful for a particular purpose",
+ example:"This dictionary is useful for learners."
+},
+
+{
+ word:"confident",
+ meaning:"feeling sure about your ability",
+ example:"She felt confident before the presentation."
+}
+
+];
+
+
+const quizQuestions = [
+
+{
+question:"Which word is a noun?",
+options:["Quickly","School","Run","Beautiful"],
+answer:1
+},
+
+{
+question:"Which word is a verb?",
+options:["Happy","Table","Read","Blue"],
+answer:2
+},
+
+{
+question:"Choose the correct sentence.",
+options:[
+"He go to school.",
+"He goes to school.",
+"He going to school.",
+"He gone to school."
+],
+answer:1
+},
+
+{
+question:"Which word describes a noun?",
+options:["Adjective","Verb","Pronoun","Conjunction"],
+answer:0
+},
+
+{
+question:"Choose the correct plural form of 'book'.",
+options:["Bookes","Books","Bookies","Book"],
+answer:1
+},
+
+{
+question:"Which sentence is in the simple present?",
+options:[
+"I am eating now.",
+"I ate yesterday.",
+"I play football every week.",
+"I will play tomorrow."
+],
+answer:2
+},
+
+{
+question:"What is the opposite of 'easy'?",
+options:["Simple","Light","Difficult","Small"],
+answer:2
+},
+
+{
+question:"Choose the correct article.",
+options:[
+"an book",
+"a book",
+"the book a",
+"book an"
+],
+answer:1
+}
+
+];
+
+
+/* =========================
+   STATE
+========================= */
+
+let quizIndex = 0;
+let quizScore = 0;
+let quizAnswered = false;
+
+
+/* =========================
+   STORAGE
+========================= */
+
+let progress = JSON.parse(
+  localStorage.getItem("englishMasterProgress")
+) || {
+  words:0,
+  correct:0,
+  favorites:[]
+};
+
+
+/* =========================
+   STATS
+========================= */
+
+function updateStats(){
+
+  document.getElementById("wordsStat")
+    .textContent = progress.words;
+
+  document.getElementById("quizStat")
+    .textContent = progress.correct;
+
+  document.getElementById("favStat")
+    .textContent = progress.favorites.length;
+
+}
+
+
+function saveProgress(){
+
+  localStorage.setItem(
+    "englishMasterProgress",
+    JSON.stringify(progress)
+  );
+
+  updateStats();
+
+}
+
+updateStats();
+
+
+/* =========================
+   VOCABULARY
+========================= */
+
+function openVocabulary(){
+
+  hideHome();
+
+  const content =
+    document.getElementById("content");
+
+  let html = `
+    <div class="lesson">
+    <h2>📖 Vocabulary</h2>
+
+    <p>
+    Learn useful English words with meanings and examples.
+    Tap 🔊 to hear pronunciation.
+    </p>
+  `;
+
+  vocabulary.forEach((item,index)=>{
+
+    const favorite =
+      progress.favorites.includes(item.word);
+
+    html += `
+
+      <div class="word searchable">
+
+        <div class="word-title">
+          ${item.word}
+        </div>
+
+        <div class="word-meaning">
+          Meaning: ${item.meaning}
+        </div>
+
+        <div class="example">
+          Example: ${item.example}
+        </div>
+
+        <button
+          class="small-btn speak"
+          onclick="speakWord('${item.word}')">
+          🔊 Pronounce
+        </button>
+
+        <button
+          class="small-btn favorite"
+          onclick="toggleFavorite('${item.word}')">
+          ${favorite ? "⭐ Saved" : "☆ Save"}
+        </button>
+
+      </div>
+    `;
+
+  });
+
+  html += `</div>`;
+
+  content.innerHTML = html;
+
+}
+
+
+/* =========================
+   SPEECH
+========================= */
+
+function speakWord(word){
+
+  if(!("speechSynthesis" in window)){
+
+    alert(
+      "Text-to-speech is not supported by this browser."
+    );
+
+    return;
+  }
+
+  const speech =
+    new SpeechSynthesisUtterance(word);
+
+  speech.lang = "en-US";
+  speech.rate = 0.85;
+
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(speech);
+
+}
+
+
+/* =========================
+   FAVORITES
+========================= */
+
+function toggleFavorite(word){
+
+  const index =
+    progress.favorites.indexOf(word);
+
+  if(index === -1){
+
+    progress.favorites.push(word);
+
+  }else{
+
+    progress.favorites.splice(index,1);
+
+  }
+
+  saveProgress();
+
+  openVocabulary();
+
+}
+
+
+/* =========================
+   GRAMMAR
+========================= */
+
+function openGrammar(){
+
+  hideHome();
+
+  document.getElementById("content").innerHTML = `
+
+  <div class="lesson">
+
+    <h2>🔤 Grammar</h2>
+
+    <h3>1. Nouns</h3>
+
+    <p>
+      A noun is a word that names a person, place,
+      thing, or idea.
+    </p>
+
+    <div class="info">
+      Examples: teacher, school, book, happiness
+    </div>
+
+
+    <h3>2. Pronouns</h3>
+
+    <p>
+      A pronoun can be used in place of a noun.
+    </p>
+
+    <div class="info">
+      Examples: I, you, he, she, it, we, they
+    </div>
+
+
+    <h3>3. Verbs</h3>
+
+    <p>
+      A verb commonly expresses an action or a state.
+    </p>
+
+    <div class="info">
+      Examples: run, write, read, think, be
+    </div>
+
+
+    <h3>4. Adjectives</h3>
+
+    <p>
+      An adjective describes or gives more information
+      about a noun or pronoun.
+    </p>
+
+    <div class="info">
+      Examples: a large house, a kind person
+    </div>
+
+
+    <h3>5. Simple Present</h3>
+
+    <p>
+      The simple present is commonly used for habits,
+      routines, facts and repeated actions.
+    </p>
+
+    <div class="info">
+      Example: I study English every day.
+      <br>
+      Example: Water boils at 100°C at standard atmospheric pressure.
+    </div>
+
+
+    <h3>6. Simple Past</h3>
+
+    <p>
+      The simple past is commonly used for completed
+      actions in the past.
+    </p>
+
+    <div class="info">
+      Example: I visited my friend yesterday.
+    </div>
+
+
+    <h3>7. Future with "will"</h3>
+
+    <p>
+      "Will" can be used to talk about future events
+      or decisions made at the time of speaking.
+    </p>
+
+    <div class="info">
+      Example: I will call you tomorrow.
+    </div>
+
+  </div>
+
+  `;
+
+}
+
+
+/* =========================
+   SPEAKING
+========================= */
+
+function openSpeaking(){
+
+  hideHome();
+
+  document.getElementById("content").innerHTML = `
+
+  <div class="lesson">
+
+    <h2>🗣️ Speaking Practice</h2>
+
+    <h3>Introduce Yourself</h3>
+
+    <div class="info">
+
+      Hello. My name is ______.
+      <br>
+      I am a student.
+      <br>
+      I live in ______.
+      <br>
+      I enjoy learning new things.
+      <br>
+      I am learning English to improve my communication skills.
+
+    </div>
+
+    <h3>Daily Questions</h3>
+
+    <ul>
+      <li>What is your name?</li>
+      <li>Where do you live?</li>
+      <li>What do you study?</li>
+      <li>What is your hobby?</li>
+      <li>What do you want to learn?</li>
+    </ul>
+
+    <h3>Practice Method</h3>
+
+    <p>
+      Read each sentence aloud. Speak slowly and clearly.
+      Focus on understandable pronunciation rather than speed.
+    </p>
+
+  </div>
+
+  `;
+
+}
+
+
+/* =========================
+   WRITING
+========================= */
+
+function openWriting(){
+
+  hideHome();
+
+  document.getElementById("content").innerHTML = `
+
+  <div class="lesson">
+
+    <h2>✍️ Writing Practice</h2>
+
+    <h3>Topic: My Daily Routine</h3>
+
+    <p>
+      Write 5–8 sentences about your daily routine.
+    </p>
+
+    <div class="info">
+      Think about what you do in the morning,
+      afternoon and evening.
+    </div>
+
+    <h3>Writing Checklist</h3>
+
+    <ul>
+      <li>Start sentences with capital letters.</li>
+      <li>Use suitable punctuation.</li>
+      <li>Check spelling.</li>
+      <li>Use complete sentences.</li>
+      <li>Read your work again.</li>
+    </ul>
+
+    <h3>Practice Topics</h3>
+
+    <ul>
+      <li>My School</li>
+      <li>My Favorite Hobby</li>
+      <li>A Day I Remember</li>
+      <li>My Future Goal</li>
+      <li>Why Education Is Important</li>
+    </ul>
+
+  </div>
+
+  `;
+
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+function startQuiz(){
+
+  hideHome();
+
+  quizIndex = 0;
+  quizScore = 0;
+  quizAnswered = false;
+
+  showQuizQuestion();
+
+}
+
+
+function showQuizQuestion(){
+
+  const content =
+    document.getElementById("content");
+
+  if(quizIndex >= quizQuestions.length){
+
+    finishQuiz();
+    return;
+
+  }
+
+  const q =
+    quizQuestions[quizIndex];
+
+  const percentage =
+    Math.round(
+      (quizIndex / quizQuestions.length) * 100
+    );
+
+  let html = `
+
+    <div class="lesson">
+
+      <h2>📝 English Quiz</h2>
+
+      <p>
+        Question ${quizIndex + 1}
+        of ${quizQuestions.length}
+      </p>
+
+      <div class="progress">
+        <div
+          class="progress-bar"
+          style="width:${percentage}%">
+        </div>
+      </div>
+
+      <div class="quiz-question">
+        ${q.question}
+      </div>
+
+  `;
+
+  q.options.forEach((option,index)=>{
+
+    html += `
+      <button
+        class="quiz-option"
+        onclick="answerQuiz(${index})">
+        ${String.fromCharCode(65 + index)}.
+        ${option}
+      </button>
+    `;
+
+  });
+
+  html += `
+
+      <p id="quizFeedback"></p>
+
+    </div>
+  `;
+
+  content.innerHTML = html;
+
+}
+
+
+/* =========================
+   ANSWER QUIZ
+========================= */
+
+function answerQuiz(selected){
+
+  if(quizAnswered) return;
+
+  quizAnswered = true;
+
+  const q =
+    quizQuestions[quizIndex];
+
+  const buttons =
+    document.querySelectorAll(".quiz-option");
+
+  buttons.forEach((button,index)=>{
+
+    button.disabled = true;
+
+    if(index === q.answer){
+      button.classList.add("correct");
+    }
+
+    if(index === selected && selected !== q.answer){
+      button.classList.add("wrong");
+    }
+
+  });
+
+  const feedback =
+    document.getElementById("quizFeedback");
+
+  if(selected === q.answer){
+
+    quizScore++;
+
+    progress.correct++;
+
+    feedback.innerHTML =
+      `<p class="success">✓ Correct!</p>`;
+
+  }else{
+
+    feedback.innerHTML =
+      `<p>✗ Not quite. The correct answer is:
+      <strong>${q.options[q.answer]}</strong></p>`;
+
+  }
+
+  saveProgress();
+
+  const next =
+    document.createElement("button");
+
+  next.className = "action";
+
+  next.textContent =
+    quizIndex === quizQuestions.length - 1
+    ? "See Result"
+    : "Next Question →";
+
+  next.onclick = ()=>{
+
+    quizIndex++;
+    quizAnswered = false;
+    showQuizQuestion();
+
+  };
+
+  feedback.appendChild(next);
+
+}
+
+
+/* =========================
+   QUIZ RESULT
+========================= */
+
+function finishQuiz(){
+
+  const total =
+    quizQuestions.length;
+
+  const percentage =
+    Math.round((quizScore / total) * 100);
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="lesson">
+
+      <h2>🏆 Quiz Result</h2>
+
+      <h3>
+        You scored ${quizScore} out of ${total}
+      </h3>
+
+      <p>
+        Score: ${percentage}%
+      </p>
+
+      <div class="info">
+        ${getQuizMessage(percentage)}
+      </div>
+
+      <button
+        class="action"
+        onclick="startQuiz()">
+        🔄 Try Again
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+function getQuizMessage(score){
+
+  if(score >= 80){
+    return "Excellent work! Keep practicing to maintain your progress.";
+  }
+
+  if(score >= 60){
+    return "Good work! Review the questions you missed and practice again.";
+  }
+
+  return "Keep learning! Review the grammar lessons and try the quiz again.";
+
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function openProgress(){
+
+  hideHome();
+
+  const favoriteWords =
+    progress.favorites.length
+    ? progress.favorites.join(", ")
+    : "No favorite words yet.";
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="lesson">
+
+      <h2>📊 My Progress</h2>
+
+      <div class="info">
+        Words learned: <strong>${progress.words}</strong>
+        <br>
+        Correct quiz answers:
+        <strong>${progress.correct}</strong>
+        <br>
+        Favorite words:
+        <strong>${progress.favorites.length}</strong>
+      </div>
+
+      <h3>⭐ Favorite Words</h3>
+
+      <p>${favoriteWords}</p>
+
+      <button
+        class="action secondary"
+        onclick="resetProgress()">
+        Reset Progress
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetProgress(){
+
+  const confirmed =
+    confirm(
+      "Are you sure you want to reset your progress?"
+    );
+
+  if(!confirmed) return;
+
+  progress = {
+    words:0,
+    correct:0,
+    favorites:[]
+  };
+
+  saveProgress();
+  openProgress();
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchApp(){
+
+  const query =
+    document.getElementById("search")
+    .value
+    .toLowerCase()
+    .trim();
+
+  const items =
+    document.querySelectorAll(".searchable");
+
+  if(!query){
+
+    items.forEach(item=>{
+      item.style.display = "";
+    });
+
+    return;
+  }
+
+  items.forEach(item=>{
+
+    const text =
+      item.textContent.toLowerCase();
+
+    item.style.display =
+      text.includes(query) ? "" : "none";
+
+  });
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function hideHome(){
+
+  document.getElementById("home")
+    .classList.add("hidden");
+
+  document.getElementById("contentPanel")
+    .classList.remove("hidden");
+
+}
+
+
+function goHome(){
+
+  document.getElementById("contentPanel")
+    .classList.add("hidden");
+
+  document.getElementById("home")
+    .classList.remove("hidden");
+
+  document.getElementById("search").value = "";
+
+  searchApp();
+
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+function toggleDarkMode(){
+
+  document.body.classList.toggle("dark");
+
+  localStorage.setItem(
+    "englishMasterDark",
+    document.body.classList.contains("dark")
+  );
+
+}
+
+if(
+  localStorage.getItem("englishMasterDark")
+  === "true"
+){
+
+  document.body.classList.add("dark");
+
+}
+
+
+/* =========================
+   COUNT WORD WHEN OPENED
+========================= */
+
+/*
+  Each vocabulary section visit counts as
+  learning the available vocabulary once.
+*/
+
+let vocabularyOpened =
+  sessionStorage.getItem("vocabularyOpened");
+
+if(!vocabularyOpened){
+
+  progress.words =
+    vocabulary.length;
+
+  saveProgress();
+
+  sessionStorage.setItem(
+    "vocabularyOpened",
+    "true"
+  );
+
+}
+
+</script>
+
+</body>
+</html>
+
