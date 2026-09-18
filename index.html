@@ -1,724 +1,2830 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#152b45">
-  <title>SpeakCraft — Learn English with confidence</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
-    :root{--navy:#152b45;--navy-2:#1d395a;--blue:#3279ee;--blue-dark:#1e60cb;--sky:#eaf3ff;--aqua:#d9f6ee;--aqua-dark:#087c62;--orange:#ffab4d;--coral:#ff7577;--ink:#18253a;--muted:#6f7c91;--paper:#f8fafc;--white:#fff;--line:#e4eaf1;--shadow:0 16px 44px rgba(18,51,90,.11)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased}button,input{font:inherit}.app{max-width:1200px;margin:auto;padding:20px 28px 106px;min-height:100vh}.top{height:56px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font:800 22px "Plus Jakarta Sans",sans-serif;letter-spacing:-.065em;color:var(--navy);display:flex;align-items:center;gap:10px}.logo{width:35px;height:35px;background:var(--blue);border-radius:12px;display:grid;place-items:center;color:white;font-size:19px;box-shadow:inset 0 -3px rgba(0,0,0,.12)}.topnav{display:flex;gap:4px;border:1px solid var(--line);background:white;border-radius:13px;padding:4px}.topnav button{border:0;background:transparent;color:var(--muted);font-size:13px;font-weight:700;padding:8px 12px;border-radius:9px;cursor:pointer}.topnav button.active{background:var(--sky);color:var(--blue)}.user{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;font-weight:700}.avatar{height:36px;width:36px;border-radius:50%;display:grid;place-items:center;background:#ffe5c6;font-size:18px}
-    .view{display:none}.view.active{display:block}.welcome{display:grid;grid-template-columns:1.12fr .88fr;gap:28px;align-items:stretch;padding:45px 3% 35px}.welcome-copy{padding:30px 12px}.eyebrow{font-size:11px;color:var(--blue);text-transform:uppercase;letter-spacing:.13em;font-weight:800;margin-bottom:13px}.welcome h1,.lesson-title,.library h1,.profile-page h1{font:800 clamp(35px,5vw,59px)/1.02 "Plus Jakarta Sans",sans-serif;letter-spacing:-.065em;margin:0;color:var(--navy)}.welcome h1 strong{color:var(--blue)}.welcome p{line-height:1.65;color:var(--muted);font-size:17px;max-width:570px;margin:21px 0 25px}.primary{border:0;background:var(--blue);color:white;border-radius:13px;padding:14px 19px;font-weight:700;cursor:pointer;box-shadow:0 5px 0 var(--blue-dark);transition:.18s}.primary:hover{transform:translateY(-2px)}.primary:active{transform:translateY(3px);box-shadow:0 2px 0 var(--blue-dark)}.hero-card{border-radius:27px;background:var(--navy);color:white;padding:28px;position:relative;overflow:hidden;min-height:320px;box-shadow:var(--shadow)}.hero-card:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:#2d66aa;right:-110px;top:-105px}.hero-card:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;background:#ffb25a;left:-65px;bottom:-95px}.hero-card>*{position:relative;z-index:1}.tiny-label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;color:#a9c8f7}.hero-card h2{font:800 29px/1.12 "Plus Jakarta Sans",sans-serif;letter-spacing:-.05em;max-width:270px;margin:17px 0}.hero-card p{font-size:14px;color:#c4d4ed;max-width:290px;line-height:1.5}.word-chip{position:absolute;z-index:2;right:23px;bottom:25px;background:#fff;color:var(--navy);border-radius:14px;padding:12px 15px;box-shadow:var(--shadow);font-weight:800;font-size:15px}.word-chip small{display:block;color:var(--muted);font-size:11px;font-weight:500;margin-top:3px}
-    .section-head{margin:24px 0 17px;display:flex;justify-content:space-between;align-items:end;gap:12px}.section-head h2{font:800 26px "Plus Jakarta Sans",sans-serif;letter-spacing:-.055em;margin:0}.section-head p{font-size:13px;color:var(--muted);margin:0}.route-grid{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:14px}.route{border:1px solid var(--line);background:var(--white);border-radius:20px;padding:18px;min-height:185px;position:relative;overflow:hidden;cursor:pointer;transition:.2s}.route:hover{box-shadow:var(--shadow);transform:translateY(-4px);border-color:#bfd4fa}.route.active-route{background:linear-gradient(145deg,#eaf3ff,#fff);border-color:#9ebdf3}.route-icon{height:39px;width:39px;border-radius:12px;display:grid;place-items:center;font-size:21px;background:var(--sky)}.route:nth-child(2) .route-icon{background:#fff0dc}.route:nth-child(3) .route-icon{background:var(--aqua)}.route:nth-child(4) .route-icon{background:#ffe7e8}.route h3{font:800 16px "Plus Jakarta Sans",sans-serif;margin:17px 0 6px;letter-spacing:-.035em}.route p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.route .route-meta{position:absolute;bottom:16px;font-size:11px;color:var(--blue);font-weight:800}.route .pill{display:inline-block;background:var(--aqua);color:var(--aqua-dark);border-radius:7px;padding:4px 6px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.dashboard{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:43px}.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:21px}.panel h3{font-size:14px;margin:0 0 15px}.daily-row{display:flex;gap:14px;align-items:center}.ring{height:66px;width:66px;border-radius:50%;background:conic-gradient(var(--blue) calc(var(--p)*1%),#eaf0f8 0);display:grid;place-items:center;flex:none}.ring:after{content:"";height:52px;width:52px;background:white;border-radius:50%;position:absolute}.ring b{z-index:1;font-size:12px;color:var(--blue)}.daily-row p{font-size:13px;color:var(--muted);margin:3px 0}.daily-row strong{font-size:14px}.mini-week{display:flex;align-items:end;gap:8px;height:74px}.week-day{flex:1;text-align:center;font-size:10px;color:var(--muted)}.week-bar{height:var(--h);border-radius:6px 6px 2px 2px;background:#dfeaff;margin-bottom:6px}.week-day.today .week-bar{background:var(--blue)}
-    .lesson-shell{max-width:760px;margin:36px auto}.lesson-top{display:flex;gap:15px;align-items:center;margin-bottom:45px}.exit{border:0;background:none;font-size:28px;color:#8190a4;cursor:pointer;padding:0 5px}.progress{height:10px;flex:1;background:#e7edf5;border-radius:9px;overflow:hidden}.progress i{display:block;width:0;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--blue),#70abff);transition:.35s}.lesson-count{font-size:12px;color:var(--muted);font-weight:700;min-width:38px}.lesson-label{font-size:11px;text-transform:uppercase;color:var(--blue);letter-spacing:.13em;font-weight:800}.lesson-title{font-size:clamp(28px,4vw,40px);margin:13px 0 28px}.prompt-card{border-radius:20px;background:#f1f7ff;border:1px solid #dceafa;padding:18px 20px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px}.prompt-card p{margin:0;color:#4e6078;line-height:1.5;font-size:14px}.speaker{border:0;background:var(--white);box-shadow:0 2px 8px rgba(43,101,180,.12);border-radius:10px;height:38px;min-width:38px;color:var(--blue);cursor:pointer;font-size:16px}.choice{width:100%;border:1.5px solid var(--line);background:white;color:var(--ink);border-radius:15px;margin:10px 0;padding:17px 18px;display:flex;align-items:center;gap:14px;text-align:left;font-weight:600;font-size:15px;cursor:pointer;transition:.15s}.choice:hover{border-color:#a9c5f5;background:#fcfdff}.choice.selected{background:var(--sky);border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}.choice.correct{background:#effcf7;border-color:#58bd96;color:#176c51}.choice.wrong{background:#fff2f2;border-color:#ee8a8c;color:#b44b4e}.choice:disabled{cursor:default}.option-key{height:25px;width:25px;border-radius:7px;border:1px solid var(--line);color:#8895a6;font-size:11px;display:grid;place-items:center;flex:none}.lesson-actions{display:flex;justify-content:space-between;align-items:center;margin-top:28px}.clue{border:0;background:transparent;color:var(--blue);font-weight:700;cursor:pointer;padding:12px}.feedback{display:none;align-items:center;justify-content:space-between;gap:15px;border-radius:18px;padding:16px 18px;margin-top:24px;background:#eafaf3;color:#176c51}.feedback.bad{background:#fff0f0;color:#ad4548}.feedback.show{display:flex}.feedback b{font-size:16px}.feedback span{display:block;font-size:12px;margin-top:3px}.feedback .primary{padding:11px 15px}.feedback.bad .primary{background:var(--coral);box-shadow:0 5px 0 #d95759}
-    .library,.profile-page{max-width:940px;margin:55px auto}.library h1,.profile-page h1{font-size:42px}.intro{color:var(--muted);font-size:16px;margin:12px 0 30px}.library-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.library-item{border:1px solid var(--line);border-radius:19px;background:white;padding:19px}.library-item .term{font:800 20px "Plus Jakarta Sans",sans-serif;letter-spacing:-.04em}.library-item .meaning{color:var(--blue);font-size:13px;font-weight:700;margin:5px 0}.library-item p{color:var(--muted);font-size:12px;line-height:1.5;margin:10px 0 14px}.listen-small{border:0;color:var(--blue);background:var(--sky);border-radius:8px;padding:7px 9px;font-size:12px;font-weight:700;cursor:pointer}.profile-layout{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:28px}.profile-card{border:1px solid var(--line);border-radius:20px;background:white;padding:25px}.profile-card h3{margin:0 0 10px;font-size:14px}.big-number{font:800 41px "Plus Jakarta Sans",sans-serif;color:var(--blue);letter-spacing:-.065em}.profile-card p{font-size:13px;color:var(--muted);line-height:1.5}.setting{margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:15px;padding:14px 0;border-top:1px solid var(--line);font-size:13px;font-weight:700}.danger{border:0;background:#fff0f0;color:#b64b4e;padding:10px 12px;border-radius:9px;font-weight:700;cursor:pointer}.success{max-width:600px;margin:105px auto;text-align:center}.success .confetti{font-size:72px}.success h1{font:800 46px "Plus Jakarta Sans",sans-serif;letter-spacing:-.06em;margin:7px 0;color:var(--navy)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:26px 0}.stat{padding:15px 7px;border:1px solid var(--line);background:white;border-radius:14px}.stat b{display:block;color:var(--blue);font-size:21px}.stat span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-    .dictionary-search{background:linear-gradient(135deg,#edf5ff,#fff);border:1px solid #dce9fa;border-radius:20px;padding:16px;display:flex;gap:10px;box-shadow:0 10px 28px rgba(38,94,167,.07)}.dictionary-search input{min-width:0;flex:1;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:16px;outline:none;color:var(--ink);background:white}.dictionary-search input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #e4efff}.dictionary-search button{white-space:nowrap}.search-status{min-height:22px;margin:12px 2px;color:var(--muted);font-size:13px}.dictionary-result{display:grid;grid-template-columns:1.15fr .85fr;gap:15px;margin:4px 0 38px}.definition-card,.knowledge-card{background:white;border:1px solid var(--line);border-radius:20px;padding:21px}.definition-card h2,.knowledge-card h2{font:800 26px "Plus Jakarta Sans",sans-serif;letter-spacing:-.05em;margin:0}.pronunciation{color:var(--blue);font-size:13px;font-weight:700;margin:7px 0 18px}.entry{border-top:1px solid var(--line);padding:15px 0 1px}.entry:first-of-type{border-top:0;padding-top:0}.part-of-speech{display:inline-block;border-radius:7px;background:var(--aqua);color:var(--aqua-dark);font-size:11px;font-weight:800;padding:4px 6px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px}.senses{margin:2px 0 0 21px;padding:0}.senses li{margin:0 0 11px;padding-left:3px;color:#3d4b5f;font-size:14px;line-height:1.52}.example{display:block;color:var(--muted);font-size:12px;margin-top:4px}.knowledge-card p{color:var(--muted);font-size:14px;line-height:1.58;margin:12px 0}.source-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.source-link{border-radius:9px;background:var(--sky);color:var(--blue);text-decoration:none;font-size:12px;font-weight:700;padding:8px 10px}.empty-result{grid-column:1/-1;text-align:center;padding:22px;color:var(--muted);font-size:14px;background:white;border:1px dashed #cfd9e6;border-radius:17px}.history{display:flex;gap:7px;flex-wrap:wrap;margin:-3px 0 23px}.history button{border:1px solid var(--line);background:white;border-radius:20px;color:var(--muted);padding:7px 10px;font-size:12px;font-weight:700;cursor:pointer}.history button:hover{border-color:var(--blue);color:var(--blue)}
-    @media(max-width:760px){.app{padding:15px 15px 90px}.topnav{display:none}.user span{display:none}.welcome{grid-template-columns:1fr;padding:35px 1% 28px;gap:22px}.welcome-copy{padding:10px 4px}.hero-card{min-height:255px}.route-grid,.library-grid{grid-template-columns:repeat(2,1fr)}.route:first-child{grid-column:span 2}.dashboard,.profile-layout,.dictionary-result{grid-template-columns:1fr}.lesson-shell{margin:25px auto}.lesson-top{margin-bottom:28px}.feedback{align-items:stretch;flex-direction:column}.feedback .primary{width:100%}.library,.profile-page{margin:35px auto}.stats{gap:6px}.dictionary-search{padding:10px;gap:8px}.dictionary-search input{padding:12px;font-size:15px}.dictionary-search button{padding:12px 13px}.definition-card,.knowledge-card{padding:17px}}
-    @media(max-width:390px){.route-grid,.library-grid{grid-template-columns:1fr}.route:first-child{grid-column:auto}.dictionary-search{flex-direction:column}.dictionary-search button{width:100%}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070b16">
+<meta name="description" content="English Master - premium English learning PWA">
+<title>English Master Ultra</title>
+
+<style>
+:root{
+--bg:#070b16;
+--panel:#10182a;
+--panel2:#151f35;
+--text:#f5f7ff;
+--muted:#9aa7bd;
+--accent:#7c5cff;
+--accent2:#19d3ae;
+--danger:#ff5f7a;
+--line:#26324a;
+--shadow:0 18px 55px #0007
+}
+
+*{box-sizing:border-box}
+
+html,body{
+margin:0;
+background:var(--bg);
+color:var(--text);
+font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif
+}
+
+body{min-height:100vh}
+
+button,input,textarea,select{font:inherit}
+
+button{
+cursor:pointer;
+border:0
+}
+
+.hidden{display:none!important}
+
+#splash{
+position:fixed;
+inset:0;
+z-index:100;
+background:radial-gradient(circle at 50% 35%,#2b2368 0,#0b1021 42%,#05070e 100%);
+display:grid;
+place-items:center;
+transition:.6s
+}
+
+.splashBox{text-align:center}
+
+.logo{
+width:86px;
+height:86px;
+border-radius:26px;
+margin:auto;
+display:grid;
+place-items:center;
+background:linear-gradient(135deg,var(--accent),#25d8c2);
+font-size:40px;
+font-weight:900;
+box-shadow:0 20px 70px #6c55ff66;
+animation:float 2s ease-in-out infinite
+}
+
+.splashBox h1{
+font-size:36px;
+margin:20px 0 6px
+}
+
+.splashBox p{color:var(--muted)}
+
+.loader{
+width:190px;
+height:5px;
+border-radius:10px;
+background:#ffffff18;
+overflow:hidden;
+margin:22px auto
+}
+
+.loader i{
+display:block;
+width:45%;
+height:100%;
+background:linear-gradient(90deg,var(--accent),var(--accent2));
+animation:load 1.1s infinite
+}
+
+@keyframes load{
+to{transform:translateX(330%)}
+}
+
+@keyframes float{
+50%{transform:translateY(-8px)}
+}
+
+.app{
+max-width:1180px;
+margin:auto;
+padding:18px 18px 90px
+}
+
+.top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+position:sticky;
+top:0;
+z-index:20;
+padding:10px 0 16px;
+background:linear-gradient(var(--bg) 75%,transparent)
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.brandMark{
+width:42px;
+height:42px;
+border-radius:14px;
+background:linear-gradient(135deg,var(--accent),var(--accent2));
+display:grid;
+place-items:center;
+font-weight:900
+}
+
+.brand b{font-size:18px}
+
+.brand small{
+display:block;
+color:var(--muted)
+}
+
+.actions{
+display:flex;
+gap:8px
+}
+
+.iconBtn,.ghost{
+background:var(--panel);
+color:var(--text);
+border:1px solid var(--line);
+border-radius:13px;
+padding:10px 12px
+}
+
+.primary{
+background:linear-gradient(135deg,var(--accent),#5d78ff);
+color:#fff;
+border-radius:14px;
+padding:12px 16px;
+font-weight:800
+}
+
+.danger{
+background:#ff5f7a18;
+color:#ff91a4;
+border:1px solid #ff5f7a44;
+border-radius:12px;
+padding:10px 14px
+}
+
+.hero{
+background:linear-gradient(135deg,#171b3d,#10182b 50%,#102e34);
+border:1px solid var(--line);
+border-radius:28px;
+padding:28px;
+box-shadow:var(--shadow);
+overflow:hidden;
+position:relative
+}
+
+.hero:after{
+content:"";
+position:absolute;
+width:240px;
+height:240px;
+border-radius:50%;
+right:-90px;
+top:-90px;
+background:#7c5cff33;
+filter:blur(5px)
+}
+
+.hero h2{
+font-size:clamp(27px,5vw,46px);
+margin:0 0 8px
+}
+
+.hero p{
+color:var(--muted);
+max-width:680px
+}
+
+.chips{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-top:18px
+}
+
+.chip{
+padding:8px 11px;
+background:#ffffff0c;
+border:1px solid #ffffff16;
+border-radius:99px;
+color:#dce4f7;
+font-size:13px
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:13px;
+margin-top:15px
+}
+
+.card{
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:20px;
+padding:18px;
+box-shadow:0 12px 35px #0003
+}
+
+.card h3{margin:0 0 6px}
+
+.muted{color:var(--muted)}
+
+.stat b{font-size:28px}
+
+.stat small{color:var(--muted)}
+
+.section{margin-top:24px}
+
+.sectionHead{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:12px
+}
+
+.sectionHead h2{
+margin:0;
+font-size:21px
+}
+
+.tiles{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:13px
+}
+
+.tile{
+min-height:135px;
+position:relative;
+overflow:hidden
+}
+
+.tile .emoji{font-size:30px}
+
+.tile p{
+color:var(--muted);
+margin:6px 0 0
+}
+
+.tile button{margin-top:14px}
+
+.page{display:none}
+
+.page.active{display:block}
+
+.searchBox{
+display:flex;
+gap:8px
+}
+
+.searchBox input,
+.field input,
+.field textarea,
+.field select{
+width:100%;
+padding:13px 14px;
+border-radius:13px;
+border:1px solid var(--line);
+background:var(--panel);
+color:var(--text);
+outline:0
+}
+
+.field textarea{
+min-height:150px;
+resize:vertical
+}
+
+.list{
+display:grid;
+gap:10px;
+margin-top:14px
+}
+
+.item{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:15px;
+padding:14px
+}
+
+.itemMain{min-width:0}
+
+.itemMain b{font-size:16px}
+
+.itemMain p{
+margin:4px 0 0;
+color:var(--muted)
+}
+
+.row{
+display:flex;
+gap:8px;
+align-items:center;
+flex-wrap:wrap
+}
+
+.nav{
+position:fixed;
+left:50%;
+bottom:12px;
+transform:translateX(-50%);
+width:min(680px,calc(100% - 22px));
+background:#0d1424eF;
+backdrop-filter:blur(20px);
+border:1px solid var(--line);
+border-radius:20px;
+padding:8px;
+display:flex;
+justify-content:space-around;
+z-index:30;
+box-shadow:var(--shadow)
+}
+
+.nav button{
+background:transparent;
+color:var(--muted);
+padding:8px 10px;
+border-radius:13px;
+font-size:12px
+}
+
+.nav button.active{
+background:#ffffff10;
+color:#fff
+}
+
+.nav span{
+display:block;
+font-size:17px
+}
+
+.badges{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px
+}
+
+.badge{
+text-align:center;
+padding:16px;
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:17px
+}
+
+.badge .bicon{font-size:28px}
+
+.badge.locked{
+opacity:.4;
+filter:grayscale(1)
+}
+
+.themeGrid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px
+}
+
+.theme{
+padding:15px;
+border-radius:16px;
+border:1px solid var(--line);
+background:var(--panel);
+text-align:left
+}
+
+.theme .swatch{
+height:35px;
+border-radius:10px;
+margin-bottom:9px
+}
+
+.theme.locked:after{
+content:" 🔒 PRO";
+color:#ffc857;
+font-size:12px
+}
+
+.theme small{color:var(--muted)}
+
+#rain{
+pointer-events:none;
+position:fixed;
+inset:0;
+z-index:2;
+overflow:hidden
+}
+
+.drop{
+position:absolute;
+width:1px;
+height:18px;
+background:#8fc7ff77;
+animation:rain .7s linear infinite
+}
+
+@keyframes rain{
+to{transform:translateY(105vh)}
+}
+
+#stars{
+pointer-events:none;
+position:fixed;
+inset:0;
+z-index:1;
+overflow:hidden
+}
+
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:#fff;
+border-radius:50%;
+animation:twinkle 2s infinite alternate
+}
+
+@keyframes twinkle{
+to{
+opacity:.15;
+transform:scale(.5)
+}
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:#0009;
+z-index:80;
+display:grid;
+place-items:center;
+padding:18px
+}
+
+.modalBox{
+width:min(680px,100%);
+max-height:90vh;
+overflow:auto;
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:25px;
+padding:22px;
+box-shadow:var(--shadow)
+}
+
+.camera{
+width:100%;
+aspect-ratio:16/10;
+background:#05070d;
+border-radius:18px;
+object-fit:cover
+}
+
+.notice{
+padding:12px 14px;
+border-radius:13px;
+background:#ffffff08;
+border:1px solid var(--line);
+color:var(--muted);
+margin-top:10px
+}
+
+.certificate{
+background:#fff;
+color:#111;
+padding:34px;
+border-radius:8px;
+text-align:center;
+border:10px solid #ddd
+}
+
+.certificate h1{
+font-family:Georgia,serif;
+font-size:35px
+}
+
+.certificate .certName{
+font-size:25px;
+font-weight:800;
+border-bottom:1px solid #aaa;
+display:inline-block;
+padding:5px 30px
+}
+
+.quizOption{
+width:100%;
+text-align:left;
+background:var(--panel);
+color:var(--text);
+border:1px solid var(--line);
+padding:14px;
+border-radius:13px;
+margin-top:9px
+}
+
+.quizOption.correct{
+border-color:#20d6a2;
+background:#20d6a21a
+}
+
+.quizOption.wrong{
+border-color:#ff5f7a;
+background:#ff5f7a1a
+}
+
+@media(max-width:800px){
+.grid{grid-template-columns:repeat(2,1fr)}
+.tiles{grid-template-columns:repeat(2,1fr)}
+.badges{grid-template-columns:repeat(2,1fr)}
+.themeGrid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:520px){
+.app{padding:12px 12px 88px}
+.hero{padding:22px}
+.grid,.tiles{grid-template-columns:1fr}
+.top{padding-top:4px}
+.nav button{padding:7px 6px}
+.nav button:nth-child(5){display:none}
+}
+</style>
 </head>
+
 <body>
-  <div class="app">
-    <header class="top">
-      <div class="brand"><span class="logo">S</span>SpeakCraft</div>
-      <nav class="topnav">
-        <button class="active" onclick="showView('home')">Today</button>
-        <button onclick="showView('library')">Word library</button>
-        <button onclick="showView('profile')">My progress</button>
-      </nav>
-      <div class="user"><span>🔥 <b id="headerStreak">0</b> day flow</span><div class="avatar">🧑🏽‍💻</div></div>
-    </header>
-
-    <main id="home" class="view active">
-      <section class="welcome">
-        <div class="welcome-copy">
-          <div class="eyebrow">English for everyday confidence</div>
-          <h1>Say what you mean, <strong>naturally.</strong></h1>
-          <p>Build useful English through short, accurate lessons. Every word, sentence, and grammar note is made for real conversations — with Urdu meaning when it helps.</p>
-          <button class="primary" onclick="startLesson('starter')">Start today’s lesson →</button>
-        </div>
-        <aside class="hero-card">
-          <div class="tiny-label">Today’s useful phrase</div>
-          <h2>“Could you help me, please?”</h2>
-          <p>ایک مؤدبانہ جملہ جو آپ دکان، دفتر یا سفر میں استعمال کر سکتے ہیں۔</p>
-          <div class="word-chip">polite <small>/pəˈlaɪt/ · باادب</small></div>
-        </aside>
-      </section>
-
-      <div class="section-head">
-        <div><h2>Choose your practice</h2><p>Start anywhere. We’ll keep your progress safe on this device.</p></div>
-        <p id="scoreNote">0 points collected</p>
-      </div>
-
-      <section class="route-grid">
-        <article class="route active-route" onclick="startLesson('starter')">
-          <div class="route-icon">💬</div><h3>Speak every day</h3>
-          <p>Greetings, requests, and simple conversations.</p>
-          <div class="route-meta"><span class="pill">Start here</span> · 4 min</div>
-        </article>
-        <article class="route" onclick="startLesson('grammar')">
-          <div class="route-icon">✍️</div><h3>Grammar, clearly</h3>
-          <p>Tenses, articles, and sentence order.</p><div class="route-meta">3 focused questions</div>
-        </article>
-        <article class="route" onclick="startLesson('vocabulary')">
-          <div class="route-icon">🌱</div><h3>Useful words</h3>
-          <p>Remember words by using them in context.</p><div class="route-meta">Listen & learn</div>
-        </article>
-        <article class="route" onclick="startLesson('review')">
-          <div class="route-icon">🧠</div><h3>Quick review</h3>
-          <p>Strengthen what you practised before.</p><div class="route-meta">No pressure</div>
-        </article>
-      </section>
-
-      <section class="dashboard">
-        <div class="panel">
-          <h3>Daily goal</h3>
-          <div class="daily-row">
-            <div class="ring" id="ring" style="--p:0"><b id="goalPercent">0%</b></div>
-            <div><strong id="goalText">One small lesson is enough for today.</strong><p>Complete 30 points to finish your gentle daily goal.</p></div>
-          </div>
-        </div>
-        <div class="panel"><h3>Your week</h3><div class="mini-week" id="week"></div></div>
-      </section>
-    </main>
-
-    <main id="lesson" class="view">
-      <section class="lesson-shell">
-        <div class="lesson-top">
-          <button class="exit" aria-label="Exit lesson" onclick="showView('home')">×</button>
-          <div class="progress"><i id="lessonBar"></i></div>
-          <span class="lesson-count" id="lessonCount">1 / 3</span>
-        </div>
-        <div class="lesson-label" id="lessonLabel">Everyday English</div>
-        <h1 class="lesson-title" id="question"></h1>
-        <div id="explanation"></div>
-        <div id="answers"></div>
-        <div class="lesson-actions">
-          <button class="clue" onclick="showClue()">✦ Show a clue</button>
-          <button class="primary" id="checkBtn" disabled onclick="checkAnswer()">Check answer</button>
-        </div>
-        <div class="feedback" id="feedback">
-          <div><b id="feedbackTitle"></b><span id="feedbackDetail"></span></div>
-          <button class="primary" onclick="nextQuestion()">Continue →</button>
-        </div>
-      </section>
-    </main>
-
-    <main id="complete" class="view">
-      <section class="success">
-        <div class="confetti">✦ ✦ ✦</div>
-        <div class="eyebrow">Lesson complete</div>
-        <h1>Excellent work.</h1>
-        <p style="color:var(--muted);line-height:1.55">You made room for English today. Tiny, steady practice is how confidence grows.</p>
-        <div class="stats">
-          <div class="stat"><b id="resultPoints">+30</b><span>points</span></div>
-          <div class="stat"><b id="resultCorrect">3/3</b><span>correct</span></div>
-          <div class="stat"><b id="resultStreak">1</b><span>day flow</span></div>
-        </div>
-        <button class="primary" onclick="showView('home')">Continue learning</button>
-      </section>
-    </main>
-
-    <main id="library" class="view">
-      <section class="library">
-        <div class="eyebrow">Explore any English word</div>
-        <h1>Your word explorer</h1>
-        <p class="intro">Search for an English word to see its available meanings, pronunciation, word type, examples, and related knowledge. Results need an internet connection and are shown from Wiktionary and Wikipedia.</p>
-
-        <form class="dictionary-search" id="dictionaryForm">
-          <input id="dictionaryInput" type="search" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="80" placeholder="Try: confident, borrow, schedule" aria-label="Search an English word">
-          <button class="primary" type="submit">Search word</button>
-        </form>
-
-        <div class="search-status" id="searchStatus" aria-live="polite">Search a word to begin.</div>
-        <div class="history" id="searchHistory"></div>
-        <div class="dictionary-result" id="dictionaryResult"></div>
-
-        <div class="section-head" style="margin-top:42px">
-          <div><h2>Starter words</h2><p>Useful words available even when you are offline.</p></div>
-        </div>
-        <div class="library-grid" id="wordGrid"></div>
-      </section>
-    </main>
-
-    <main id="profile" class="view">
-      <section class="profile-page">
-        <div class="eyebrow">Your personal progress</div>
-        <h1>Keep your own pace.</h1>
-        <div class="profile-layout">
-          <article class="profile-card">
-            <h3>Growth points</h3><div class="big-number" id="profilePoints">0</div>
-            <p>Each correct answer adds 10 points. Points show your practice, not your worth.</p>
-          </article>
-          <article class="profile-card">
-            <h3>Learning rhythm</h3><div class="big-number"><span id="profileStreak">0</span> days</div>
-            <p>Come back when you can. Your progress is never lost for missing a day.</p>
-          </article>
-          <article class="profile-card">
-            <h3>Correct answers</h3><div class="big-number" id="profileCorrect">0</div>
-            <p>Every correction is part of learning. Keep trying.</p>
-          </article>
-          <article class="profile-card">
-            <h3>Your settings</h3>
-            <div class="setting"><span>Save progress on this device</span><span style="color:var(--aqua-dark)">● On</span></div>
-            <div class="setting"><span>Need a fresh start?</span><button class="danger" onclick="resetProgress()">Reset progress</button></div>
-          </article>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <script>
-    const lessons = {
-      starter: {
-        label: 'Everyday English',
-        items: [
-          {
-            q: 'Choose the most polite way to ask for help.',
-            options: ['Help me.', 'Could you help me, please?', 'You help me now.', 'Help, please you.'],
-            answer: 1,
-            note: '“Could you …, please?” is a polite and natural request.',
-            clue: 'Look for “Could you” and “please”.'
-          },
-          {
-            q: 'What does “I am on my way” mean?',
-            options: ['I am sleeping.', 'I am travelling to the place now.', 'I do not know the way.', 'I arrived yesterday.'],
-            answer: 1,
-            note: 'Use it when you have started travelling to meet someone.',
-            clue: '“On my way” means travelling there now.',
-            speak: 'I am on my way.'
-          },
-          {
-            q: 'Complete the sentence: “She ___ coffee every morning.”',
-            options: ['drink', 'drinks', 'drinking', 'drank'],
-            answer: 1,
-            note: 'With he, she, or it in the present simple, add -s: “She drinks.”',
-            clue: 'The subject is “she”.'
-          }
-        ]
-      },
-      grammar: {
-        label: 'Grammar, clearly',
-        items: [
-          {
-            q: 'Choose the correct sentence for a regular habit.',
-            options: ['He go to work by bus.', 'He goes to work by bus.', 'He going to work by bus.', 'He gone to work by bus.'],
-            answer: 1,
-            note: 'For he, she, and it, present-simple verbs usually end in -s.',
-            clue: 'The subject is “he”.'
-          },
-          {
-            q: 'Complete the sentence: “I saw ___ honest person.”',
-            options: ['a', 'an', 'the not needed', 'some'],
-            answer: 1,
-            note: 'Use “an” before a vowel sound. “Honest” begins with a silent h.',
-            clue: 'Say “honest” aloud: it begins like “onest”.'
-          },
-          {
-            q: 'Choose the correct past-tense sentence.',
-            options: ['They go to the market yesterday.', 'They went to the market yesterday.', 'They goes to the market yesterday.', 'They are go to the market yesterday.'],
-            answer: 1,
-            note: '“Went” is the past form of “go”. “Yesterday” signals the past.',
-            clue: 'The time word is “yesterday”.'
-          }
-        ]
-      },
-      vocabulary: {
-        label: 'Useful vocabulary',
-        items: [
-          {
-            q: 'What does “borrow” mean?',
-            options: ['To give something away forever.', 'To take something temporarily and return it later.', 'To buy something expensive.', 'To break something by accident.'],
-            answer: 1,
-            note: 'You borrow from another person; later, you return the item.',
-            clue: 'Think: borrow now, return later.',
-            speak: 'May I borrow your pen?'
-          },
-          {
-            q: 'Choose the best meaning of “available”.',
-            options: ['Not able to be used.', 'Free and ready to be used or found.', 'Very expensive.', 'Far away from home.'],
-            answer: 1,
-            note: 'For example: “The doctor is available at 4 p.m.”',
-            clue: 'Something available can be used or found.',
-            speak: 'Is this seat available?'
-          },
-          {
-            q: 'Complete the natural sentence: “Please ___ the door when you leave.”',
-            options: ['close', 'closes', 'closed', 'closing'],
-            answer: 0,
-            note: 'After “please”, use the base verb: “Please close …”',
-            clue: '“Please” is followed by the base form of the verb.'
-          }
-        ]
-      },
-      review: {
-        label: 'Quick review',
-        items: [
-          {
-            q: 'Which preposition is correct? “The meeting starts ___ 9 o’clock.”',
-            options: ['in', 'on', 'at', 'by'],
-            answer: 2,
-            note: 'Use “at” for exact times: at 9 o’clock, at noon, at 6:30.',
-            clue: 'Use “at” for clock times.'
-          },
-          {
-            q: 'Choose the natural response to “Thank you.”',
-            options: ['You’re welcome.', 'I welcome you.', 'Thank you welcome.', 'Please welcome.'],
-            answer: 0,
-            note: '“You’re welcome” is a standard polite response.',
-            clue: 'This is a fixed polite phrase.',
-            speak: 'You’re welcome.'
-          },
-          {
-            q: 'Which sentence has the correct word order?',
-            options: ['Always I am tired after work.', 'I am tired always after work.', 'I am always tired after work.', 'I always am tired after work.'],
-            answer: 2,
-            note: 'With the verb “be”, an adverb like “always” usually comes after it: “I am always …”',
-            clue: 'Place “always” after “am”.'
-          }
-        ]
-      }
-    };
-
-    const words = [
-      ['available', 'موجود / دستیاب', 'Is the manager available this afternoon?'],
-      ['borrow', 'عارضی طور پر لینا', 'Can I borrow your pen for a minute?'],
-      ['careful', 'احتیاط کرنے والا', 'Please be careful with the glass.'],
-      ['decide', 'فیصلہ کرنا', 'We need to decide before Friday.'],
-      ['enough', 'کافی', 'Do we have enough time?'],
-      ['friendly', 'دوستانہ', 'Our new neighbour is very friendly.'],
-      ['improve', 'بہتر بنانا', 'Practice can improve your English.'],
-      ['message', 'پیغام', 'I will send you a message later.'],
-      ['quiet', 'پرسکون / خاموش', 'This library is quiet in the morning.']
-    ];
-
-    const storageKey = 'speakcraft-english-v1';
-    let state = JSON.parse(localStorage.getItem(storageKey) || '{"points":0,"streak":0,"correct":0,"week":[0,0,0,0,0,0,0],"lastPractice":"","searches":[]}');
-
-    state.searches = Array.isArray(state.searches) ? state.searches : [];
-
-    let currentLesson = [];
-    let lessonName = '';
-    let at = 0;
-    let chosen = null;
-    let answered = false;
-    let correctThis = 0;
-
-    const $ = id => document.getElementById(id);
-    const persist = () => localStorage.setItem(storageKey, JSON.stringify(state));
-
-    function showView(name) {
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-      $(name).classList.add('active');
-
-      document.querySelectorAll('.topnav button').forEach(button => {
-        const text = button.textContent.toLowerCase();
-        const active =
-          (name === 'home' && text.includes('today')) ||
-          (name === 'library' && text.includes('word')) ||
-          (name === 'profile' && text.includes('progress'));
-
-        button.classList.toggle('active', active);
-      });
-
-      if (name === 'home') renderHome();
-      if (name === 'library') renderWords();
-      if (name === 'profile') renderProfile();
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function renderHome() {
-      $('headerStreak').textContent = state.streak;
-      $('scoreNote').textContent = `${state.points} point${state.points === 1 ? '' : 's'} collected`;
-
-      const day = (new Date().getDay() + 6) % 7;
-      const percent = Math.min(100, Math.round((state.week[day] || 0) / 30 * 100));
-
-      $('ring').style.setProperty('--p', percent);
-      $('goalPercent').textContent = percent + '%';
-      $('goalText').textContent =
-        percent >= 100 ? 'Today’s goal is complete. Well done!' :
-        percent ? 'You’re moving forward — keep it light.' :
-        'One small lesson is enough for today.';
-
-      const labels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-
-      $('week').innerHTML = labels.map((label, index) => `
-        <div class="week-day ${index === day ? 'today' : ''}">
-          <div class="week-bar" style="--h:${Math.max(8, Math.min(58, (state.week[index] || 0) * 1.9))}px"></div>
-          ${label}
-        </div>
-      `).join('');
-    }
-
-    function startLesson(id) {
-      lessonName = id;
-      currentLesson = lessons[id].items;
-      at = 0;
-      correctThis = 0;
-      showView('lesson');
-      loadQuestion();
-    }
-
-    function loadQuestion() {
-      answered = false;
-      chosen = null;
-
-      const item = currentLesson[at];
-
-      $('lessonLabel').textContent = lessons[lessonName].label;
-      $('question').textContent = item.q;
-      $('lessonCount').textContent = `${at + 1} / ${currentLesson.length}`;
-      $('lessonBar').style.width = `${at / currentLesson.length * 100}%`;
-      $('checkBtn').disabled = true;
-      $('feedback').className = 'feedback';
-
-      $('explanation').innerHTML = item.speak ? `
-        <div class="prompt-card">
-          <p><b>Hear it:</b> ${item.speak}</p>
-          <button class="speaker" aria-label="Hear pronunciation" onclick="speakPhrase()">🔊</button>
-        </div>
-      ` : '';
-
-      $('answers').innerHTML = item.options.map((option, index) => `
-        <button class="choice" onclick="choose(this,${index})">
-          <span class="option-key">${String.fromCharCode(65 + index)}</span>
-          ${option}
-        </button>
-      `).join('');
-    }
-
-    function choose(button, index) {
-      if (answered) return;
-
-      document.querySelectorAll('.choice').forEach(item => item.classList.remove('selected'));
-      button.classList.add('selected');
-      chosen = index;
-      $('checkBtn').disabled = false;
-    }
-
-    function showClue() {
-      if (answered) return;
-
-      const old = document.querySelector('.clue-box');
-      if (old) old.remove();
-
-      const note = document.createElement('div');
-      note.className = 'prompt-card clue-box';
-      note.innerHTML = `<p><b>Clue:</b> ${currentLesson[at].clue}</p>`;
-
-      $('answers').before(note);
-    }
-
-    function checkAnswer() {
-      if (chosen === null) return;
-
-      answered = true;
-
-      const item = currentLesson[at];
-      const right = chosen === item.answer;
-
-      document.querySelectorAll('.choice').forEach((button, index) => {
-        button.disabled = true;
-        if (index === item.answer) button.classList.add('correct');
-      });
-
-      if (!right) document.querySelectorAll('.choice')[chosen].classList.add('wrong');
-      if (right) correctThis++;
-
-      $('checkBtn').disabled = true;
-      $('feedback').className = 'feedback show' + (right ? '' : ' bad');
-      $('feedbackTitle').textContent = right ? 'Correct — nicely done!' : 'Not quite — here is the key idea.';
-      $('feedbackDetail').textContent = item.note;
-    }
-
-    function nextQuestion() {
-      at++;
-      if (at < currentLesson.length) loadQuestion();
-      else completeLesson();
-    }
-
-    function completeLesson() {
-      const today = new Date().toDateString();
-      const day = (new Date().getDay() + 6) % 7;
-      const gained = correctThis * 10;
-
-      state.points += gained;
-      state.correct += correctThis;
-
-      if (state.lastPractice !== today) {
-        state.streak++;
-        state.lastPractice = today;
-      }
-
-      state.week[day] = (state.week[day] || 0) + gained;
-      persist();
-
-      $('resultPoints').textContent = '+' + gained;
-      $('resultCorrect').textContent = `${correctThis}/${currentLesson.length}`;
-      $('resultStreak').textContent = state.streak;
-      $('lessonBar').style.width = '100%';
-
-      showView('complete');
-    }
-
-    function speak(text) {
-      if (!('speechSynthesis' in window)) {
-        alert('Your browser does not support pronunciation playback.');
-        return;
-      }
-
-      window.speechSynthesis.cancel();
-
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US';
-      utterance.rate = 0.86;
-
-      window.speechSynthesis.speak(utterance);
-    }
-
-    function speakPhrase() {
-      speak(currentLesson[at].speak);
-    }
-
-    function speakWord(index) {
-      speak(words[index][0]);
-    }
-
-    function renderWords() {
-      $('wordGrid').innerHTML = words.map(([word, meaning, example], index) => `
-        <article class="library-item">
-          <div class="term">${word}</div>
-          <div class="meaning">${meaning}</div>
-          <p>“${example}”</p>
-          <button class="listen-small" onclick="speakWord(${index})">🔊 Hear word</button>
-        </article>
-      `).join('');
-
-      renderSearchHistory();
-    }
-
-    function plainText(value) {
-      const holder = document.createElement('div');
-      holder.innerHTML = String(value || '');
-      return (holder.textContent || holder.innerText || '').replace(/\s+/g, ' ').trim();
-    }
-
-    function makeElement(tag, className, text) {
-      const node = document.createElement(tag);
-      if (className) node.className = className;
-      if (text !== undefined) node.textContent = text;
-      return node;
-    }
-
-    function requestJson(url) {
-      return fetch(url, { headers: { accept: 'application/json' } })
-        .then(response => {
-          if (!response.ok) throw new Error('not found');
-          return response.json();
-        });
-    }
-
-    function createSourceLink(label, url) {
-      const link = makeElement('a', 'source-link', label);
-      link.href = url;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      return link;
-    }
-
-    function rememberSearch(term) {
-      state.searches = [term, ...state.searches.filter(item => item.toLowerCase() !== term.toLowerCase())].slice(0, 6);
-      persist();
-      renderSearchHistory();
-    }
-
-    function renderSearchHistory() {
-      const target = $('searchHistory');
-      if (!target) return;
-
-      target.replaceChildren();
-
-      state.searches.forEach(term => {
-        const button = makeElement('button', '', term);
-        button.type = 'button';
-
-        button.addEventListener('click', () => {
-          $('dictionaryInput').value = term;
-          searchDictionary();
-        });
-
-        target.append(button);
-      });
-    }
-
-    function renderDictionary(entries, summary, term) {
-      const result = $('dictionaryResult');
-      result.replaceChildren();
-
-      const englishEntries = Array.isArray(entries)
-        ? entries.filter(entry => entry.language === 'English').slice(0, 4)
-        : [];
-
-      if (!englishEntries.length && !summary) {
-        result.append(makeElement(
-          'div',
-          'empty-result',
-          'No clear English entry was found. Check the spelling or try a simpler form, such as “run” instead of “running”.'
-        ));
-        return;
-      }
-
-      if (englishEntries.length) {
-        const definitions = makeElement('section', 'definition-card');
-        definitions.append(makeElement('h2', '', term));
-
-        const ipa = englishEntries
-          .flatMap(entry => Array.isArray(entry.pronunciations) ? entry.pronunciations : [])
-          .map(item => item.ipa)
-          .filter(Boolean)
-          .filter((item, index, list) => list.indexOf(item) === index)
-          .slice(0, 3);
-
-        definitions.append(makeElement(
-          'div',
-          'pronunciation',
-          ipa.length
-            ? 'Pronunciation: ' + ipa.join(' · ')
-            : 'Pronunciation may not be available for this entry.'
-        ));
-
-        englishEntries.forEach(entry => {
-          const block = makeElement('div', 'entry');
-          block.append(makeElement('div', 'part-of-speech', entry.partOfSpeech || 'word'));
-
-          const list = makeElement('ol', 'senses');
-
-          (entry.definitions || []).slice(0, 5).forEach(definition => {
-            const item = makeElement('li', '', plainText(definition.definition));
-            const example = Array.isArray(definition.examples) ? definition.examples[0] : '';
-
-            if (example) {
-              item.append(makeElement('span', 'example', 'Example: ' + plainText(example)));
-            }
-
-            list.append(item);
-          });
-
-          if (!list.children.length) {
-            list.append(makeElement('li', '', 'A definition is not available in a readable format for this entry.'));
-          }
-
-          block.append(list);
-          definitions.append(block);
-        });
-
-        const sources = makeElement('div', 'source-row');
-        sources.append(createSourceLink(
-          'Open in Wiktionary ↗',
-          'https://en.wiktionary.org/wiki/' + encodeURIComponent(term)
-        ));
-
-        definitions.append(sources);
-        result.append(definitions);
-      }
-
-      if (summary && summary.extract) {
-        const knowledge = makeElement('aside', 'knowledge-card');
-
-        knowledge.append(makeElement('h2', '', 'Related knowledge'));
-        knowledge.append(makeElement('p', '', summary.extract));
-
-        const sources = makeElement('div', 'source-row');
-        sources.append(createSourceLink(
-          'Read on Wikipedia ↗',
-          summary.content_urls?.desktop?.page || 'https://en.wikipedia.org/wiki/' + encodeURIComponent(term)
-        ));
-
-        knowledge.append(sources);
-        result.append(knowledge);
-      }
-    }
-
-    async function searchDictionary() {
-      const input = $('dictionaryInput');
-      const raw = input.value.trim();
-      const status = $('searchStatus');
-      const result = $('dictionaryResult');
-
-      const term = raw.replace(/\s+/g, ' ');
-
-      if (!/^[A-Za-z][A-Za-z '-]{0,79}$/.test(term)) {
-        status.textContent = 'Please enter an English word or a short English phrase using letters, spaces, hyphens, or apostrophes.';
-        result.replaceChildren();
-        return;
-      }
-
-      input.value = term;
-      status.textContent = 'Looking up “' + term + '”…';
-      result.replaceChildren();
-
-      const encoded = encodeURIComponent(term);
-
-      const dictionaryUrl = 'https://en.wiktionary.org/api/rest_v1/page/definition/' + encoded;
-      const wikipediaUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + encoded;
-
-      const [dictionary, wikipedia] = await Promise.allSettled([
-        requestJson(dictionaryUrl),
-        requestJson(wikipediaUrl)
-      ]);
-
-      const entries = dictionary.status === 'fulfilled' ? dictionary.value : [];
-      const summary = wikipedia.status === 'fulfilled' ? wikipedia.value : null;
-
-      renderDictionary(entries, summary, term);
-
-      if (dictionary.status === 'fulfilled' || wikipedia.status === 'fulfilled') {
-        status.textContent = 'Showing currently available information for “' + term + '”.';
-        rememberSearch(term);
-      } else {
-        status.textContent = 'The online dictionary could not be reached. Check your internet connection, then try again.';
-        result.append(makeElement(
-          'div',
-          'empty-result',
-          'Your offline starter words and lessons still work without internet.'
-        ));
-      }
-    }
-
-    function renderProfile() {
-      $('profilePoints').textContent = state.points;
-      $('profileStreak').textContent = state.streak;
-      $('profileCorrect').textContent = state.correct;
-    }
-
-    function resetProgress() {
-      if (!confirm('Kya aap waqai apni sari saved progress reset karna chahte hain?')) return;
-
-      localStorage.removeItem(storageKey);
-
-      state = {
-        points: 0,
-        streak: 0,
-        correct: 0,
-        week: [0, 0, 0, 0, 0, 0, 0],
-        lastPractice: '',
-        searches: []
-      };
-
-      renderProfile();
-      renderHome();
-      renderSearchHistory();
-    }
-
-    $('dictionaryForm').addEventListener('submit', event => {
-      event.preventDefault();
-      searchDictionary();
-    });
-
-    renderHome();
-  </script>
+
+<div id="splash">
+<div class="splashBox">
+<div class="logo">E</div>
+<h1>English Master</h1>
+<p>Ultra learning experience</p>
+<div class="loader"><i></i></div>
+</div>
+</div>
+
+<div id="stars"></div>
+<div id="rain"></div>
+
+<main class="app">
+
+<header class="top">
+
+<div class="brand">
+<div class="brandMark">E</div>
+<div>
+<b>English Master</b>
+<small>Learn • Speak • Grow</small>
+</div>
+</div>
+
+<div class="actions">
+<button class="iconBtn" onclick="openSearch()">⌕</button>
+<button class="iconBtn" onclick="toggleTheme()">☼</button>
+</div>
+
+</header>
+
+
+<section id="home" class="page active">
+
+<div class="hero">
+
+<h2>Build your English, one smart step at a time.</h2>
+
+<p>
+Vocabulary, grammar, speaking, writing, quizzes and guided practice —
+all in one focused learning space.
+</p>
+
+<div class="chips">
+
+<span class="chip">
+🔥 <span id="streakChip">0</span> day streak
+</span>
+
+<span class="chip">
+🎯 <span id="goalChip">0/20</span> daily goal
+</span>
+
+<span class="chip">
+⭐ <span id="xpChip">0</span> XP
+</span>
+
+</div>
+
+<div class="row" style="margin-top:18px">
+
+<button class="primary" onclick="go('learn')">
+Start Learning
+</button>
+
+<button class="ghost" onclick="go('teacher')">
+Meet Teacher
+</button>
+
+</div>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card stat">
+<small>Words learned</small>
+<div><b id="wordsStat">0</b></div>
+</div>
+
+<div class="card stat">
+<small>Quiz score</small>
+<div><b id="scoreStat">0%</b></div>
+</div>
+
+<div class="card stat">
+<small>Writing</small>
+<div><b id="writeStat">0</b></div>
+</div>
+
+<div class="card stat">
+<small>Achievements</small>
+<div><b id="badgeStat">0</b></div>
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="sectionHead">
+<h2>Quick practice</h2>
+<button class="ghost" onclick="go('learn')">View all</button>
+</div>
+
+<div class="tiles">
+
+<div class="card tile">
+<div class="emoji">📚</div>
+<h3>Vocabulary</h3>
+<p>Learn useful words by category.</p>
+<button class="ghost" onclick="go('learn')">Open</button>
+</div>
+
+<div class="card tile">
+<div class="emoji">🧠</div>
+<h3>Grammar</h3>
+<p>Short lessons with examples.</p>
+<button class="ghost" onclick="go('grammar')">Open</button>
+</div>
+
+<div class="card tile">
+<div class="emoji">🎙️</div>
+<h3>Speaking</h3>
+<p>Practice pronunciation and voice.</p>
+<button class="ghost" onclick="go('speaking')">Open</button>
+</div>
+
+<div class="card tile">
+<div class="emoji">✍️</div>
+<h3>Writing Lab</h3>
+<p>Write, count and improve.</p>
+<button class="ghost" onclick="go('writing')">Open</button>
+</div>
+
+<div class="card tile">
+<div class="emoji">🏆</div>
+<h3>Quiz Arena</h3>
+<p>Test yourself and earn XP.</p>
+<button class="ghost" onclick="go('quiz')">Open</button>
+</div>
+
+<div class="card tile">
+<div class="emoji">👩‍🏫</div>
+<h3>AI Teacher</h3>
+<p>Voice-based guided conversation.</p>
+<button class="ghost" onclick="go('teacher')">Open</button>
+</div>
+
+</div>
+</div>
+
+</section>
+
+
+<section id="learn" class="page">
+
+<div class="sectionHead">
+<h2>Learning Hub</h2>
+<button class="ghost" onclick="go('home')">Home</button>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h3>Beginner</h3>
+<p class="muted">Everyday words and phrases.</p>
+<button class="primary" onclick="showCategory('Everyday')">Practice</button>
+</div>
+
+<div class="card">
+<h3>School</h3>
+<p class="muted">Academic English.</p>
+<button class="primary" onclick="showCategory('School')">Practice</button>
+</div>
+
+<div class="card">
+<h3>Travel</h3>
+<p class="muted">Useful travel vocabulary.</p>
+<button class="primary" onclick="showCategory('Travel')">Practice</button>
+</div>
+
+<div class="card">
+<h3>Work</h3>
+<p class="muted">Professional vocabulary.</p>
+<button class="primary" onclick="showCategory('Work')">Practice</button>
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="searchBox">
+<input id="wordSearch"
+placeholder="Search words..."
+oninput="renderWords()">
+
+<button class="primary" onclick="renderWords()">Search</button>
+</div>
+
+<div id="wordList" class="list"></div>
+
+</div>
+
+</section>
+
+
+<section id="dictionary" class="page">
+
+<div class="sectionHead">
+<h2>Smart Dictionary</h2>
+</div>
+
+<div class="searchBox">
+
+<input
+id="dictSearch"
+placeholder="Type an English word..."
+onkeydown="if(event.key==='Enter')dictionarySearch()">
+
+<button class="primary" onclick="dictionarySearch()">
+Search
+</button>
+
+</div>
+
+<div id="dictResult" class="card" style="margin-top:14px">
+
+<h3>Try: confident</h3>
+
+<p class="muted">
+Search the built-in offline dictionary.
+Online API can be connected later.
+</p>
+
+</div>
+
+</section>
+
+
+<section id="grammar" class="page">
+
+<div class="sectionHead">
+<h2>Grammar Studio</h2>
+</div>
+
+<div id="grammarList" class="list"></div>
+
+</section>
+
+
+<section id="speaking" class="page">
+
+<div class="sectionHead">
+<h2>Speaking Lab</h2>
+</div>
+
+<div class="card">
+
+<h3>🎙️ Pronunciation Practice</h3>
+
+<p class="muted">
+Tap Speak to hear a phrase. Use the microphone where your browser
+supports speech recognition.
+</p>
+
+<div class="notice" id="speakPhrase">
+I am learning English every day.
+</div>
+
+<div class="row" style="margin-top:12px">
+
+<button class="primary" onclick="speakCurrent()">
+🔊 Speak
+</button>
+
+<button class="ghost" onclick="startSpeech()">
+🎤 My turn
+</button>
+
+</div>
+
+<p id="speechOutput" class="muted"></p>
+
+</div>
+
+</section>
+
+
+<section id="writing" class="page">
+
+<div class="sectionHead">
+<h2>Writing Lab</h2>
+</div>
+
+<div class="card field">
+
+<label>Write 3–5 sentences</label>
+
+<textarea
+id="writingText"
+placeholder="Today I learned..."></textarea>
+
+<div class="row" style="margin-top:10px">
+
+<button class="primary" onclick="checkWriting()">
+Check writing
+</button>
+
+<span class="muted" id="wordCounter">
+0 words
+</span>
+
+</div>
+
+<div id="writingFeedback" class="notice">
+Your feedback will appear here.
+</div>
+
+</div>
+
+</section>
+
+
+<section id="quiz" class="page">
+
+<div class="sectionHead">
+
+<h2>Quiz Arena</h2>
+
+<span class="muted" id="quizProgress"></span>
+
+</div>
+
+<div id="quizBox" class="card"></div>
+
+</section>
+
+
+<section id="teacher" class="page">
+
+<div class="sectionHead">
+<h2>AI Teacher</h2>
+</div>
+
+<div class="card">
+
+<h3>👩‍🏫 Ayesha</h3>
+
+<p class="muted">
+A browser-based teacher demo: speak or type English and get guided
+corrections. A true ChatGPT-style teacher requires an AI API/backend connection.
+</p>
+
+<div id="chat" class="list"></div>
+
+<div class="searchBox" style="margin-top:12px">
+
+<input
+id="teacherInput"
+placeholder="Say something in English..."
+onkeydown="if(event.key==='Enter')teacherReply()">
+
+<button class="primary" onclick="teacherReply()">
+Send
+</button>
+
+<button class="ghost" onclick="startTeacherSpeech()">
+🎤
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="vision" class="page">
+
+<div class="sectionHead">
+<h2>Vision Practice</h2>
+</div>
+
+<div class="card">
+
+<h3>📷 Object English</h3>
+
+<video
+id="camera"
+class="camera"
+autoplay
+playsinline>
+</video>
+
+<div class="row" style="margin-top:10px">
+
+<button class="primary" onclick="startCamera()">
+Start camera
+</button>
+
+<button class="ghost" onclick="stopCamera()">
+Stop
+</button>
+
+</div>
+
+<div class="notice">
+
+Camera access is connected. Automatic object recognition needs
+a vision model/API; this page does not pretend that recognition
+is active when no model is connected.
+
+</div>
+
+<div class="row" style="margin-top:12px">
+
+<button class="ghost" onclick="sayObject('bottle')">
+This is a bottle
+</button>
+
+<button class="ghost" onclick="sayObject('book')">
+This is a book
+</button>
+
+<button class="ghost" onclick="sayObject('phone')">
+This is a phone
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="shorts" class="page">
+
+<div class="sectionHead">
+<h2>English Shorts</h2>
+</div>
+
+<div class="tiles">
+
+<div class="card tile">
+<div class="emoji">🎬</div>
+<h3>30-second phrase</h3>
+<p>
+“How are you doing?” — a friendly everyday phrase.
+</p>
+<button class="ghost"
+onclick="speakText('How are you doing?')">
+Listen
+</button>
+</div>
+
+<div class="card tile">
+<div class="emoji">🎧</div>
+<h3>Pronunciation tip</h3>
+<p>
+Practice slowly, then at natural speed.
+</p>
+<button class="ghost"
+onclick="speakText('Practice slowly, then at natural speed.')">
+Listen
+</button>
+</div>
+
+<div class="card tile">
+<div class="emoji">💡</div>
+<h3>Word of the day</h3>
+<p>
+Confident — feeling sure about yourself.
+</p>
+<button class="ghost"
+onclick="speakText('Confident. Feeling sure about yourself.')">
+Listen
+</button>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="challenge" class="page">
+
+<div class="sectionHead">
+<h2>Friend Challenge</h2>
+</div>
+
+<div class="card">
+
+<h3>Invite a friend</h3>
+
+<p class="muted">
+Create a simple challenge message and share it using your phone's
+share menu.
+</p>
+
+<div class="notice">
+Challenge: Learn 20 English words today.
+</div>
+
+<button
+class="primary"
+style="margin-top:12px"
+onclick="shareChallenge()">
+Share challenge
+</button>
+
+</div>
+
+</section>
+
+
+<section id="themes" class="page">
+
+<div class="sectionHead">
+
+<h2>Theme Gallery</h2>
+
+<span class="muted">
+3 free • 47+ locked
+</span>
+
+</div>
+
+<div id="themeGrid" class="themeGrid"></div>
+
+</section>
+
+
+<section id="progress" class="page">
+
+<div class="sectionHead">
+<h2>My Progress</h2>
+</div>
+
+<div class="grid">
+
+<div class="card stat">
+<small>XP</small>
+<b id="pXP">0</b>
+</div>
+
+<div class="card stat">
+<small>Streak</small>
+<b id="pStreak">0</b>
+</div>
+
+<div class="card stat">
+<small>Words</small>
+<b id="pWords">0</b>
+</div>
+
+<div class="card stat">
+<small>Goal</small>
+<b id="pGoal">0%</b>
+</div>
+
+</div>
+
+<div class="section card">
+
+<h3>Daily goal</h3>
+
+<div class="progress">
+<i id="goalBar"></i>
+</div>
+
+<p class="muted" id="goalText"></p>
+
+</div>
+
+<div class="section">
+
+<h3>Achievements</h3>
+
+<div id="badges" class="badges"></div>
+
+</div>
+
+<div class="section card">
+
+<h3>Certificate</h3>
+
+<p class="muted">
+Generate a printable achievement certificate.
+It is an in-app achievement certificate, not an accredited qualification.
+</p>
+
+<button class="primary" onclick="showCertificate()">
+Create certificate
+</button>
+
+</div>
+
+</section>
+
+
+<section id="premium" class="page">
+
+<div class="hero">
+
+<h2>Premium Learning</h2>
+
+<p>
+Unlock additional themes and future premium content.
+Payment is intentionally not faked: a real subscription requires
+a supported payment gateway and secure server-side verification.
+</p>
+
+</div>
+
+<div class="tiles">
+
+<div class="card tile">
+
+<h3>Pro</h3>
+
+<p>Extra themes and learning packs.</p>
+
+<h2>Rs. 499</h2>
+
+<button class="primary" onclick="premiumInfo()">
+View plan
+</button>
+
+</div>
+
+<div class="card tile">
+
+<h3>Ultra</h3>
+
+<p>All premium UI/content slots.</p>
+
+<h2>Rs. 999</h2>
+
+<button class="primary" onclick="premiumInfo()">
+View plan
+</button>
+
+</div>
+
+</div>
+
+<div class="notice">
+To connect real payments, add a backend/payment provider and
+verify transactions on the server. Never put secret payment keys
+in this HTML file.
+</div>
+
+</section>
+
+
+<section id="settings" class="page">
+
+<div class="sectionHead">
+<h2>Settings</h2>
+</div>
+
+<div class="card">
+
+<div class="row" style="justify-content:space-between">
+
+<div>
+<b>Daily reminder</b>
+<p class="muted">
+Request browser notification permission.
+</p>
+</div>
+
+<button class="ghost" onclick="enableReminder()">
+Enable
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card" style="margin-top:12px">
+
+<div class="row" style="justify-content:space-between">
+
+<div>
+<b>Animations</b>
+<p class="muted">
+Environmental theme effects.
+</p>
+</div>
+
+<button class="ghost" onclick="toggleAnimations()">
+Toggle
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card" style="margin-top:12px">
+
+<b>Reset progress</b>
+
+<p class="muted">
+This removes local learning progress on this device.
+</p>
+
+<button class="danger" onclick="resetProgress()">
+Reset
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+
+<nav class="nav">
+
+<button onclick="go('home')" data-nav="home">
+🏠
+<span>Home</span>
+</button>
+
+<button onclick="go('learn')" data-nav="learn">
+📚
+<span>Learn</span>
+</button>
+
+<button onclick="go('quiz')" data-nav="quiz">
+🧠
+<span>Quiz</span>
+</button>
+
+<button onclick="go('progress')" data-nav="progress">
+📈
+<span>Progress</span>
+</button>
+
+<button onclick="go('settings')" data-nav="settings">
+⚙️
+<span>Settings</span>
+</button>
+
+</nav>
+
+
+<div
+id="searchModal"
+class="modal hidden"
+onclick="if(event.target.id==='searchModal')closeSearch()">
+
+<div class="modalBox">
+
+<div class="sectionHead">
+
+<h2>Search</h2>
+
+<button class="iconBtn" onclick="closeSearch()">
+✕
+</button>
+
+</div>
+
+<input
+id="globalSearch"
+style="width:100%;padding:13px;border-radius:13px;background:var(--panel2);color:var(--text);border:1px solid var(--line)"
+placeholder="Search vocabulary, grammar, courses..."
+oninput="globalSearch()">
+
+<div id="globalResults" class="list"></div>
+
+</div>
+</div>
+
+
+<div
+id="certModal"
+class="modal hidden"
+onclick="if(event.target.id==='certModal')this.classList.add('hidden')">
+
+<div class="modalBox">
+
+<div id="certificate" class="certificate"></div>
+
+<div class="row" style="margin-top:12px">
+
+<button class="primary" onclick="window.print()">
+Print / Save PDF
+</button>
+
+<button
+class="ghost"
+onclick="document.getElementById('certModal').classList.add('hidden')">
+Close
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+
+const WORDS=[
+
+['confident','feeling sure about yourself','Everyday'],
+['achieve','to successfully reach a goal','Everyday'],
+['curious','wanting to learn or know more','Everyday'],
+['improve','to make something better','School'],
+['accurate','correct and without mistakes','School'],
+['research','careful study to discover facts','School'],
+['journey','an act of travelling from one place to another','Travel'],
+['luggage','bags and cases used while travelling','Travel'],
+['departure','the act of leaving a place','Travel'],
+['deadline','the latest time by which something should be done','Work'],
+['reliable','able to be trusted or depended on','Work'],
+['collaborate','to work together with others','Work']
+
+];
+
+
+const GRAMMAR=[
+
+[
+'Present Simple',
+'Use it for routines and facts. Example: “I study English every day.”'
+],
+
+[
+'Present Continuous',
+'Use it for something happening now. Example: “I am studying now.”'
+],
+
+[
+'Past Simple',
+'Use it for completed past actions. Example: “I visited Lahore yesterday.”'
+],
+
+[
+'Future with will',
+'Use it for future decisions or predictions. Example: “I will practice tomorrow.”'
+],
+
+[
+'Articles: a/an/the',
+'Use a/an for a non-specific singular noun and the for a specific one.'
+]
+
+];
+
+
+const QUIZ=[
+
+[
+'Choose the correct sentence.',
+[
+'She go to school.',
+'She goes to school.',
+'She going school.'
+],
+1
+],
+
+[
+'What does “reliable” mean?',
+[
+'Easy to break',
+'Able to be trusted',
+'Very expensive'
+],
+1
+],
+
+[
+'Choose the past form of “learn”.',
+[
+'learned',
+'learning',
+'learns'
+],
+0
+],
+
+[
+'Complete: “I ___ studying now.”',
+[
+'am',
+'is',
+'are'
+],
+0
+],
+
+[
+'What is a deadline?',
+[
+'A starting point',
+'The latest time something should be done',
+'A holiday'
+],
+1
+]
+
+];
+
+
+const THEMES=[
+
+['Midnight','🌙',['#070b16','#10182a'],'free'],
+['Ocean','🌊',['#04151d','#0c3342'],'free'],
+['Lavender','💜',['#160d27','#302052'],'free'],
+
+['Forest','🌲',['#07160d','#123d25'],'pro'],
+['Rain','🌧️',['#07121f','#12304b'],'pro'],
+['Space','🚀',['#050514','#171044'],'pro'],
+['Sunset','🌅',['#21100a','#4c2318'],'pro'],
+['Aurora','🌌',['#061a20','#183a45'],'pro'],
+['Royal','👑',['#160d20','#32194d'],'pro'],
+['Sapphire','💎',['#071326','#102e63'],'pro'],
+['Emerald','🟢',['#07170f','#124d2d'],'pro'],
+['Ruby','♦️',['#1b080e','#4a1520'],'pro'],
+['Desert','🏜️',['#21170a','#513719'],'pro'],
+['Cloud','☁️',['#10141e','#263044'],'pro'],
+['Cherry','🌸',['#210c17','#4c1d32'],'pro'],
+['Neon','⚡',['#080b14','#16263a'],'pro'],
+['Coffee','☕',['#140d09','#38231a'],'pro'],
+['Paper','📄',['#11110f','#303029'],'pro'],
+['Mint','🌿',['#071713','#123d36'],'pro'],
+['Coral','🪸',['#1b0e0c','#4d2922'],'pro'],
+['Ice','🧊',['#08141a','#173643'],'pro'],
+['Galaxy','🌠',['#090617','#29104b'],'pro'],
+['Volcano','🌋',['#170806','#4a160c'],'pro'],
+['Meadow','🌼',['#09130a','#2c3b16'],'pro'],
+['Rainforest','🌴',['#06140c','#164329'],'pro'],
+['Night City','🏙️',['#070a12','#202d45'],'pro'],
+['Monochrome','◐',['#0b0b0b','#2b2b2b'],'pro'],
+['Rose','🌹',['#190a12','#4a1a2d'],'pro'],
+['Steel','⚙️',['#0c1015','#29313b'],'pro'],
+['Sky','☁️',['#07131e','#183b55'],'pro'],
+['Autumn','🍂',['#160d08','#4b2a15'],'pro'],
+['Spring','🌷',['#09150d','#20422c'],'pro'],
+['Summer','☀️',['#17120a','#4a3b12'],'pro'],
+['Deep Sea','🐋',['#031015','#0a3541'],'pro'],
+['Plum','🍇',['#140a19','#3b164b'],'pro'],
+['Cobalt','🔵',['#061025','#112e68'],'pro'],
+['Golden','✨',['#171108','#4c3b10'],'pro'],
+['Silver','🥈',['#0e1114','#32383e'],'pro'],
+['Copper','🟠',['#160d08','#4a2717'],'pro'],
+['Moss','🌱',['#0b1208','#30431b'],'pro'],
+['Electric','🔋',['#071018','#16364a'],'pro'],
+['Twilight','🌆',['#0e0a1b','#30204a'],'pro'],
+['Pearl','🦪',['#101117','#343746'],'pro'],
+['Cosmic','🪐',['#070612','#22184c'],'pro'],
+['Bamboo','🎋',['#081309','#214024'],'pro'],
+['Storm','⛈️',['#090d16','#202d40'],'pro'],
+['Wild','🦋',['#09100d','#2d3a25'],'pro'],
+['Classic','📘',['#0b0f18','#1d2b43'],'pro']
+
+];
+
+
+let state=
+JSON.parse(localStorage.getItem('englishMasterState')||'null')
+||
+{
+xp:0,
+words:0,
+writing:0,
+quizTotal:0,
+quizCorrect:0,
+goal:0,
+streak:0,
+lastDay:'',
+favorites:[],
+theme:0,
+animations:true
+};
+
+let quizIndex=0;
+let quizScore=0;
+let cameraStream=null;
+let selectedCategory='All';
+
+
+function save(){
+
+localStorage.setItem(
+'englishMasterState',
+JSON.stringify(state)
+);
+
+renderStats();
+
+}
+
+
+function today(){
+
+return new Date().toISOString().slice(0,10);
+
+}
+
+
+function activity(n=1){
+
+let d=today();
+
+if(state.lastDay!==d){
+
+if(state.lastDay){
+
+let prev=new Date(state.lastDay);
+let now=new Date(d);
+let diff=Math.round((now-prev)/86400000);
+
+state.streak=diff===1
+?state.streak+1
+:1;
+
+}else{
+
+state.streak=1;
+
+}
+
+state.lastDay=d;
+state.goal=0;
+
+}
+
+state.goal=Math.min(20,state.goal+n);
+state.xp+=n*5;
+
+save();
+
+}
+
+
+function renderStats(){
+
+let pct=
+state.quizTotal
+?Math.round(state.quizCorrect/state.quizTotal*100)
+:0;
+
+document.querySelector('#wordsStat').textContent=state.words;
+document.querySelector('#scoreStat').textContent=pct+'%';
+document.querySelector('#writeStat').textContent=state.writing;
+document.querySelector('#badgeStat').textContent=badgesUnlocked();
+
+document.querySelector('#streakChip').textContent=state.streak;
+document.querySelector('#goalChip').textContent=state.goal+'/20';
+document.querySelector('#xpChip').textContent=state.xp;
+
+document.querySelector('#pXP').textContent=state.xp;
+document.querySelector('#pStreak').textContent=state.streak;
+document.querySelector('#pWords').textContent=state.words;
+
+document.querySelector('#pGoal').textContent=
+Math.round(state.goal/20*100)+'%';
+
+document.querySelector('#goalBar').style.width=
+Math.min(100,state.goal/20*100)+'%';
+
+document.querySelector('#goalText').textContent=
+state.goal+' of 20 learning actions today.';
+
+}
+
+
+function go(id){
+
+document.querySelectorAll('.page')
+.forEach(p=>p.classList.remove('active'));
+
+document.getElementById(id).classList.add('active');
+
+document.querySelectorAll('.nav button')
+.forEach(b=>
+b.classList.toggle('active',b.dataset.nav===id)
+);
+
+history.pushState({page:id},'', '#'+id);
+
+if(id==='learn')renderWords();
+if(id==='grammar')renderGrammar();
+if(id==='progress'){
+renderBadges();
+renderStats();
+}
+if(id==='themes')renderThemes();
+if(id==='quiz')renderQuiz();
+
+if(
+id==='teacher' &&
+!document.querySelector('#chat .item')
+){
+teacherSay(
+'Hello! I am Ayesha. Tell me one sentence about your day.'
+);
+}
+
+}
+
+
+window.addEventListener(
+'popstate',
+()=>{
+
+let id=location.hash.slice(1)||'home';
+
+if(document.getElementById(id))
+goSilent(id);
+
+}
+);
+
+
+function goSilent(id){
+
+document.querySelectorAll('.page')
+.forEach(p=>p.classList.remove('active'));
+
+document.getElementById(id).classList.add('active');
+
+document.querySelectorAll('.nav button')
+.forEach(b=>
+b.classList.toggle('active',b.dataset.nav===id)
+);
+
+}
+
+
+function renderWords(){
+
+let q=
+(document.getElementById('wordSearch').value||'')
+.toLowerCase();
+
+let arr=
+WORDS.filter(w=>
+(selectedCategory==='All'||w[2]===selectedCategory)
+&&
+(!q||w[0].includes(q)||w[1].includes(q))
+);
+
+document.getElementById('wordList').innerHTML=
+
+arr.map(w=>`
+
+<div class="item">
+
+<div class="itemMain">
+
+<b>${w[0]}</b>
+
+<p>
+${w[1]} · ${w[2]}
+</p>
+
+</div>
+
+<div class="row">
+
+<button
+class="iconBtn"
+onclick="speakText('${w[0]}')">
+🔊
+</button>
+
+<button
+class="iconBtn"
+onclick="favorite('${w[0]}')">
+☆
+</button>
+
+<button
+class="primary"
+onclick="learnWord('${w[0]}')">
+Learn
+</button>
+
+</div>
+
+</div>
+
+`).join('')
+
+||
+'<div class="card">No words found.</div>';
+
+}
+
+
+function showCategory(c){
+
+selectedCategory=c;
+
+go('learn');
+
+document.getElementById('wordSearch').value='';
+
+renderWords();
+
+}
+
+
+function learnWord(word){
+
+if(!state.favorites.includes(word))
+state.favorites.push(word);
+
+state.words++;
+
+activity(1);
+
+speakText(word);
+
+renderWords();
+
+}
+
+
+function favorite(w){
+
+if(!state.favorites.includes(w))
+state.favorites.push(w);
+
+else
+state.favorites=
+state.favorites.filter(x=>x!==w);
+
+save();
+
+}
+
+
+function dictionarySearch(){
+
+let q=
+document.getElementById('dictSearch')
+.value
+.trim()
+.toLowerCase();
+
+let w=
+WORDS.find(x=>x[0]===q)
+||
+WORDS.find(x=>x[0].includes(q));
+
+let box=document.getElementById('dictResult');
+
+if(w){
+
+box.innerHTML=`
+
+<h2>${w[0]}</h2>
+
+<p>${w[1]}</p>
+
+<p class="muted">
+Category: ${w[2]}
+</p>
+
+<button
+class="primary"
+onclick="speakText('${w[0]}')">
+🔊 Pronounce
+</button>
+
+`;
+
+activity(1);
+
+}
+
+else{
+
+box.innerHTML=`
+
+<h3>No offline result</h3>
+
+<p class="muted">
+Try a word from the learning list, or connect an online
+dictionary API in your backend.
+</p>
+
+`;
+
+}
+
+}
+
+
+function renderGrammar(){
+
+document.getElementById('grammarList').innerHTML=
+
+GRAMMAR.map((g,i)=>`
+
+<div class="item">
+
+<div class="itemMain">
+
+<b>${i+1}. ${g[0]}</b>
+
+<p>${g[1]}</p>
+
+</div>
+
+<button
+class="iconBtn"
+onclick="speakText(${JSON.stringify(g[1])})">
+🔊
+</button>
+
+</div>
+
+`).join('');
+
+}
+
+
+function speakText(t){
+
+if('speechSynthesis' in window){
+
+speechSynthesis.cancel();
+
+let u=
+new SpeechSynthesisUtterance(t);
+
+u.lang='en-US';
+u.rate=.9;
+
+speechSynthesis.speak(u);
+
+}
+
+}
+
+
+function speakCurrent(){
+
+speakText(
+document.getElementById('speakPhrase').textContent
+);
+
+activity(1);
+
+}
+
+
+function startSpeech(){
+
+let SR=
+window.SpeechRecognition||
+window.webkitSpeechRecognition;
+
+if(!SR){
+
+document.getElementById('speechOutput').textContent=
+'Speech recognition is not supported in this browser.';
+
+return;
+
+}
+
+let r=new SR();
+
+r.lang='en-US';
+r.interimResults=false;
+
+r.onresult=e=>{
+
+document.getElementById('speechOutput').textContent=
+'You said: '+e.results[0][0].transcript;
+
+activity(1);
+
+};
+
+r.onerror=()=>{
+
+document.getElementById('speechOutput').textContent=
+'Microphone recognition was not available.';
+
+};
+
+r.start();
+
+}
+
+
+function checkWriting(){
+
+let t=
+document.getElementById('writingText')
+.value
+.trim();
+
+let words=
+t?t.split(/\s+/).length:0;
+
+document.getElementById('wordCounter').textContent=
+words+' words';
+
+if(words<3){
+
+document.getElementById('writingFeedback').textContent=
+'Try writing at least 3 sentences. Add a subject, verb and a clear idea.';
+
+return;
+
+}
+
+state.writing+=words;
+
+activity(
+Math.min(5,Math.ceil(words/10))
+);
+
+document.getElementById('writingFeedback').textContent=
+'Good practice. Check your verb tense, punctuation and spelling, then read your paragraph aloud.';
+
+}
+
+
+function renderQuiz(){
+
+let q=QUIZ[quizIndex];
+
+document.getElementById('quizProgress').textContent=
+(quizIndex+1)+' / '+QUIZ.length;
+
+document.getElementById('quizBox').innerHTML=
+
+`<h3>${q[0]}</h3>`+
+
+q[1].map((o,i)=>`
+
+<button
+class="quizOption"
+onclick="answerQuiz(${i})">
+${o}
+</button>
+
+`).join('');
+
+}
+
+
+function answerQuiz(i){
+
+let q=QUIZ[quizIndex];
+
+document
+.querySelectorAll('.quizOption')
+.forEach((b,j)=>{
+
+b.disabled=true;
+
+if(j===q[2])
+b.classList.add('correct');
+
+if(j===i&&i!==q[2])
+b.classList.add('wrong');
+
+});
+
+state.quizTotal++;
+
+if(i===q[2]){
+
+state.quizCorrect++;
+quizScore++;
+state.xp+=15;
+
+}else{
+
+state.xp+=3;
+
+}
+
+state.goal=Math.min(20,state.goal+1);
+
+save();
+
+setTimeout(()=>{
+
+quizIndex=
+(quizIndex+1)%QUIZ.length;
+
+if(quizIndex===0){
+
+alert(
+'Quiz round complete: '+
+quizScore+'/'+QUIZ.length
+);
+
+}
+
+renderQuiz();
+
+},650);
+
+}
+
+
+function teacherSay(t){
+
+let el=document.createElement('div');
+
+el.className='item';
+
+el.innerHTML=
+
+`<div class="itemMain">
+<b>Ayesha</b>
+<p>${escapeHtml(t)}</p>
+</div>
+<button class="iconBtn"
+onclick='speakText(${JSON.stringify(t)})'>
+🔊
+</button>`;
+
+document
+.getElementById('chat')
+.appendChild(el);
+
+}
+
+
+function teacherReply(){
+
+let input=
+document.getElementById('teacherInput');
+
+let t=input.value.trim();
+
+if(!t)return;
+
+let u=document.createElement('div');
+
+u.className='item';
+
+u.innerHTML=
+
+`<div class="itemMain">
+<b>You</b>
+<p>${escapeHtml(t)}</p>
+</div>`;
+
+document
+.getElementById('chat')
+.appendChild(u);
+
+input.value='';
+
+let reply;
+
+if(/\b(i am|i'm)\b/i.test(t)){
+
+reply=
+'Nice sentence! Now try adding one detail: where, when, or why?';
+
+}
+
+else if(t.split(/\s+/).length<4){
+
+reply=
+'Good start. Make it a little longer so we can practice more.';
+
+}
+
+else{
+
+reply=
+'Good effort! Check your verb tense and punctuation, then say the sentence aloud once.';
+
+}
+
+setTimeout(()=>{
+
+teacherSay(reply);
+speakText(reply);
+
+},250);
+
+activity(1);
+
+}
+
+
+function startTeacherSpeech(){
+
+let SR=
+window.SpeechRecognition||
+window.webkitSpeechRecognition;
+
+if(!SR){
+
+teacherSay(
+'Your browser does not support speech recognition. You can type your sentence instead.'
+);
+
+return;
+
+}
+
+let r=new SR();
+
+r.lang='en-US';
+
+r.onresult=e=>{
+
+document.getElementById('teacherInput').value=
+e.results[0][0].transcript;
+
+teacherReply();
+
+};
+
+r.start();
+
+}
+
+
+function escapeHtml(s){
+
+return s.replace(
+/[&<>"']/g,
+m=>({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#039;'
+}[m])
+);
+
+}
+
+
+async function startCamera(){
+
+if(!navigator.mediaDevices?.getUserMedia){
+
+alert(
+'Camera is not supported by this browser.'
+);
+
+return;
+
+}
+
+try{
+
+cameraStream=
+await navigator.mediaDevices.getUserMedia({
+video:true,
+audio:false
+});
+
+document.getElementById('camera').srcObject=
+cameraStream;
+
+}
+
+catch(e){
+
+alert(
+'Camera permission was not granted.'
+);
+
+}
+
+}
+
+
+function stopCamera(){
+
+if(cameraStream){
+
+cameraStream
+.getTracks()
+.forEach(t=>t.stop());
+
+cameraStream=null;
+
+document.getElementById('camera').srcObject=null;
+
+}
+
+}
+
+
+function sayObject(o){
+
+speakText('This is a '+o+'.');
+
+activity(1);
+
+}
+
+
+function shareChallenge(){
+
+let text=
+'English Master Challenge: Learn 20 English words today!';
+
+if(navigator.share){
+
+navigator.share({
+title:'English Master Challenge',
+text:text
+});
+
+}
+
+else if(navigator.clipboard){
+
+navigator.clipboard
+.writeText(text)
+.then(()=>alert('Challenge copied.'));
+
+}
+
+}
+
+
+function renderThemes(){
+
+document.getElementById('themeGrid').innerHTML=
+
+THEMES.map((t,i)=>`
+
+<button
+class="theme ${t[3]==='pro'?'locked':''}"
+onclick="applyTheme(${i})">
+
+<div
+class="swatch"
+style="background:linear-gradient(135deg,${t[2][0]},${t[2][1]})">
+</div>
+
+<b>${t[1]} ${t[0]}</b>
+
+<br>
+
+<small>
+${t[3]==='free'?'Free':'Premium slot'}
+</small>
+
+</button>
+
+`).join('');
+
+}
+
+
+function applyTheme(i){
+
+let t=THEMES[i];
+
+if(t[3]==='pro'){
+
+alert(
+'This theme is reserved for the premium tier. Connect your verified payment/backend before enabling paid unlocks.'
+);
+
+return;
+
+}
+
+state.theme=i;
+
+document.documentElement
+.style.setProperty('--bg',t[2][0]);
+
+document.documentElement
+.style.setProperty('--panel',t[2][1]);
+
+save();
+
+if(t[0]==='Rain')
+makeRain();
+
+else if(t[0]==='Space')
+makeStars();
+
+else{
+
+document.getElementById('rain').innerHTML='';
+document.getElementById('stars').innerHTML='';
+
+}
+
+}
+
+
+function makeRain(){
+
+document.getElementById('stars').innerHTML='';
+
+let r=document.getElementById('rain');
+
+r.innerHTML='';
+
+for(let i=0;i<70;i++){
+
+let d=document.createElement('i');
+
+d.className='drop';
+
+d.style.left=
+Math.random()*100+'%';
+
+d.style.top=
+Math.random()*-100+'px';
+
+d.style.animationDelay=
+Math.random()+'s';
+
+r.appendChild(d);
+
+}
+
+}
+
+
+function makeStars(){
+
+document.getElementById('rain').innerHTML='';
+
+let s=document.getElementById('stars');
+
+s.innerHTML='';
+
+for(let i=0;i<100;i++){
+
+let d=document.createElement('i');
+
+d.className='star';
+
+d.style.left=
+Math.random()*100+'%';
+
+d.style.top=
+Math.random()*100+'%';
+
+d.style.animationDelay=
+Math.random()*2+'s';
+
+s.appendChild(d);
+
+}
+
+}
+
+
+function toggleTheme(){
+
+let light=
+document.body.dataset.light==='1';
+
+document.body.dataset.light=
+light?'0':'1';
+
+if(!light){
+
+document.documentElement.style.setProperty(
+'--bg','#f3f6fb'
+);
+
+document.documentElement.style.setProperty(
+'--panel','#fff'
+);
+
+document.documentElement.style.setProperty(
+'--panel2','#edf1f8'
+);
+
+document.documentElement.style.setProperty(
+'--text','#111827'
+);
+
+document.documentElement.style.setProperty(
+'--muted','#596579'
+);
+
+document.documentElement.style.setProperty(
+'--line','#d8dfeb'
+);
+
+}
+
+else{
+
+let t=THEMES[state.theme];
+
+document.documentElement.style.setProperty(
+'--bg',t[2][0]
+);
+
+document.documentElement.style.setProperty(
+'--panel',t[2][1]
+);
+
+document.documentElement.style.setProperty(
+'--panel2','#151f35'
+);
+
+document.documentElement.style.setProperty(
+'--text','#f5f7ff'
+);
+
+document.documentElement.style.setProperty(
+'--muted','#9aa7bd'
+);
+
+document.documentElement.style.setProperty(
+'--line','#26324a'
+);
+
+}
+
+}
+
+
+function openSearch(){
+
+document
+.getElementById('searchModal')
+.classList.remove('hidden');
+
+document
+.getElementById('globalSearch')
+.focus();
+
+}
+
+
+function closeSearch(){
+
+document
+.getElementById('searchModal')
+.classList.add('hidden');
+
+}
+
+
+function globalSearch(){
+
+let q=
+document.getElementById('globalSearch')
+.value
+.toLowerCase()
+.trim();
+
+if(!q){
+
+document.getElementById('globalResults').innerHTML='';
+
+return;
+
+}
+
+let out=[];
+
+WORDS.forEach(w=>{
+
+if(
+w[0].includes(q)||
+w[1].includes(q)
+){
+
+out.push(`
+
+<div class="item">
+
+<div class="itemMain">
+
+<b>${w[0]}</b>
+
+<p>${w[1]}</p>
+
+</div>
+
+<button
+class="primary"
+onclick="closeSearch();go('learn');document.getElementById('wordSearch').value='${w[0]}';renderWords()">
+
+Open
+
+</button>
+
+</div>
+
+`);
+
+}
+
+});
+
+
+GRAMMAR.forEach(g=>{
+
+if(
+g[0].toLowerCase().includes(q)||
+g[1].toLowerCase().includes(q)
+){
+
+out.push(`
+
+<div class="item">
+
+<div class="itemMain">
+
+<b>${g[0]}</b>
+
+<p>${g[1]}</p>
+
+</div>
+
+<button
+class="primary"
+onclick="closeSearch();go('grammar')">
+
+Open
+
+</button>
+
+</div>
+
+`);
+
+}
+
+});
+
+
+document.getElementById('globalResults').innerHTML=
+out.join('')||
+'<div class="card">No results.</div>';
+
+}
+
+
+function badgesUnlocked(){
+
+return [
+
+state.words>=1,
+state.words>=10,
+state.xp>=100,
+state.streak>=3,
+state.writing>=20,
+state.quizCorrect>=5
+
+].filter(Boolean).length;
+
+}
+
+
+function renderBadges(){
+
+let b=[
+
+['🌱','First Word',state.words>=1],
+['📚','10 Words',state.words>=10],
+['⚡','100 XP',state.xp>=100],
+['🔥','3-Day Streak',state.streak>=3],
+['✍️','20 Written Words',state.writing>=20],
+['🏆','5 Correct',state.quizCorrect>=5]
+
+];
+
+
+document.getElementById('badges').innerHTML=
+
+b.map(x=>`
+
+<div class="badge ${x[2]?'':'locked'}">
+
+<div class="bicon">${x[0]}</div>
+
+<b>${x[1]}</b>
+
+<p class="muted">
+${x[2]?'Unlocked':'Keep learning'}
+</p>
+
+</div>
+
+`).join('');
+
+}
+
+
+function showCertificate(){
+
+document.getElementById('certificate').innerHTML=`
+
+<h1>Certificate of Learning</h1>
+
+<p>This certifies that</p>
+
+<div class="certName">
+English Master Learner
+</div>
+
+<p>
+has completed ${state.words} vocabulary words,
+${state.writing} writing words and earned
+${state.xp} XP.
+</p>
+
+<p>
+English Master • ${new Date().toLocaleDateString()}
+</p>
+
+`;
+
+document
+.getElementById('certModal')
+.classList.remove('hidden');
+
+}
+
+
+function premiumInfo(){
+
+alert(
+'Premium screen connected. Real payment must be implemented with a secure payment gateway and server-side verification; this HTML does not fake a successful purchase.'
+);
+
+}
+
+
+async function enableReminder(){
+
+if(!('Notification'in window)){
+
+alert(
+'Notifications are not supported here.'
+);
+
+return;
+
+}
+
+let p=
+await Notification.requestPermission();
+
+alert(
+p==='granted'
+?
+'Reminder permission enabled. A real scheduled reminder still needs a service worker/push setup.'
+:
+'Notification permission was not granted.'
+);
+
+}
+
+
+function toggleAnimations(){
+
+state.animations=!state.animations;
+
+alert(
+state.animations
+?'Animations on'
+:'Animations off'
+);
+
+save();
+
+}
+
+
+function resetProgress(){
+
+if(confirm(
+'Reset all local learning progress?'
+)){
+
+state={
+xp:0,
+words:0,
+writing:0,
+quizTotal:0,
+quizCorrect:0,
+goal:0,
+streak:0,
+lastDay:'',
+favorites:[],
+theme:0,
+animations:true
+};
+
+save();
+
+alert('Progress reset.');
+
+}
+
+}
+
+
+document
+.getElementById('writingText')
+.addEventListener('input',()=>{
+
+let t=
+document.getElementById('writingText')
+.value
+.trim();
+
+document.getElementById('wordCounter').textContent=
+(t?t.split(/\s+/).length:0)+' words';
+
+});
+
+
+window.addEventListener('load',()=>{
+
+setTimeout(
+()=>{
+document.getElementById('splash').style.display='none'
+},
+1200
+);
+
+renderStats();
+renderWords();
+renderGrammar();
+renderThemes();
+renderBadges();
+renderQuiz();
+
+let t=
+THEMES[state.theme]||THEMES[0];
+
+applyTheme(state.theme);
+
+let hash=location.hash.slice(1);
+
+if(hash&&document.getElementById(hash))
+goSilent(hash);
+
+});
+
+</script>
+
 </body>
 </html>
