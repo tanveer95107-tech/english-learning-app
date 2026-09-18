@@ -3,143 +3,184 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="English Master ULTRA - vocabulary, grammar, speaking, writing and quizzes with 50 themes">
 <title>English Master ULTRA</title>
 <link rel="manifest" href="manifest.json">
 <style>
-/* --- ULTRA THEMES ENGINE --- */
-:root{ --primary:#2563eb; --secondary:#0f172a; --background:#f5f7fb; --card:#ffffff; --text:#172033; --muted:#64748b; --border:#e2e8f0; }
-body[data-theme="dark"]{ --background:#0f172a; --card:#1e293b; --text:#f8fafc; --border:#334155; }
-body[data-theme="neon"]{ --background:#0a0a0a; --card:#111; --text:#39ff14; --primary:#39ff14; --border:#39ff14; }
-body[data-theme="royal"]{ --background:#1a1a2e; --card:#16213e; --text:#ffd700; --primary:#ffd700; }
-body[data-theme="sunset"]{ --background:#fff7ed; --card:#ffedd5; --text:#7c2d12; --primary:#f97316; }
-body[data-theme="forest"]{ --background:#f0fdf4; --card:#dcfce7; --text:#14532d; --primary:#15803d; }
-/* 47 aur themes aise add hongi */
-
-* { box-sizing:border-box; margin:0; padding:0; }
-body{ font-family:Arial,sans-serif; background:var(--background); color:var(--text); transition:.3s; }
-
-/* --- SPLASH ANIMATION --- */
-#splash{ position:fixed; inset:0; background:linear-gradient(135deg,#1d4ed8,#2563eb); color:white; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:9999; animation: splashOut 0.8s ease 2.2s forwards; }
-@keyframes splashIn{ 0%{transform:scale(0) rotate(-20deg); opacity:0} 100%{transform:scale(1) rotate(0); opacity:1} }
-@keyframes splashOut{ 0%{transform:translateY(0)} 100%{transform:translateY(-100%)} }
-.splash-logo{ font-size:60px; animation:splashIn 1s ease; }
-
-/* Tumhara purana CSS yahan rahega + mera naya */
-header{ background:linear-gradient(135deg,var(--primary),#1d4ed8); color:white; padding:28px 18px; text-align:center; }
-.topbar{ max-width:1050px; margin:15px auto 0; padding:0 15px; display:flex; gap:10px; }
-.search{ flex:1; padding:13px 16px; border:1px solid var(--border); border-radius:10px; background:var(--card); color:var(--text); }
-.top-btn{ border:0; border-radius:10px; padding:0 15px; background:var(--secondary); color:white; cursor:pointer; }
-.container{ max-width:1050px; margin:auto; padding:20px 15px; }
-/*... baki tumhara purana CSS same... */
-
-/* ULTRA CARDS */
-.ultra-badge{ background:linear-gradient(135deg,#f59e0b,#ef4444); color:white; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:bold; }
-.pro-lock{ position:relative; opacity:0.6; }
-.pro-lock::after{ content:"🔒 ULTRA"; position:absolute; top:8px; right:8px; background:#0f172a; color:white; padding:2px 8px; border-radius:10px; font-size:10px; }
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#2563eb;--secondary:#0f172a;--background:#f5f7fb;--card:#ffffff;--text:#172033;--muted:#64748b;--border:#e2e8f0;--success:#15803d;--danger:#dc2626}
+body[data-theme="light"]{--primary:#2563eb;--secondary:#0f172a;--background:#f5f7fb;--card:#ffffff;--text:#172033}
+body[data-theme="dark"]{--primary:#3b82f6;--secondary:#020617;--background:#0f172a;--card:#1e293b;--text:#f8fafc;--muted:#cbd5e1;--border:#334155}
+body[data-theme="ocean"]{--primary:#0ea5e9;--background:#f0f9ff;--card:#ffffff;--text:#0c4a6e}
+body[data-theme="neon"]{--primary:#39ff14;--secondary:#000;--background:#0a0a0a;--card:#111;--text:#39ff14;--border:#39ff14}
+body[data-theme="royal"]{--primary:#ffd700;--secondary:#1a1a2e;--background:#1a1a2e;--card:#16213e;--text:#ffd700;--border:#ffd700}
+body[data-theme="sunset"]{--primary:#f97316;--background:#fff7ed;--card:#ffedd5;--text:#7c2d12}
+body[data-theme="forest"]{--primary:#15803d;--background:#f0fdf4;--card:#dcfce7;--text:#14532d}
+body[data-theme="cyberpunk"]{--primary:#ff00ff;--background:#0f0f1a;--card:#1a0a2e;--text:#00ffff}
+body[data-theme="pink"]{--primary:#ec4899;--background:#fdf2f8;--card:#fce7f3;--text:#831843}
+body[data-theme="midnight"]{--primary:#6366f1;--background:#020617;--card:#0f172a;--text:#e0e7ff}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--background);color:var(--text);line-height:1.6;transition:.3s}
+#splash{position:fixed;inset:0;background:linear-gradient(135deg,#1d4ed8,#2563eb,#7c3aed);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
+#splash.hide{animation:splashOut.8s ease forwards}
+@keyframes splashIn{0%{transform:scale(0) rotate(-30deg);opacity:0}60%{transform:scale(1.2) rotate(10deg)}100%{transform:scale(1) rotate(0);opacity:1}}
+@keyframes splashOut{to{transform:translateY(-100%);opacity:0}}
+@keyframes bookOpen{0%{transform:perspective(800px) rotateY(-90deg)}100%{transform:perspective(800px) rotateY(0)}}
+.splash-logo{font-size:70px;animation:splashIn 1.2s cubic-bezier(.34,1.56,.64,1)}
+header{background:linear-gradient(135deg,var(--primary),#1d4ed8);color:white;padding:28px 18px;text-align:center}
+header h1{font-size:32px}
+.topbar{max-width:1050px;margin:15px auto 0;padding:0 15px;display:flex;gap:10px}
+.search{flex:1;padding:13px 16px;border:1px solid var(--border);border-radius:10px;font-size:16px;background:var(--card);color:var(--text);outline:none}
+.top-btn{border:0;border-radius:10px;padding:0 15px;background:var(--secondary);color:white;cursor:pointer}
+.container{max-width:1050px;margin:auto;padding:20px 15px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:15px;text-align:center}
+.stat strong{display:block;font-size:24px;color:var(--primary)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.card{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:14px;padding:20px;text-align:left;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.05);transition:.2s}
+.card:hover{transform:translateY(-3px)}
+.icon{display:block;font-size:28px;margin-bottom:8px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin-top:18px}
+.hidden{display:none!important}
+.back{border:0;background:var(--secondary);color:white;padding:10px 15px;border-radius:8px;cursor:pointer;margin-bottom:18px}
+.info{background:#eff6ff;color:#172033;border-left:5px solid var(--primary);padding:14px;border-radius:8px;margin:14px 0}
+body[data-theme="dark"].info,body[data-theme="neon"].info,body[data-theme="royal"].info,body[data-theme="midnight"].info,body[data-theme="cyberpunk"].info{background:var(--card);color:var(--text)}
+.word{background:var(--background);border:1px solid var(--border);padding:15px;border-radius:10px;margin:10px 0}
+.word-title{font-size:19px;font-weight:bold}
+.example{margin-top:6px;color:var(--muted)}
+.small-btn{border:0;padding:8px 11px;border-radius:7px;cursor:pointer;margin-top:10px;margin-right:5px}
+.speak{background:var(--primary);color:white}
+.favorite{background:#f1f5f9;color:#172033}
+.quiz-question{font-size:20px;font-weight:bold;margin-bottom:15px}
+.quiz-option{width:100%;padding:12px;margin:7px 0;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);text-align:left;cursor:pointer}
+.quiz-option.correct{border-color:var(--success);background:#dcfce7;color:#166534}
+.quiz-option.wrong{border-color:var(--danger);background:#fee2e2;color:#991b1b}
+.progress{width:100%;height:10px;background:var(--border);border-radius:10px;overflow:hidden;margin:12px 0 20px}
+.progress-bar{height:100%;width:0%;background:var(--primary);transition:.3s}
+.action{border:0;background:var(--primary);color:white;padding:11px 16px;border-radius:8px;cursor:pointer;margin-top:12px}
+.secondary{background:#475569}
+.ultra-badge{background:linear-gradient(135deg,#f59e0b,#ef4444);color:white;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:bold;margin-left:8px}
+.theme-lock{position:relative}
+.theme-lock.locked::after{content:"🔒 ULTRA";position:absolute;top:6px;right:6px;background:#0f172a;color:white;padding:2px 6px;border-radius:8px;font-size:9px}
+footer{margin-top:35px;background:var(--secondary);color:white;text-align:center;padding:25px}
+@media(max-width:600px){header h1{font-size:22px}.topbar{flex-direction:column}.stats{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body data-theme="light">
 
 <div id="splash">
-  <div class="splash-logo">🇬🇧</div>
-  <h1 style="margin-top:10px">English Master</h1>
-  <p>ULTRA Edition</p>
+  <div class="splash-logo">📚</div>
+  <h1 style="font-size:36px;margin-top:10px;animation:bookOpen 1s ease.5s both">English Master</h1>
+  <p style="margin-top:6px;letter-spacing:3px">ULTRA EDITION</p>
+  <p style="margin-top:20px;font-size:12px;opacity:.8">Loading 50 Themes • AI Dictionary • Unlimited</p>
 </div>
 
 <header>
   <h1>🇬🇧 English Master <span class="ultra-badge">ULTRA</span></h1>
   <p>Learn • Practice • Improve • Earn</p>
-  <div style="margin-top:12px">
-    <button onclick="openThemeStore()" style="background:white;color:#2563eb;border:0;padding:8px 14px;border-radius:20px;font-weight:bold">🎨 50 Themes</button>
-    <button onclick="buyUltra()" style="background:#f59e0b;color:black;border:0;padding:8px 14px;border-radius:20px;font-weight:bold;margin-left:8px">💎 Unlock Ultra Rs.999</button>
+  <div style="margin-top:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+    <button onclick="openThemeStore()" style="background:white;color:#2563eb;border:0;padding:9px 16px;border-radius:20px;font-weight:bold;cursor:pointer">🎨 50 Themes</button>
+    <button id="ultraBtn" onclick="buyUltra()" style="background:#f59e0b;color:black;border:0;padding:9px 16px;border-radius:20px;font-weight:bold;cursor:pointer">💎 Unlock Ultra Rs.999</button>
   </div>
+  <div id="limitBar" style="margin-top:12px;background:rgba(0,0,0,.2);border-radius:20px;padding:6px 12px;font-size:12px;display:inline-block"></div>
 </header>
 
 <div class="topbar">
-  <input id="search" class="search" type="search" placeholder="Search ANY English word - Live Dictionary..." oninput="searchApp(); liveDictionary(this.value)">
-  <button class="top-btn" onclick="toggleDarkMode()">🌙</button>
+<input id="search" class="search" type="search" placeholder="🔍 Search ANY word - Live Dictionary + Lessons..." oninput="searchApp(); liveDict(this.value)">
+<button class="top-btn" onclick="openThemeStore()">🎨</button>
+<button class="top-btn" onclick="toggleDarkMode()">🌙</button>
 </div>
 
-<div id="themeStore" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;padding:20px;overflow:auto">
-  <div style="background:var(--card);max-width:600px;margin:auto;border-radius:16px;padding:20px">
-    <h2>🎨 Theme Store - 50 Themes</h2>
-    <p>3 Free, 47 Ultra me</p>
+<div id="themeStore" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;padding:15px;overflow:auto">
+  <div style="background:var(--card);max-width:650px;margin:20px auto;border-radius:16px;padding:20px">
+    <h2>🎨 Theme Store - 50 LIVE Themes</h2>
+    <p style="color:var(--muted);font-size:13px;margin-top:4px">3 Free • 47 Ultra me unlock hongi</p>
     <div id="themeGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px"></div>
-    <button onclick="closeThemeStore()" style="margin-top:15px;width:100%;padding:12px;background:var(--secondary);color:white;border:0;border-radius:10px">Close</button>
+    <button onclick="closeThemeStore()" style="margin-top:16px;width:100%;padding:12px;background:var(--secondary);color:white;border:0;border-radius:10px;cursor:pointer">Close Store</button>
   </div>
 </div>
 
-<!-- TUMHARA PURANA CONTAINER SAME RAHEGA -->
 <div class="container">
-<!--... tumhara stats, grid, panels... -->
+<div class="stats">
+<div class="stat"><strong id="wordsStat">0</strong>Words Learned</div>
+<div class="stat"><strong id="quizStat">0</strong>Quiz Correct</div>
+<div class="stat"><strong id="favStat">0</strong>Favorites</div>
 </div>
+<section id="home">
+<h2>Start Learning <span id="proStatus" style="font-size:12px"></span></h2>
+<div class="grid">
+<button class="card searchable" onclick="openVocabulary()"><span class="icon">📖</span>Vocabulary</button>
+<button class="card searchable" onclick="openGrammar()"><span class="icon">🔤</span>Grammar</button>
+<button class="card searchable" onclick="openSpeaking()"><span class="icon">🗣️</span>Speaking Practice</button>
+<button class="card searchable" onclick="openWriting()"><span class="icon">✍️</span>Writing Practice</button>
+<button class="card searchable" onclick="startQuiz()"><span class="icon">📝</span>English Quiz</button>
+<button class="card searchable" onclick="openProgress()"><span class="icon">📊</span>My Progress</button>
+</div>
+</section>
+<section id="contentPanel" class="panel hidden">
+<button class="back" onclick="goHome()">← Home</button>
+<div id="content"></div>
+</section>
+</div>
+<footer><p>🇬🇧 English Master ULTRA</p><p>Original educational learning material</p><p>50 Themes • AI Dictionary • Daily Limit • Pro System</p></footer>
 
 <script>
-// === ULTRA LOGIC ===
-let isUltra = localStorage.getItem('isUltra') === 'true';
-let today = new Date().toDateString();
-let dailyData = JSON.parse(localStorage.getItem('dailyData') || '{"date":"","count":0,"dict":0}');
-if(dailyData.date!== today) dailyData = {date:today, count:0, dict:0};
+const vocabulary=[{word:"achieve",meaning:"to successfully reach a goal",example:"She worked hard to achieve her goal."},{word:"brave",meaning:"showing courage in a difficult situation",example:"The brave student helped his classmate."},{word:"careful",meaning:"giving attention to avoid mistakes or danger",example:"Be careful when crossing the road."},{word:"curious",meaning:"wanting to know or learn something",example:"The curious student asked many questions."},{word:"improve",meaning:"to become better or make something better",example:"I practice every day to improve my English."},{word:"important",meaning:"having great value or significance",example:"Education is important for personal development."},{word:"knowledge",meaning:"information and understanding gained through learning",example:"Reading can increase your knowledge."},{word:"practice",meaning:"repeated activity used to improve a skill",example:"Regular practice can improve your speaking."},{word:"respect",meaning:"to treat someone or something with consideration",example:"We should respect other people."},{word:"understand",meaning:"to know the meaning of something",example:"I understand the lesson."},{word:"useful",meaning:"helpful for a particular purpose",example:"This dictionary is useful for learners."},{word:"confident",meaning:"feeling sure about your ability",example:"She felt confident before the presentation."}];
+const quizQuestions=[{question:"Which word is a noun?",options:["Quickly","School","Run","Beautiful"],answer:1},{question:"Which word is a verb?",options:["Happy","Table","Read","Blue"],answer:2},{question:"Choose the correct sentence.",options:["He go to school.","He goes to school.","He going to school.","He gone to school."],answer:1},{question:"Which word describes a noun?",options:["Adjective","Verb","Pronoun","Conjunction"],answer:0},{question:"Choose the correct plural form of 'book'.",options:["Bookes","Books","Bookies","Book"],answer:1},{question:"Which sentence is in the simple present?",options:["I am eating now.","I ate yesterday.","I play football every week.","I will play tomorrow."],answer:2},{question:"What is the opposite of 'easy'?",options:["Simple","Light","Difficult","Small"],answer:2},{question:"Choose the correct article.",options:["an book","a book","the book a","book an"],answer:1}];
+let quizIndex=0,quizScore=0,quizAnswered=false;
+let progress=JSON.parse(localStorage.getItem("englishMasterProgress"))||{words:0,correct:0,favorites:[]};
+let isUltra=localStorage.getItem('isUltra')==='true';
+let today=new Date().toDateString();
+let daily=JSON.parse(localStorage.getItem('dailyLimit')||'{"date":"","words":0,"dict":0}');
+if(daily.date!==today) daily={date:today,words:0,dict:0};
 
-const themes = [
-  {id:'light', name:'Light - FREE', free:true},
-  {id:'dark', name:'Dark - FREE', free:true},
-  {id:'ocean', name:'Ocean Blue - FREE', free:true},
-  {id:'neon', name:'Neon Hacker', free:false},
-  {id:'royal', name:'Royal Gold', free:false},
-  {id:'sunset', name:'Sunset', free:false},
-  {id:'forest', name:'Forest', free:false},
-  {id:'cyberpunk', name:'Cyberpunk', free:false},
-  // 42 aur...
+const allThemes=[
+{id:'light',name:'Light ☀️',free:true},{id:'dark',name:'Dark 🌙',free:true},{id:'ocean',name:'Ocean Blue 🌊',free:true},
+{id:'neon',name:'Neon Hacker 💚',free:false},{id:'royal',name:'Royal Gold 👑',free:false},{id:'sunset',name:'Sunset Orange 🌅',free:false},{id:'forest',name:'Forest Green 🌲',free:false},{id:'cyberpunk',name:'Cyberpunk 💜',free:false},{id:'pink',name:'Pink Blossom 🌸',free:false},{id:'midnight',name:'Midnight Blue 🌌',free:false},
+{id:'crimson',name:'Crimson Red',free:false},{id:'emerald',name:'Emerald',free:false},{id:'volcano',name:'Volcano',free:false},{id:'ice',name:'Ice Blue',free:false},{id:'desert',name:'Desert Sand',free:false},{id:'galaxy',name:'Galaxy',free:false},{id:'matrix',name:'Matrix',free:false},{id:'candy',name:'Candy',free:false},{id:'lava',name:'Lava',free:false},{id:'aqua',name:'Aqua',free:false}
 ];
+// baki 30 themes same logic se add ho jayengi
 
-function openThemeStore(){
-  document.getElementById('themeStore').style.display='block';
-  let html=''; themes.forEach(t=>{
-    let locked =!t.free &&!isUltra;
-    html+=`<div class="pro-lock" style="${locked?'':''} border:1px solid var(--border);padding:12px;border-radius:10px;cursor:pointer" onclick="applyTheme('${t.id}', ${t.free})"><b>${t.name}</b><br>${locked?'<span style=color:red>🔒 Rs.999 me unlock</span>':'<span style=color:green>✓ Active</span>'}</div>`;
-  });
-  document.getElementById('themeGrid').innerHTML=html;
+function updateLimitBar(){
+  let el=document.getElementById('limitBar');
+  let status=document.getElementById('proStatus');
+  let btn=document.getElementById('ultraBtn');
+  if(isUltra){el.textContent='💎 ULTRA Active - Unlimited Learning'; status.textContent='💎 ULTRA'; btn.textContent='✅ ULTRA Active'; btn.style.background='#22c55e';}
+  else{el.textContent=`📅 Today: ${daily.words}/15 Words • ${daily.dict}/5 Dictionary • Free Plan`; status.textContent=`• ${daily.words}/15 Today`; btn.textContent='💎 Unlock Ultra Rs.999';}
 }
-function closeThemeStore(){ document.getElementById('themeStore').style.display='none'; }
-function applyTheme(id, isFree){
-  if(!isFree &&!isUltra){ alert('Ye theme ULTRA me hai! Rs.999 me unlock karo.'); buyUltra(); return; }
-  document.body.setAttribute('data-theme', id);
-  localStorage.setItem('theme', id);
-}
-function buyUltra(){
-  if(confirm('ULTRA Unlock karein Rs.999 Lifetime? Isme 47 Premium Themes + Unlimited Learning + Camera Dictionary + No Ads milega.')){
-    localStorage.setItem('isUltra','true'); alert('ULTRA Unlocked! App reload ho rahi hai...'); location.reload();
-  }
-}
-function checkLimit(){
+function checkDailyLimit(type){
   if(isUltra) return true;
-  if(dailyData.count >= 15){ alert('Aaj ki 15 words ki limit khatam! Kal aao ya ULTRA Unlock karo Rs.999 me unlimited ke liye.'); return false; }
-  dailyData.count++; localStorage.setItem('dailyData', JSON.stringify(dailyData)); return true;
+  if(type==='word' && daily.words>=15){alert('⏰ Aaj ki 15 words ki limit khatam!\nKal wapas aao ya ULTRA Unlock karo Rs.999 me unlimited ke liye.'); return false;}
+  if(type==='dict' && daily.dict>=5){alert('📚 Free Dictionary 5/day limit khatam!\nULTRA lo unlimited dictionary ke liye.'); return false;}
+  if(type==='word') daily.words++; if(type==='dict') daily.dict++;
+  daily.date=today; localStorage.setItem('dailyLimit',JSON.stringify(daily)); updateLimitBar(); return true;
 }
-async function liveDictionary(word){
-  if(word.length < 3) return;
-  if(!isUltra && dailyData.dict >=5){ document.getElementById('content').innerHTML='<p style=color:red>Free Dictionary limit 5/day. ULTRA lo unlimited.</p>'; return; }
-  try{
-    let res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-    let data = await res.json(); if(data[0]){
-      if(!isUltra) { dailyData.dict++; localStorage.setItem('dailyData', JSON.stringify(dailyData)); }
-      // yahan meaning dikhao
-    }
-  }catch(e){}
-}
-
-// Splash auto hide
-setTimeout(()=>{ document.getElementById('splash').style.display='none'; }, 3000);
-// Load saved theme
-let savedTheme = localStorage.getItem('theme') || 'light';
-document.body.setAttribute('data-theme', savedTheme);
+function openThemeStore(){document.getElementById('themeStore').style.display='block'; let g=document.getElementById('themeGrid'); g.innerHTML=''; allThemes.forEach(t=>{let locked=!t.free&&!isUltra; g.innerHTML+=`<div class="theme-lock ${locked?'locked':''}" style="border:1px solid var(--border);padding:14px;border-radius:12px;cursor:pointer;background:var(--background)" onclick="applyTheme('${t.id}',${t.free})"><b>${t.name}</b><br><span style="font-size:11px;color:${locked?'#ef4444':'#22c55e'}">${locked?'🔒 ULTRA Rs.999':'✅ ${t.free?'FREE':'Unlocked'}'}</span></div>`});}
+function closeThemeStore(){document.getElementById('themeStore').style.display='none';}
+function applyTheme(id,free){if(!free&&!isUltra){buyUltra(); return;} document.body.setAttribute('data-theme',id); localStorage.setItem('savedTheme',id);}
+function buyUltra(){if(confirm('💎 ULTRA Unlock karein Rs.999 Lifetime?\n\n✅ 47 Premium Themes\n✅ Unlimited Words & Dictionary\n✅ No Ads\n✅ Camera Dictionary (Future)\n✅ Certificate\n\nPlay Store pe ye Google Play Billing se hoga.')){localStorage.setItem('isUltra','true'); isUltra=true; updateLimitBar(); alert('🎉 ULTRA Unlocked! Ab aap Pro user ho.'); closeThemeStore();}}
+async function liveDict(w){w=w.trim().toLowerCase(); if(w.length<2) return; if(!checkDailyLimit('dict')) return; try{let r=await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${w}`); let d=await r.json(); if(d[0]&&d[0].meanings){let m=d[0].meanings[0].definitions[0].definition; document.getElementById('contentPanel').classList.remove('hidden'); document.getElementById('home').classList.add('hidden'); document.getElementById('content').innerHTML=`<div class="lesson"><h2>📚 ${d[0].word} ${d[0].phonetic||''}</h2><div class="info"><b>Meaning:</b> ${m}<br><br><b>Definition:</b> ${d[0].meanings[0].definitions[0].example||'No example'}</div><button class="action" onclick="speakWord('${d[0].word}')">🔊 Pronounce</button><button class="action secondary" onclick="goHome()">← Home</button></div>`;}}catch(e){}}
+function updateStats(){document.getElementById("wordsStat").textContent=progress.words; document.getElementById("quizStat").textContent=progress.correct; document.getElementById("favStat").textContent=progress.favorites.length;}
+function saveProgress(){localStorage.setItem("englishMasterProgress",JSON.stringify(progress)); updateStats();}
+updateStats(); updateLimitBar();
+function openVocabulary(){if(!checkDailyLimit('word')) return; hideHome(); let content=document.getElementById("content"); let html=`<div class="lesson"><h2>📖 Vocabulary</h2><p>Learn useful English words. ${isUltra?'ULTRA: Unlimited':'Free: ${15-daily.words} left today'}</p>`; vocabulary.forEach(item=>{let fav=progress.favorites.includes(item.word); html+=`<div class="word searchable"><div class="word-title">${item.word}</div><div class="word-meaning">Meaning: ${item.meaning}</div><div class="example">Example: ${item.example}</div><button class="small-btn speak" onclick="speakWord('${item.word}')">🔊 Pronounce</button><button class="small-btn favorite" onclick="toggleFavorite('${item.word}')">${fav?"⭐ Saved":"☆ Save"}</button></div>`;}); html+=`</div>`; content.innerHTML=html;}
+function speakWord(word){if(!("speechSynthesis" in window)){alert("TTS not supported"); return;} let s=new SpeechSynthesisUtterance(word); s.lang="en-US"; s.rate=0.85; speechSynthesis.cancel(); speechSynthesis.speak(s);}
+function toggleFavorite(word){let i=progress.favorites.indexOf(word); if(i===-1) progress.favorites.push(word); else progress.favorites.splice(i,1); saveProgress(); openVocabulary();}
+function openGrammar(){hideHome(); document.getElementById("content").innerHTML=`<div class="lesson"><h2>🔤 Grammar</h2><h3>1. Nouns</h3><p>A noun names a person, place, thing, or idea.</p><div class="info">Examples: teacher, school, book, happiness</div><h3>2. Pronouns</h3><p>Used in place of a noun.</p><div class="info">I, you, he, she, it, we, they</div><h3>3. Verbs</h3><p>Expresses action or state.</p><div class="info">run, write, read, think, be</div><h3>4. Adjectives</h3><p>Describes noun.</p><div class="info">a large house, a kind person</div><h3>5. Simple Present</h3><p>For habits, routines, facts.</p><div class="info">I study English every day.<br>Water boils at 100°C.</div><h3>6. Simple Past</h3><div class="info">I visited my friend yesterday.</div><h3>7. Future with will</h3><div class="info">I will call you tomorrow.</div></div>`;}
+function openSpeaking(){hideHome(); document.getElementById("content").innerHTML=`<div class="lesson"><h2>🗣️ Speaking Practice</h2><h3>Introduce Yourself</h3><div class="info">Hello. My name is ____.<br>I am a student.<br>I live in ____.<br>I enjoy learning new things.<br>I am learning English to improve my communication skills.</div><h3>Daily Questions</h3><ul><li>What is your name?</li><li>Where do you live?</li><li>What do you study?</li><li>What is your hobby?</li><li>What do you want to learn?</li></ul></div>`;}
+function openWriting(){hideHome(); document.getElementById("content").innerHTML=`<div class="lesson"><h2>✍️ Writing Practice</h2><h3>Topic: My Daily Routine</h3><p>Write 5–8 sentences.</p><div class="info">Think about morning, afternoon and evening.</div><h3>Writing Checklist</h3><ul><li>Capital letters.</li><li>Punctuation.</li><li>Spelling.</li><li>Complete sentences.</li><li>Read again.</li></ul><h3>Practice Topics</h3><ul><li>My School</li><li>My Favorite Hobby</li><li>A Day I Remember</li><li>My Future Goal</li><li>Why Education Is Important</li></ul></div>`;}
+function startQuiz(){hideHome(); quizIndex=0; quizScore=0; quizAnswered=false; showQuizQuestion();}
+function showQuizQuestion(){let content=document.getElementById("content"); if(quizIndex>=quizQuestions.length){finishQuiz(); return;} let q=quizQuestions[quizIndex]; let perc=Math.round((quizIndex/quizQuestions.length)*100); let html=`<div class="lesson"><h2>📝 Quiz</h2><p>Q ${quizIndex+1} of ${quizQuestions.length}</p><div class="progress"><div class="progress-bar" style="width:${perc}%"></div></div><div class="quiz-question">${q.question}</div>`; q.options.forEach((op,i)=>{html+=`<button class="quiz-option" onclick="answerQuiz(${i})">${String.fromCharCode(65+i)}. ${op}</button>`}); html+=`<p id="quizFeedback"></p></div>`; content.innerHTML=html;}
+function answerQuiz(sel){if(quizAnswered) return; quizAnswered=true; let q=quizQuestions[quizIndex]; let btns=document.querySelectorAll(".quiz-option"); btns.forEach((b,i)=>{b.disabled=true; if(i===q.answer) b.classList.add("correct"); if(i===sel&&sel!==q.answer) b.classList.add("wrong");}); let fb=document.getElementById("quizFeedback"); if(sel===q.answer){quizScore++; progress.correct++; fb.innerHTML=`<p style="color:green;font-weight:bold">✓ Correct!</p>`;} else fb.innerHTML=`<p>✗ Correct: <strong>${q.options[q.answer]}</strong></p>`; saveProgress(); let next=document.createElement("button"); next.className="action"; next.textContent=quizIndex===quizQuestions.length-1?"See Result":"Next →"; next.onclick=()=>{quizIndex++; quizAnswered=false; showQuizQuestion();}; fb.appendChild(next);}
+function finishQuiz(){let total=quizQuestions.length; let perc=Math.round((quizScore/total)*100); document.getElementById("content").innerHTML=`<div class="lesson"><h2>🏆 Result</h2><h3>You scored ${quizScore} / ${total}</h3><p>${perc}%</p><div class="info">${perc>=80?"Excellent work!":perc>=60?"Good work! Review missed.":"Keep learning! Review grammar."}</div><button class="action" onclick="startQuiz()">🔄 Try Again</button></div>`;}
+function openProgress(){hideHome(); let fav=progress.favorites.length?progress.favorites.join(", "):"No favorite words yet."; document.getElementById("content").innerHTML=`<div class="lesson"><h2>📊 My Progress ${isUltra?'<span class="ultra-badge">ULTRA</span>':''}</h2><div class="info">Words learned: <strong>${progress.words}</strong><br>Correct: <strong>${progress.correct}</strong><br>Favorites: <strong>${progress.favorites.length}</strong><br>Today Words: ${daily.words}/15<br>Today Dict: ${daily.dict}/5</div><h3>⭐ Favorite Words</h3><p>${fav}</p><button class="action secondary" onclick="resetProgress()">Reset Progress</button>${!isUltra?'<button class="action" style="background:#f59e0b;color:black;margin-left:8px" onclick="buyUltra()">💎 Unlock Ultra Rs.999</button>':''}</div>`;}
+function resetProgress(){if(!confirm("Reset progress?")) return; progress={words:0,correct:0,favorites:[]}; saveProgress(); openProgress();}
+function searchApp(){let q=document.getElementById("search").value.toLowerCase().trim(); let items=document.querySelectorAll(".searchable"); if(!q){items.forEach(i=>i.style.display=""); return;} items.forEach(i=>{i.style.display=i.textContent.toLowerCase().includes(q)?"":"none";});}
+function hideHome(){document.getElementById("home").classList.add("hidden"); document.getElementById("contentPanel").classList.remove("hidden");}
+function goHome(){document.getElementById("contentPanel").classList.add("hidden"); document.getElementById("home").classList.remove("hidden"); document.getElementById("search").value=""; searchApp();}
+function toggleDarkMode(){let cur=document.body.getAttribute('data-theme'); let next=cur==='dark'?'light':'dark'; applyTheme(next,true);}
+let saved=localStorage.getItem('savedTheme'); if(saved) document.body.setAttribute('data-theme',saved);
+setTimeout(()=>{let s=document.getElementById('splash'); s.classList.add('hide'); setTimeout(()=>s.style.display='none',800);},2200);
+let vocabOpened=sessionStorage.getItem("vocabularyOpened"); if(!vocabOpened){progress.words=vocabulary.length; saveProgress(); sessionStorage.setItem("vocabularyOpened","true");}
 </script>
-
-<!-- TUMHARA PURANA SCRIPT SAME COPY KARNA HAI YAHAN -->
-<script>
-//... tumhara purana vocabulary, quiz, progress wala script yahan paste rahega...
-</script>
-
 </body>
 </html>
